@@ -1,0 +1,24 @@
+/*初始化CSS*/
+@charset "utf-8";
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,input,button,textarea,p,th,td { margin:0; padding:0; }
+body { background:#fafafa;font-weight:bold;font-size: 14px; font-family: Arial, Verdana,  Helvetica, sans-serif; }
+body *{box-sizing: border-box;}
+h1, h2, h3, h4, h5, h6 { font-weight:bold; font-size: inherit; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+a {text-decoration:none;font-weight: bold; }
+p{font-weight: normal;}
+a:hover { text-decoration:none; }
+img { border:none; }
+ol,ul,li { list-style:none; }
+input, textarea, select, button { font:14px "Microsoft YaHei",Verdana,Helvetica,Arial,sans-serif; }
+table { border-collapse:collapse; }
+html {overflow-y: scroll;} 
+
+.clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
+
+.pull-right{float: right;}
+.pull-left{float: left;}
+.text-center{text-align: center;}
+.relative{position: relative;}
+
