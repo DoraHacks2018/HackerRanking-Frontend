@@ -1,0 +1,178 @@
+/* eslint-disable */
+<template>
+    <div>
+      <div class="upinfo-box">
+        <div class="wrap">
+          <h2 class="big-title">Information Completion</h2>
+          <div class="form">
+            <form action="">
+              <div class="realyou add addone circle" :class="{bgnone:ava}">
+                <input type="file" @change="uploadAvatar($event)" title="选择头像">
+                <img :src="ava" alt="">
+              </div>
+              <p class="p">Upload real you</p>
+              <div class="input-group clearfix">
+                <label for="name" class="label">Real name</label>
+                <div class="form-info">
+                  <input type="text" id="name" v-model="name">
+                </div>
+              </div>
+              <div class="input-group clearfix">
+                <label for="residence" class="label">Residence</label>
+                <div class="form-info">
+                  <input type="text" id="residence" v-model="city">
+                </div>
+              </div>
+              <div class="input-group clearfix" style="margin-bottom: 10px">
+                <label class="label">Choose a role</label>
+                <div class="form-info">
+                  <input class="magic btn-check" type="radio" name="role" id="stack">
+                  <label for="stack" class="fontnormal">Full Stack</label>
+                  <input class="magic btn-check" type="radio" name="role" id="designer">
+                  <label for="designer" class="fontnormal">Designer</label>
+                  <input class="magic btn-check" type="radio" name="role"  id="dapps">
+                  <label for="dapps" class="fontnormal">DApps</label>
+                  <input class="magic btn-check" type="radio" name="role" id="security">
+                  <label for="security" class="fontnormal">Security</label>
+                  <input class="magic btn-check" type="radio" name="role" id="chain">
+                  <label for="chain" class="fontnormal">Public Chain</label>
+                  <input class="magic btn-check" type="radio" name="role" id="hacker">
+                  <label for="hacker" class="fontnormal">Hacker</label>
+                </div>
+              </div>
+              <div class="input-group clearfix">
+                <label for="work" class="label">Your work information</label>
+                <div class="form-info">
+                  <input type="text" id="work" v-model="org">
+                </div>
+              </div>
+              <div class="input-group clearfix">
+                <label for="address" class="label">ETH address</label>
+                <div class="form-info">
+                  <input type="text" id="address" v-model="eth">
+                </div>
+              </div>
+              <div class="input-group clearfix">
+                <label for="slogan" class="label">Teaming slogan</label>
+                <div class="form-info">
+                  <div class="area">
+                    <textarea name="" rows="5" v-model="slogan" placeholder="eg: I have a good idea about..." @input="input($event)" id="slogan"></textarea>
+                    <div class="count">
+                      <span class="cur" :class="{red:curTxtCount>maxTxtCount}">{{curTxtCount}}</span> /
+                      <span class="all">{{maxTxtCount}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group clearfix">
+                <label for="" class="label">&nbsp;</label>
+                <div class="form-info">
+                  <input class="magic magic-check" type="checkbox" id="save">
+                  <label for="save">Save for next Hackthon</label>
+                </div>
+              </div>
+              <div class="input-group">
+                <button type="submit" class="btn-primary" @click="submit">Submit And Upload</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+      <footer>
+        <div class="wrap">
+          <ul class="flex">
+            <li><a href="">ABOUT US</a></li>
+            <li>FEEDBACK support@dorahacks.com</li>
+            <li>COOPERATION bd@dorahacks.com</li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+</template>
+
+<script>
+import api from '@/api'
+export default {
+  name: 'UploadInfo',
+  data () {
+    return {
+      menuShow:false,
+      maxTxtCount:100,
+      curTxtCount:0,
+      ava:'',
+      avatar: null,
+      name: '',
+      city: '',
+      role: '',
+      org: '',
+      eth: '',
+      sloagn: '',
+      rolecontent: [
+        'Full Stack',
+        'Designer',
+        'DApps',
+        'Security',
+        'Public Chain',
+        'Hacker'
+      ]
+    }
+  },
+  methods:{
+    input(event){
+      this.curTxtCount = event.target.textLength
+      if(this.curTxtCount>this.allTxtCount){
+        return false;
+      }
+    },
+
+    uploadAvatar(event){
+      var _name, _fileName;
+
+      _name = event.target.value;
+      this.avatar = event.target.files[0]
+      _fileName = _name.substring(_name.lastIndexOf(".") + 1).toLowerCase();
+      if (_fileName !== 'png' && _fileName !== 'jpg') {
+        alert('We only support png/jpg. Please upload again.');
+      } else {
+        let url = `${window.URL.createObjectURL(event.target.files[0])}`
+        this.ava = url
+      }
+    },
+    submit () {
+      const formd = new FormData()
+      if (this.avatar) {
+        formd.append('file', this.avatar)
+      }
+      else {
+        alert('Please upload your avatar')
+        return
+      }
+      const radio = document.getElementsByName('role')
+      for (let i = 0; i < radio.length; i += 1) {
+        if (radio[i].checked) {
+          formd.append('role', this.rolecontent[i])
+        }
+      }
+      formd.append('name', this.name)
+      formd.append('city', this.city)
+      formd.append('org', this.org)
+      formd.append('eth', this.eth)
+      formd.append('slogan', this.slogan)
+      api.upload_info(formd).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          alert('Upload Success')
+        }
+      })
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

@@ -1,5 +1,6 @@
 /*公共部分css，头部，尾部等*/
 @charset "utf-8";
+
 input[type=text]{
 	outline: none;
 	padding: 0 15px;
@@ -66,11 +67,12 @@ button{border:none;outline: none;cursor: pointer;}
 	color:#3d9e9e;
 }
 [v-cloak]{display: none;}
-input.magic +label{
+.magic +label{
 	color:#4f5454;
 	font-size: .12rem;
 }
-input.magic{width: 0;height: 0;}
+input:disabled{background-color: #ccc !important}
+.magic{width: 0;height: 0;opacity: 0;z-index: -9;}
 .btn-check + label{
 	display: inline-block;
 	padding: 0 15px;
@@ -103,8 +105,34 @@ input.magic{width: 0;height: 0;}
 body{font-size: .12rem;}
 .fontlg{font-size: .14rem;}
 .fontnormal{font-weight: normal;}
-
+.webkitscroll{overflow-y: auto;}
 @media (min-width: 768px){
+	/*//自定义滚动条*/
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar
+{
+    width: 8px;
+	background-color: #fff;
+
+}
+ 
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+	border-right: 1px solid #d0d5d5;
+ 	padding: 0 2px;
+    
+}
+ 
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+
+	display: block;
+    border-radius: 100px;
+    background-color: #d0d5d5;
+}
 	body{font-size: 14px;}
 	.f20{font-size: 20px;}
 	/*.f20 *{font-size: inherit;}*/
@@ -121,6 +149,10 @@ body{font-size: .12rem;}
 		height: 36px;
 		line-height: 36px;
 		margin: 0 20px 20px 0;
+	}
+	.magic.btn-check:checked + label{
+		color:#4cc6c5 !important;
+		border-color: #4cc6c5 !important;;
 	}
 	.magic-check+label{line-height: 36px;}
 	.magic-check+label:before{

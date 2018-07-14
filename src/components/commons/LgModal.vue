@@ -1,10 +1,9 @@
 <template>
-  <div class="layer" v-show="show">
+  <div class="layer layer-send" v-show="show">
     <div class="main">
       <div class="modal-header">
         <slot name="modal-header">
           <h4 class="title">{{modalTitle}}</h4>
-          <h5 class="sub-title">{{sTitle}}</h5>
         </slot>
         <span class="close-layer" @click="show = !show"></span>
       </div>
@@ -12,19 +11,18 @@
         <slot name="modal-content">
 
         </slot>
-      </div>
-      <div class="modal-footer">
-        <slot name="modal-footer"></slot>
-      </div>
 
+      </div>
+      <div class="modal-footer"><slot name="modal-footer"></slot></div>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
-  name: 'm-modal',
-  props: ['modalTitle', 'sTitle', 'isShow'],
+  name: 'LgModal',
+  props: ['modalTitle', 'isShow'],
   data () {
     return {
       show: false
@@ -32,6 +30,11 @@ export default {
   },
   created () {
     this.show = this.isShow
+  },
+  updated () {
+    maxHeight('lists','intro')
+  },
+  methods: {
   }
 }
 </script>

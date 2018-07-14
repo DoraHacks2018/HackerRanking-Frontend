@@ -35,6 +35,11 @@ button:disabled,button:disabled:hover{
 	color:#fff;
 	background-color: #dcdede;
 }
+.btn:disabled,.btn:disabled:hover{
+	cursor: not-allowed !important;
+	color:#fff !important;
+	background-color: #dcdede !important;
+}
 [v-cloak]{
 	display: none;
 }
@@ -44,10 +49,10 @@ body{
 .wrap{
 	padding: 0 15px;
 }
-header .wrap{
+#header .wrap{
 	padding: 0;
 }
-header{
+#header{
 	font-size: 14px;
 	width: 100%;
 	position: fixed;
@@ -65,7 +70,7 @@ header{
 	background-position: center top;
 	background-size: cover;
 }
-header .wrap{
+#header .wrap{
 	height: 100%;
 }
 .header-top{
@@ -81,7 +86,7 @@ header .wrap{
 	background-position: left center;
 	float: left;
 }
-
+#header>.wrap{position: relative;}
 .header-nav-btn{
 	float: right;
 	display: block;
@@ -115,10 +120,10 @@ header .wrap{
     }
     to  {
     	opacity: 1;
-  
+
     	height: auto;
     	display: block;
-		
+
     }
 }
 .header-nav>li>a{
@@ -199,7 +204,7 @@ footer li a{
 		margin:  0 auto;
 		padding: 0 15px;
 	}
-	header{
+	#header{
 		min-width: 1032px;
 		position: static;
 		height: 112px;
@@ -208,15 +213,16 @@ footer li a{
 		border-color: rgba(144,147,147,.2);
 		background: none;
 		background-color: #fff;
+		background-color: #fff;
 	}
-	header.header-index{
+	#header.header-index{
 		border-bottom: 1px solid #fff;
 		border-color: rgba(255,255,255,.2);
 		background-color: #0d0d22;
 		background-image: url(../images/halo.png);
 		background-repeat: no-repeat;
 		background-position: center top;
-		background-size: cover;	
+		background-size: cover;
 	}
 	.header-top{
 		padding: 0 15px;

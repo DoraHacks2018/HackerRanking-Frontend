@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Promise from './promise.js'
 import { objectExtend, parseQueryString, getFullUrlPath, isUndefined } from './utils.js'
 

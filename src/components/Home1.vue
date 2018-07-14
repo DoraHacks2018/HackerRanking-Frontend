@@ -1,23 +1,7 @@
+/* eslint-disable */
 <template>
   <div>
-    <header class="header-index">
-      <div class="wrap">
-        <div class="header-top">
-          <a href="index.html" class="header-logo"></a>
-          <span class="header-nav-btn">
-					<i @click="menuShow = !menuShow" class="fa fa-bars" aria-hidden="true"></i>
-				</span>
-        </div>
-        <ul class="header-nav" :class="{show:menuShow}">
-          <li class="item active"><a>HACKATHON</a></li>
-          <li class="item"><a>HACKERS</a></li>
-          <li class="item"><a href="#">PROJECTS</a></li>
-          <li class="item"><a href="#" class="user">LOGIN/SIGNUP</a></li>
-          <li class="item"><a href="#" class="new active"><span></span></a></li>
-          <li class="item"><a href="#">EN</a></li>
-        </ul>
-      </div>
-    </header>
+
     <div class="swiper-container" id="swiper-container">
       <div class="swiper-wrapper">
         <div  v-for="(item,index) in carousels" class="swiper-slide relative" :style="{backgroundColor:item.bg}">
@@ -25,22 +9,23 @@
           <a @click="gotoDetail" class="join join1"></a>
         </div>
       </div>
-      <!-- 如果需要分页器 -->
-      <div class="swiper-pagination" v-show="carousels.length>1"></div>
-      <!-- 如果需要导航按钮 -->
-      <div class="swiper-button-prev" v-show="carousels.length>1"></div>
-      <div class="swiper-button-next" v-show="carousels.length>1"></div>
+      <!--&lt;!&ndash; 如果需要分页器 &ndash;&gt;-->
+      <!--<div class="swiper-pagination" v-show="carousels.length>1"></div>-->
+      <!--&lt;!&ndash; 如果需要导航按钮 &ndash;&gt;-->
+      <!--<div class="swiper-button-prev" v-show="carousels.length>1"></div>-->
+      <!--<div class="swiper-button-next" v-show="carousels.length>1"></div>-->
     </div>
 
     <div class="wrap">
       <div class="service clearfix">
         <div class="content clearfix" v-for="(v,i) in service">
           <div class="bdr clearfix">
-            <img v-if="i==0" :src="require('@/images/service01.png')" alt="">
-            <img v-else :src="require('@/images/service02.png')" alt="">
+            <img v-if="i==0" :src="require('@/images/service01.png')" alt="" @click="gotoTrue">
+            <img v-else :src="require('@/images/service02.png')" alt="" @click="gotoGit">
             <div class="txt">
-              <p>{{v.txt}}</p>
-              <a :href="v.href" class="get">Get More Gift</a>
+              <h3>{{v.txt}}</h3>
+              <a v-if="i==0" @click="gotoTrue" class="get">Get More Gift</a>
+              <a v-else @click="gotoGit" class="get">Get More Gift</a>
             </div>
           </div>
         </div>
@@ -49,7 +34,7 @@
 
     <div class="calendar">
       <div class="wrap">
-        <h2 class="big-title">Hackthon Calendar</h2>
+        <h2 class="big-title">Hackathon Calendar</h2>
         <div class="tab">
           <ul class="clearfix">
             <li
@@ -65,8 +50,7 @@
       <div class="pcwrap">
         <div class="list-group">
           <a href="#" class="item clearfix card" v-for="value,index in calendars.filterData">
-            <img v-if="index==0" :src="require('@/images/tab1.png')" alt="" class="pull-left">
-            <img v-else :src="require('@/images/tab2.png')" alt="" class="pull-left">
+            <img :src="require('@/'+value.url)" alt="" class="pull-left" >
             <div class="main pull-left">
               <h4 class="title">{{value.title}}</h4>
               <p class="sub-title">{{value.subTitle}}</p>
@@ -91,30 +75,20 @@
       </ul>
     </div>
   </footer>
+
   </div>
 </template>
 
 <script>
-
+import LoginModal from './commons/LoginModal'
+import NewsModal from './commons/NewsModal'
 
 export default {
   name: 'Home1',
+  components: { LoginModal, NewsModal },
   data () {
     return {
-      menuShow:false,
-      hasNew:true,
-      newsShow:false,
-      news:{
-        list:[
-          {abstract:'The hackthon bonus has been announced. Please the captain go to collect the...The hackthon bonus has been announced. Please the captain go to collect the...The hackthon bonus has been announced. Please the captain go to collect the...The hackthon bonus has been announced. Please the captain go to collect the...The hackthon bonus has been announced. Please the captain go to collect the...The hackthon bonus has been announced. Please the captain go to collect the...The hackthon bonus has been announced. Please the captain go to collect the...',title:'Details of Notification',time:'2018/06/20',unread:true},
-          {abstract:'The hackthon bonus has been announced. Please the captain go to collect the...',title:'Details of Notification',time:'2018/06/20',unread:true},
-          {abstract:'The hackthon bonus has been announced. Please the captain go to collect the...',title:'Details of Notification',time:'2018/06/20',unread:true},
-          {abstract:'The hackthon bonus has been announced. Please the captain go to collect the...',title:'Details of Notification',time:'2018/06/20',unread:true},
-          {abstract:'The hackthon bonus has been announced. Please the captain go to collect the...',title:'Details of Notification',time:'2018/06/20',unread:true}
-        ],
-        n:0,
-        slide:false
-      },
+
       carousels:[
         // {url:'images/banner1.png',bg:'#0d0d22'},
         {url:'@/images/banner1.png',bg:'#0d0d22'}
@@ -126,12 +100,12 @@ export default {
       calendars:{
         tab:[
           {id:0,title: 'All'},
-          {id:1,title: 'Online'},
+          {id:1,title: 'Upcoming'},
           {id:2,title: 'On Spot'}
         ],
         items: [
-          {pid:1, url:'@/images/tab1.png',title:'Blockchain for Future Hackthon',subTitle:'Blockchain, connect and coherence!',address:'San Jose convention center',money:'18,000',time:'June 26th - 27th'},
-          {pid:2, url:'@/images/tab2.png',title:'DoraHacks & BCH Hack',subTitle:'Go for our dreams with our best hackers friends!',address:'Beijing, Peking university',money:'12,000',time:'July 21th - 22th'},
+          {pid:1, url:'images/tab1.png',title:'Blockchain for Future Hackthon',subTitle:'Blockchain, connect and coherence!',address:'San Jose convention center',money:'18,000',time:'June 26th - 27th'},
+          {pid:2, url:'images/tab2.png',title:'DoraHacks & BCH Hack',subTitle:'Go for our dreams with our best hackers friends!',address:'Beijing, Peking university',money:'12,000',time:'July 21th - 22th'},
         ],
 
         filterData:[],
@@ -155,6 +129,13 @@ export default {
     }
   },
   methods: {
+    choose(index) {
+      this.calendars.n = index
+      this.calendars.filterData = index == 0 ? this.calendars.items : this.calendars.items.filter(function(item){
+        return item.pid !== index;
+      })
+    },
+
     ifnew (arr,key) {
       let flag=false;
       arr.forEach(function(v,i){
@@ -166,6 +147,12 @@ export default {
     },
     gotoDetail () {
       this.$router.push('/hackathon/detail')
+    },
+    gotoTrue () {
+      this.$router.push('/partner/truechain')
+    },
+    gotoGit () {
+      this.$router.push('/hackers')
     }
   }
 }

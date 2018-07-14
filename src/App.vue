@@ -1,52 +1,63 @@
 <template>
   <div id="app">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <transition name="fade">
-      <router-view @view="view" @update="update" @notify="notify" @got="got"/>
-    </transition>
-
-    <div class="mask" v-if="registerIsOpen">
-      <div class="register-card">
-        <span class="close" @click="closeRegister">
-          <span></span><span></span>
-        </span>
-        <ul>
-          <li>
-            <h2>Signed Resident:</h2>
-            <div class="button" @click="login">Login with Cryptoname</div>
-            <div class="button" @click="login_auth('github')">Login with Github</div>
-            <!--<div class="button" @click="login_auth('facebook')">Login with Facebook</div>-->
-          </li>
-          <li>
-            <h2>New Resident:</h2>
-            <div class="button" @click="register">Sign up with Email</div>
-            <div class="button" @click="register_auth('github')">Sign up with Github</div>
-            <!--<div class="button" @click="register_auth('facebook')">Sign up with Facebook</div>-->
-          </li>
+    <div id="header" :class="{'header-index': this.$route.path==='/'}">
+      <div class="wrap">
+        <div class="header-top">
+          <router-link to="/">
+          <a class="header-logo"></a>
+          <span class="header-nav-btn">
+					<i @click="menuShow = !menuShow" class="fa fa-bars" aria-hidden="true"></i>
+          </span></router-link>
+        </div>
+        <ul class="header-nav" :class="{show:menuShow}">
+          <li class="item" :class="{active: isPage[0]}" @click="toDetail"><a>HACKATHON</a></li>
+          <li class="item" :class="{active: isPage[1]}" @click="toHacker"><a>HACKERS</a></li>
+          <li class="item" :class="{active: isPage[2]}" @click="toProjects"><a href="#">PROJECTS</a></li>
+          <li class="item" v-if="!user" ><a href="javascript:;" class="user" @click="showLogin">LOGIN/SIGNUP</a></li>
+          <li class="item" v-else><a href="#" class="user"><img src="user.avatar" alt=""></a></li>
+          <li class="item"><a href="#" class="new" @click.stop="showNews" :class="{active:hasNew}"><span></span></a></li>
+          <li class="item"><a href="#">EN</a></li>
         </ul>
       </div>
     </div>
-    <div class="hint" v-if="showHint">You can get 10 Gift today.
-      <img width="10" height="10" :src="require('@/assets/symbols-close.png')" @click="closeHint">
-    </div>
+    <transition name="fade">
+      <router-view @update="update" @notify="notify" @atPage="atPage"/>
+    </transition>
+
+    <news-modal ref="newsLayer" :news="news"></news-modal>
+    <login-modal ref="logLayer" @update="update"></login-modal>
   </div>
 </template>
 
 <script>
 import api from '@/api'
-import OAuthPopup from './utils/popup'
 
+import LoginModal from './components/commons/LoginModal'
+import NewsModal from './components/commons/NewsModal'
 
 export default {
   name: 'App',
+  components: { LoginModal, NewsModal },
   data () {
     return {
       user: null,
-      registerIsOpen: false,
       git_state: '',
-      redirect_uri: 'https://ranking.dorahacks.com/',
-      notifications: [],
-      showHint: false,
+      isPage: [
+        true,
+        false,
+        false,
+      ],
+      menuShow:false,
+      hasNew:true,
+      newsShow:false,
+      news:{
+        list:[
+          // {abstract:'The hackthon bonus has been announced. ',title:'Details of Notification',time:'2018/06/20',unread:true},
+        ],
+        n:0,
+        slide:false
+      },
     }
   },
   created () {
@@ -54,15 +65,39 @@ export default {
       this.user = {
         name: window.cookieStorage.getItem('name'),
         id: window.cookieStorage.getItem('id'),
+        avatar: window.cookieStorage.getItem('id')
       }
-      this.showHint = false
     }
     this.notify(this.user.id)
   },
   methods: {
-    got () {
-      console.log('got')
-      this.showHint = false
+    showLogin(){
+      console.log(this.$refs)
+      this.$refs.logLayer.show = true
+    },
+    showNews () {
+      if (this.$refs.newsLayer.show === true) {
+        this.$refs.newsLayer.show = false
+      } else {
+        this.$refs.newsLayer.show = true;
+      }
+    },
+    toDetail () {
+      this.$router.push('/hackathon/detail')
+    },
+    toHacker () {
+      this.$router.push('/hackers')
+    },
+    toProjects () {
+      this.$router.push('/hackathon/ranking')
+    },
+    atPage (i) {
+      this.isPage[i] = true
+      for (let j = 0; j < 6; j += 1) {
+        if (j !== i) {
+          this.isPage[j] = false
+        }
+      }
     },
     openMenu () {
 
@@ -79,62 +114,18 @@ export default {
       }
       return text;
     },
-    login () {
-      this.closeRegister()
-      this.$router.push('/login')
-    },
-    register () {
-      this.closeRegister()
-      this.$router.push('/register')
-    },
-    login_auth (provider) {
-      const url = 'https://github.com/login/oauth/authorize?client_id=&scope=user'
-      const popupOptions = { width: 1020, height: 618 }
-      const redirect = this.redirect_uri
-      this.oauthPopup = new OAuthPopup(url, provider, popupOptions)
-      this.oauthPopup.open(redirect, false).then((res) => {
-        api.login_auth(res.code).then((response) => {
-          const dd = response.data
-          if (dd.errcode) {
-            alert(dd.errmsg)
-            return
-          }
-          this.registerIsOpen = false
-          this.update(dd)
-        })
-      })
-    },
-    register_auth (provider) {
-      const url = 'https://github.com/login/oauth/authorize?client_id=&scope=user'
-      const popupOptions = { width: 1020, height: 618 }
-      const redirect = this.redirect_uri
-      this.oauthPopup = new OAuthPopup(url, provider, popupOptions)
-      this.oauthPopup.open(redirect, false).then((res) => {
-        api.register_auth_git(res.code).then((response) => {
-          const dd = response.data
-          if (dd.errcode) {
-            alert(dd.errmsg)
-            return
-          }
-          this.registerIsOpen = false
-          this.update(dd)
-        })
-      })
-    },
-    view (item) {
-      this.$router.push({ name: 'PlanetView', query: { name: item } })
-    },
     notify (uid) {
       api.notification(uid).then((res) => {
         const d = res.data
+        if (d.errcode) {
+          return
+        }
         this.notifications = d
       })
-    },
-    openRegister () {
-      this.registerIsOpen = true
-    },
-    closeRegister () {
-      this.registerIsOpen = false
+      this.news.n = this.notifications.length
+      for (let i = 0; i < this.notifications.length; i += 1) {
+        this.news.list.push({abstract: this.notifications[i].content, })
+      }
     },
     update (data) {
       const d = new Date()
@@ -143,19 +134,21 @@ export default {
         d.setSeconds(d.getSeconds() + data.expires_in)
         this.user = {
           name: data.user_info.username,
-          id: data.user_info.id
+          id: data.user_info.id,
+          avatar: data.user_info.avatar
         }
         window.cookieStorage.setItem('token', data.auth_token, {expires: d})
         window.cookieStorage.setItem('name', data.user_info.username, {expires: d})
         window.cookieStorage.setItem('id', data.user_info.id, {expires: d})
+        window.cookieStorage.setItem('avatar', data.user_info.avatar, {expires: d})
         this.notify(this.user.id)
-        this.showHint = true
       } else {
         this.$router.push('/')
         this.user = null
         window.cookieStorage.setItem('token', 'anyValue', {expires: d})
         window.cookieStorage.setItem('name', 'anyValue', {expires: d})
         window.cookieStorage.setItem('id', 'anyValue', {expires: d})
+        window.cookieStorage.setItem('avatar', 'anyValue', {expires: d})
         this.notifications = []
       }
     },

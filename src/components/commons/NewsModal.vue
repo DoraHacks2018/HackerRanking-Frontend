@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: 'news-modal',
+  name: 'NewsModal',
   props: ['news'],
   data () {
     return {

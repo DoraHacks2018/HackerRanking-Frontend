@@ -1,28 +1,8 @@
 <template>
   <div id="app" v-cloak>
-
-    <header>
-      <div class="wrap">
-        <div class="header-top">
-          <a href="index.html" class="header-logo"></a>
-          <span class="header-nav-btn">
-					<i @click="menuShow = !menuShow" class="fa fa-bars" aria-hidden="true"></i>
-				</span>
-        </div>
-        <ul class="header-nav" :class="{show:menuShow}">
-          <li class="item active"><a href="index.html">HACKATHON</a></li>
-          <li class="item"><a href="hackers.html">HACKERS</a></li>
-          <li class="item"><a href="#">PROJECTS</a></li>
-          <li class="item"><a href="#" class="user"><img src="images/user.png" alt=""></a></li>
-          <li class="item"><a href="#" class="new active"><span></span></a></li>
-          <li class="item"><a href="#">EN</a></li>
-        </ul>
-      </div>
-    </header>
-
     <div class="wrap">
       <a class="text-center ad" href="#">
-        <img src="images/banner2.png" alt="" style="width: 100%">
+        <img :src="require('@/images/banner2.png')" alt="" style="width: 100%">
       </a>
     </div>
 
@@ -32,10 +12,10 @@
         <div class="tab">
           <ul class="clearfix">
             <li class="active"><a>Details</a></li>
-            <li><a href="participants.html">Participants</a></li>
-            <li><a href="team.html">Team</a></li>
-            <li><a href="updates.html">Updates</a></li>
-            <li><a href="ranks.html">Ranks</a></li>
+            <li><router-link to="/hackathon/participants"><a>Participants</a></router-link></li>
+            <li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>
+            <li><router-link to="/hackathon/update"><a>Update Projects</a></router-link></li>
+            <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
           </ul>
         </div>
         <div class="content clearfix">
@@ -48,9 +28,9 @@
             </div>
           </div>
           <div class="info">
-            <a class="upload" @click="gotoInfo">Upload Your Infomation <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+            <a class="upload" @click="gotoInfo">I'm a hacker <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
             <div class="cup text-center">
-              <p>${{SeparatorMoney}}</p>
+              <p>20 ETH</p>
             </div>
           </div>
         </div>
@@ -63,20 +43,34 @@
       <div class="judges four">
         <div class="main">
           <h2>Judges</h2>
-          <div class="lists clearfix" id="lists">
-
+          <div class="lists clearfix">
             <div class="item" v-for="v,i in judges">
-              <div class="img"><img :src="v.url" alt=""></div>
+              <div class="img"><img :src="require('@/'+v.url)" alt=""></div>
               <h3>{{v.name}}</h3>
               <p class="intro">{{v.intro}}
               </p>
             </div>
-
-
           </div>
+          <div class="lists clearfix">
+          <div class="item" v-for="v,i in judges2">
+              <div class="img"><img :src="require('@/'+v.url)" alt=""></div>
+              <h3>{{v.name}}</h3>
+              <p class="intro">{{v.intro}}
+              </p>
+            </div>
+          </div>
+          <div class="lists clearfix">
+            <div class="item" v-for="v,i in judges3">
+              <div class="img"><img :src="require('@/'+v.url)" alt=""></div>
+              <h3>{{v.name}}</h3>
+              <p class="intro">{{v.intro}}
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
+      </div>
 
     <footer>
       <div class="wrap">
@@ -114,25 +108,33 @@ export default {
         money:2200000
       },
       judges:[
-        {url:'images/1.png',name:'Michael Li',intro:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60.`},
-        {url:'images/2.png',name:'Adam Levine',intro:`Scientists have described the results as 'impressive' but 'pretty worrying to the Times. The decline is to do with a difference in the way languages.`},
-        {url:'images/5.png',name:'Qiu Rui',intro:`The decline is to do with a difference in the way languages and  are taught in schools. `},
-        {url:'images/3.png',name:'David Aguilera',intro:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. `},
-        {url:'images/1.png',name:'Michael Li',intro:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60.`},
-        {url:'images/2.png',name:'Adam Levine',intro:`Scientists have described the results as 'impressive' but 'pretty worrying to the Times. The decline is to do with a difference in the way languages.`},
-        {url:'images/5.png',name:'Qiu Rui',intro:`The decline is to do with a difference in the way languages and  are taught in schools. `},
-        {url:'images/3.png',name:'David Aguilera',intro:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. `}
+        {url:'assets/JiangXuxian.png',name:'Dr. Jiang Xuxian',intro:`ounder & CEO of Peckshield, former chief scientist of 360 and lifelong professor at North Carolina State University`},
+        {url:'assets/DawnSong.jpg',name:'Dawn Song',intro:`Founder of Oasis Lab, Professor at UC Berkeley`},
+        {url:'assets/MaQIang.png',name:'Ma Qiang',intro:`Founder of BA Capital and Hackers Fund, early investor of Bitmain`},
+        {url:'assets/anastasia.jpeg',name:'Anastasia Miron',intro:`Nebulas Ambassador, Innovation Evangelist`}],
+      judges2:[
+        {url:'assets/Elaine.png',name:'Elaine Shi',intro:`Co-Founder & Chief Scientist of Thunder Token`},
+        {url:'assets/jing sun.jpeg',name:'Jing Sun',intro:`Co-Founding Team of IoTeX`},
+        {url:'assets/Robin Zhong.jpg',name:'Robin Zhong',intro:`Co-Founding Team of Nebulas `},
+        {url:'assets/Hitters Xu.jpg',name:'Hitters Xu',intro:`Co-Founding Team of Nebulas `},
+        ],
+      judges3:[
+        {url:'assets/Jeffrey Wernick.jpeg',name:'Jeffery Wernick',intro:`Qtum Advisor, Early Investor of Uber & Airbnb`},
+        {url:'assets/William King.jpeg',name:'William King',intro:`PM, Consensys`},
       ]
     }
   },
   methods: {
     gotoInfo () {
-      this.$router.push('/upload-info')
+      this.$router.push('/hackathon/upload-info')
     },
+    getImgUrl (url) {
+      var images = require.context('@/', false, /\.png$/)
+      return images(url)
+    }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>

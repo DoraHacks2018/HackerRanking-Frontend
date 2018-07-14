@@ -86,31 +86,12 @@ export default {
       }
     })
   },
-  spy (name) {
-    return axios.get(`${url}/user/spy/${name}`, {
-      headers: {
-        'X-Auth-Token': window.cookieStorage.getItem('token')
-      }
-    })
-  },
   notification (uid) {
     return axios.get(`${url}/notifications/${uid}`, {
       headers: {
         'X-Auth-Token': window.cookieStorage.getItem('token')
       }
     })
-  },
-  rank_winners () {
-    return axios.get(`${url}/rank/winners`)
-  },
-  rank_dashboards () {
-    return axios.get(`${url}/rank/dashboard`)
-  },
-  rank_bounty () {
-    return axios.get(`${url}/rank/bounty`)
-  },
-  rank_hacker () {
-    return axios.get(`${url}/rank/hacker`)
   },
   owned_planets (name) {
     return axios.get(`${url}/hacker/owned-planets/${name}`, {
@@ -129,15 +110,34 @@ export default {
   posted_rewards () {
     return axios.get(`${url}/hacker/posted-rewards`, {
       headers: {
+        'Content-Type': 'multipart/form-data',
         'X-Auth-Token': window.cookieStorage.getItem('token')
       }
     })
   },
-  planets_show () {
-    return axios.get(`${url}/planets/show`)
-  },
   profile_main () {
     return axios.get(`${url}/profile/main`, {
+      headers: {
+        'X-Auth-Token': window.cookieStorage.getItem('token')
+      }
+    })
+  },
+  upload_info (formData) {
+    return axios.post(`${url}/user/upload-info`, formData, {
+      headers: {
+        'X-Auth-Token': window.cookieStorage.getItem('token')
+      }
+    })
+  },
+  upload_project (formData) {
+    return axios.post(`${url}/user/up-project`, formData, {
+      headers: {
+        'X-Auth-Token': window.cookieStorage.getItem('token')
+      }
+    })
+  },
+  check_team () {
+    return axios.get(`${url}/user/check-team`, {
       headers: {
         'X-Auth-Token': window.cookieStorage.getItem('token')
       }
@@ -153,14 +153,8 @@ export default {
       }
     })
   },
-  planet_all () {
-    return axios.get(`${url}/planets/all`)
-  },
-  planet_list () {
-    return axios.get(`${url}/planets/ranklist`)
-  },
-  bounty_show () {
-    return axios.get(`${url}/bounty/show`)
+  github_contributors () {
+    return axios.get(`${url}/`)
   },
   bounty_setup (option) {
     return axios.post(`${url}/user/bounty`, {
@@ -175,4 +169,11 @@ export default {
       }
     })
   },
+  participants (role) {
+    return axios.get(`${url}/team/attenders/${role}`, {
+      headers: {
+        'X-Auth-Token': window.cookieStorage.getItem('token')
+      }
+    })
+  }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable */
 ;var  clientWidth = document.documentElement.clientWidth;
 (function(win,doc){
     var fresh = function(){
