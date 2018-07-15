@@ -88,7 +88,7 @@ export default {
   },
   created () {
     api.github_contributors().then((res) => {
-
+      // alert(res.data)
     })
   },
 }

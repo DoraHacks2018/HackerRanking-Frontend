@@ -1,13 +1,14 @@
 import axios from 'axios'
 
-const url = 'https://ranking.dorahacks.com/api'
+const url = 'http://192.168.196.1:5000'
 
 export default {
   login (username, password) {
-    return axios.post(`${url}/login`, {
-      username,
-      password
-    }, {
+    return axios.post(`${url}/login`,{ 
+	      username,
+      	password
+        },
+        {
       headers: { 'content-type': 'application/json' }
     })
   },
@@ -154,6 +155,7 @@ export default {
     })
   },
   github_contributors () {
+    
     return axios.get(`${url}/`)
   },
   bounty_setup (option) {
