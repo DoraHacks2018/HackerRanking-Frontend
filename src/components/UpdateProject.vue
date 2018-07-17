@@ -1,6 +1,12 @@
 /* eslint-disable */
 <template>
   <div>
+      <div class="wrap">
+    <a class="text-center ad" href="#">
+      <img :src="require('@/images/banner2.png')" alt="" style="width: 100%">
+    </a>
+  </div>
+
 
     <div class="wrap">
       <div class="match">

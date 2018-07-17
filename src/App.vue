@@ -14,8 +14,10 @@
           <li class="item" :class="{active: isPage[0]}" @click="toDetail"><a>HACKATHON</a></li>
           <li class="item" :class="{active: isPage[1]}" @click="toHacker"><a>HACKERS</a></li>
           <li class="item" :class="{active: isPage[2]}" @click="toProjects"><a href="#">PROJECTS</a></li>
-          <li class="item" v-if="!user" ><a href="javascript:;" class="user" @click="showLogin">LOGIN/SIGNUP</a></li>
-          <li class="item" v-else><a href="#" class="user"><img src="user.avatar" alt=""></a></li>
+          <li class="item" v-if="!user" >
+            <a href="javascript:;" class="user" @click="showLogin">LOGIN/SIGNUP</a></li>
+          <li class="item" v-else><a href="#" class="user"><img :src="require('@/images/pig.png')" alt=""></a></li>
+
           <li class="item"><a href="#" class="new" @click.stop="showNews" :class="{active:hasNew}"><span></span></a></li>
           <li class="item"><a href="#">EN</a></li>
         </ul>
@@ -83,12 +85,17 @@ export default {
       }
     },
     toDetail () {
+  
+      this.isPage= [true,false,false];
       this.$router.push('/hackathon/detail')
     },
     toHacker () {
+      this.isPage= [false,true,false];
       this.$router.push('/hackers')
+      
     },
     toProjects () {
+      this.isPage= [false,false,true];
       this.$router.push('/hackathon/ranking')
     },
     atPage (i) {

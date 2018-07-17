@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuebar from 'vuebar'
 import axios from 'axios'
+import VueSocketio from 'vue-socket.io'
+
 // import VueAuthenticate from 'vue-authenticate'
 import { CookieStorage } from 'cookie-storage'
 import App from './App'
@@ -16,6 +18,8 @@ import './utils/jquery-1.11.3.min'
 import './utils/divscroll'
 import './utils/hackers'
 
+
+Vue.use(VueSocketio, 'ws://192.168.196.1:5200/websocket/user_refresh')
 window.cookieStorage = new CookieStorage()
 Vue.config.productionTip = false
 Vue.prototype.$http = axios

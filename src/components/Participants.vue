@@ -61,7 +61,7 @@
               <h3>{{v.name}}</h3>
               <p class="intro">{{v.intro}}
               </p>
-              <button class="btn btn-primary" @click="invite()">Invite</button>
+              <button class="btn btn-primary" @click="invite(v.uid)">Invite</button>
             </div>
           </div>
         </div>
@@ -105,6 +105,8 @@
 <script>
 import api from '@/api'
 import MModal from './commons/MModal'
+import io from 'socket.io-client'
+
 
 export default {
   name: 'Participants',
@@ -116,19 +118,23 @@ export default {
       curTxtCount:0,
       player: [],
       act:[false,false,false,false,false,false],
+      s_uid : 0,
+      uid : parseInt(window.cookieStorage.getItem('id')),
+      socket:null,
       judges:[
-        {url:'images/6.png',name:'Qiu Wang',intro:`TI will try my best to win this competition! No one is going to stop me from making it.`},
-        {url:'images/7.png',name:'Sijie Chen',intro:`I will show you what the best programmer is like.`},
-        {url:'images/8.png',name:'Anna Levine',intro:`Girls are crazy creatures cuz once they find a way to do a program, then no one can prevent them winning. `},
-        {url:'images/9.png',name:'Chen Li',intro:`I will show you what the best programmer is like.`},
-        {url:'images/10.png',name:'Michael Blue',intro:`Girls are crazy creatures cuz once they find a way to do a program, then no one can prevent them ...`},
-        {url:'images/11.png',name:'Yu Hagiee',intro:`I will try my best to win this competition! No one is going to stop me from making it.`},
-        {url:'images/12.png',name:'Xueying Li',intro:`I will show you what the best programmer is like.I am what I am. that’s it.`},
-        {url:'images/13.png',name:'Michael Blue',intro:`Boys are crazy creatures once they find a way to do a program, then every one will lose. `}
-      ]
+        {url:'images/6.png',name:'Qiu Wang',intro:`TI will try my best to win this competition! No one is going to stop me from making it.`,uid:9190260},
+        // {url:'images/7.png',name:'Sijie Chen',intro:`I will show you what the best programmer is like.`},
+        // {url:'images/8.png',name:'Anna Levine',intro:`Girls are crazy creatures cuz once they find a way to do a program, then no one can prevent them winning. `},
+        // {url:'images/9.png',name:'Chen Li',intro:`I will show you what the best programmer is like.`},
+        // {url:'images/10.png',name:'Michael Blue',intro:`Girls are crazy creatures cuz once they find a way to do a program, then no one can prevent them ...`},
+        // {url:'images/11.png',name:'Yu Hagiee',intro:`I will try my best to win this competition! No one is going to stop me from making it.`},
+        // {url:'images/12.png',name:'Xueying Li',intro:`I will show you what the best programmer is like.I am what I am. that’s it.`},
+        // {url:'images/13.png',name:'Michael Blue',intro:`Boys are crazy creatures once they find a way to do a program, then every one will lose. `}
+      ],
     }
   },
   created () {
+    
     api.participants('Full Stack').then((res) => {
       const d = res.data()
       if (d.errcode) {
@@ -140,11 +146,19 @@ export default {
       }
     })
     this.act[0] = true
+   
   },
   methods:{
-    ok(){},
-    invite(){
+    ok(){
+      
+      console.log(this.s_uid)
+      this.$socket.emit('add_group', {'from_id':this.uid,'to_id':this.s_uid,'isinvitation':1})
+
+      // this.$refs.layer.show = false
+    },
+    invite(s_uid){
       this.$refs.layer.show = true
+      this.s_uid= s_uid
     },
     cancel(){
       this.$refs.layer.show = false
