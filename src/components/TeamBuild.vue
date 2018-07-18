@@ -214,6 +214,15 @@ export default {
       this.teamName=event.target.innerHTML
     },
     createTeam () {
+      let tmp = window.cookieStorage.getItem('token')
+      if (tmp === 'anyValue' || !tmp) {
+        alert('Login required.')
+        return
+      }
+      if (this.teamName === 'enter a team name') {
+        alert('Please name your team.')
+        return
+      }
       api.create_team(this.teamName).then((res) => {
         const d = res.data
         if (d.errcode) {
