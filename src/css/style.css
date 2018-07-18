@@ -221,6 +221,15 @@
 .join:hover{
 	background-image: url(../images/join_hover.png);
 }
+.join-bch{
+  position: absolute;
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.join-bch:hover{
+  background-color: #9c9c9c;
+}
 .join1{
 	width: 12%;
 	height: 9%;
@@ -1961,6 +1970,7 @@ label.label{
 		float: left;
 		width: 780px;
 		display: inline-block;
+    font-size: 14px;
 	}
 	.updates .form-info {
 	    width: 640px;

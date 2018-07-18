@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <div id="header" :class="{'header-index': this.$route.path==='/'}">
+    <div id="header">
       <div class="wrap">
         <div class="header-top">
           <router-link to="/">
@@ -27,6 +27,99 @@
 
     <news-modal ref="newsLayer" :news="news"></news-modal>
     <login-modal ref="logLayer" @update="update"></login-modal>
+
+    <div class="talk-box" >
+      <div class="talkbtn" @click="talkShow = !talkShow" :class="{close:talkShow}"></div>
+      <div class="talk-layer" v-show="talkShow" >
+        <!-- 消息列表  -->
+        <div class="sublayer layer1" v-show="layer1">
+
+          <ul class="flex talk-header">
+            <li class="item" :class="{active:talktab.n==i}" v-for="v,i in talktab.item">
+              <a href="javascript:;" @click.stop="chooseTalk(v,i)">{{v}}</a>
+            </li>
+          </ul>
+
+          <div class="talk-list webkitscroll">
+            <div class="item card clearfix" v-for="v,i in filterTalkList"
+                 @click.stop="showMessage(v,i,v.pindex)">
+              <img :src="require(v.url)" alt="" class="avatar">
+              <div class="center">
+                <h2 class="name">{{v.name}}</h2>
+                <p>{{v.txt}}</p>
+              </div>
+              <div class="time">
+                <time>{{v.time}}</time>
+                <p class="readstate" :class="{read:v.readstate}">{{v.readstate?'Read':'Unread'}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 私人消息-->
+        <div class="sublayer layer2" v-show="layer2">
+          <div class="talk-header">
+            <span class="back" @click="back"></span>
+            <h2>Qui Wang</h2>
+            <a href="" class="user"></a>
+          </div>
+          <div class="msg-list webkitscroll">
+            <div class="item clearfix"
+                 :class="{other:v.man=='other',self:v.man=='self',read:v.read}" v-for="v,i in msgConent">
+              <img :src="v.avatar" alt="">
+              <p>{{v.msg}}</p>
+            </div>
+          </div>
+          <div class="send clearfix">
+            <input type="text" v-model="newsend">
+            <button class="btn btn-cancel" @click="send">Send</button>
+          </div>
+        </div>
+        <!-- 群组消息-->
+        <div class="sublayer layer3" v-show="layer3">
+          <div class="talk-header">
+            <span class="back" @click="back"></span>
+            <h2>Go for Sunshine</h2>
+            <a href="" class="user group"></a>
+          </div>
+          <div class="msg-list webkitscroll">
+            <div class="item clearfix ingroup"
+                 :class="{other:v.man=='other',self:v.man=='self'}" v-for="v,i in msgConent">
+              <img :src="v.avatar" alt="">
+              <p>{{v.msg}}</p>
+            </div>
+          </div>
+          <div class="send clearfix">
+            <input type="text" v-model="newsend">
+            <button class="btn btn-cancel" @click="send">Send</button>
+          </div>
+        </div>
+        <!-- 加群申请-->
+        <div class="sublayer layer4" v-show="layer4">
+          <div class="talk-header">
+            <span class="back" @click="back"></span>
+            <h2>Anna Legend</h2>
+            <a href="" class="user"></a>
+          </div>
+          <div class="msg-list webkitscroll">
+            <div class="item clearfix other">
+              <img :src="require('@/images/6.png')" alt="">
+              <h5 class="apply">Application</h5>
+              <p>Hi, I’m Anna Legend.I’m glad to join your team. I’m a designer and I do enjoy your project. The idea is really amazing!</p>
+              <div class="answerapply clearfix">
+                <button class="btn btn-cancel">Accept</button>
+                <button class="btn btn-cancel">Refuse</button>
+              </div>
+            </div>
+          </div>
+          <div class="send clearfix">
+            <input type="text" v-model="newsend">
+            <button class="btn btn-cancel" @click="send">Send</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </template>
 
@@ -58,6 +151,37 @@ export default {
         n:0,
         slide:false
       },
+      talkShow:false,
+      layer1:true,  //消息列表
+      layer2:false,  //私人聊天
+      layer3:false, //群聊天
+      layer4:false, //加群申请
+      newsend:'',
+      talktab:{
+        item:['Unread','Hacker','Group'],
+        n:0
+      },
+      talkList:[
+        {url:'images/6.png',name:'Qui Wang',txt:`I’m glad to join your team`,time:'2016/06/16',readstate:0,isgroup:0,apply:1},
+        {url:'images/6.png',name:'Qui Wang',txt:'group',time:'2016/06/16',readstate:1,isgroup:1,apply:0},
+        {url:'images/6.png',name:'Qui Wang',txt:'What if we make a power machine to get the arc. deepened?',time:'2016/06/16',readstate:0,isgroup:0,apply:0},
+        {url:'images/6.png',name:'Qui Wang',txt:'What if we make a power machine to get the arc. deepened?',time:'2016/06/16',readstate:0,isgroup:0,apply:0},
+        {url:'images/6.png',name:'Qui Wang',txt:'What if we make a power machine to get the arc. deepened?',time:'2016/06/16',readstate:0,isgroup:0,apply:0},
+        {url:'images/6.png',name:'Qui Wang',txt:'What if we make a power machine to get the arc. deepened?',time:'2016/06/16',readstate:1,isgroup:0,apply:0},
+        {url:'images/6.png',name:'Qui Wang',txt:'What if we make a power machine to get the arc. deepened?',time:'2016/06/16',readstate:0,isgroup:0,apply:0}
+      ],
+      filterTalkList:[],
+      msgConent:[
+        {avatar:'images/6.png',msg:`What if we make a power machine to get the arc. deepened?`,man:'other',read:1},
+        {avatar:'images/7.png',msg:`All right`,man:'self',read:0},
+        {avatar:'images/7.png',msg:`All right`,man:'self',read:1},
+        {avatar:'images/6.png',msg:`What if we make a power machine to get the arc. deepened?`,man:'other',read:1},
+        {avatar:'images/7.png',msg:`All right`,man:'self',read:0},
+        {avatar:'images/7.png',msg:`All right`,man:'self',read:1},
+        {avatar:'images/6.png',msg:`What if we make a power machine to get the arc. deepened?`,man:'other',read:1},
+        {avatar:'images/7.png',msg:`All right`,man:'self',read:0},
+        {avatar:'images/7.png',msg:`All right`,man:'self',read:1}
+      ],
     }
   },
   created () {
@@ -69,6 +193,24 @@ export default {
       }
     }
     this.notify(this.user.id)
+    this.filterTalkList = this.copylist(this.talkList).filter(item=>!item.readstate)
+  },
+  watch:{
+    talkList:{
+      handler(){
+        if(this.talktab.n==0){
+          this.filterTalkList = this.copylist(this.talkList).filter(item=>!item.readstate)
+        }
+        if(this.talktab.n==1){
+          this.filterTalkList = this.copylist(this.talkList)
+        }
+        if(this.talktab.n==2){
+          this.filterTalkList =  this.copylist(this.talkList).filter(item=>item.isgroup)
+        }
+
+      },
+      deep:true
+    }
   },
   methods: {
     showLogin(){
@@ -152,6 +294,52 @@ export default {
         this.notifications = []
       }
     },
+    chooseTalk(value,index){
+      // console.log(index,tab)
+      this.talktab.n = index;
+      if(index==0){ //unread
+        this.filterTalkList = this.copylist(this.talkList).filter(item=>!item.readstate)
+      }
+      if(index==1){ //hacker
+        this.filterTalkList = this.copylist(this.talkList)
+      }
+      if(index==2){ //Group
+        this.filterTalkList = this.copylist(this.talkList).filter(item=>item.isgroup)
+      }
+    },
+    showMessage(value,index,pindex){
+      // console.log(value)
+      console.log(pindex)
+      this.talkList[pindex].readstate = 1;
+      if(value.isgroup){
+        this.layer3=true;
+        this.layer1=this.layer2=this.layer4=false;
+      }else if(value.apply){
+        this.layer4=true;
+        this.layer1=this.layer2=this.layer3=false;
+      }
+      else{
+        this.layer1=this.layer3=this.layer4=false;
+        this.layer2=true
+      }
+    },
+    back(){
+      this.layer1=true
+      this.layer2=this.layer3=this.layer4=false
+    },
+    send(){
+      if(!this.newsend) return false
+      this.msgConent.push({avatar:'@/images/7.png',msg:this.newsend,man:'self',read:0},)
+    },
+    copylist (obj){
+      let res = []
+      for (let i = 0; i < obj.length; i++) {
+        res.push(obj[i])
+        res[i].pindex = i;
+      }
+      return res
+    }
+
   }
 }
 

@@ -3,7 +3,7 @@
 <div>
   <div class="wrap">
     <a class="text-center ad" href="#">
-      <img :src="require('@/images/banner2.png')" alt="" style="width: 100%">
+      <img :src="require('@/images/banner-bch.png')" alt="" style="width: 100%">
     </a>
   </div>
 
@@ -14,8 +14,8 @@
         <ul class="clearfix">
           <li><router-link to="/hackathon/detail"><a>Details</a></router-link></li>
           <li><router-link to="/hackathon/participants"><a>Participants</a></router-link></li>
-          <li class="active"><a>Team</a></li>
-          <li><router-link to="/hackathon/update"><a>Updates</a></router-link></li>
+          <li class="active"><a>Organize Teams</a></li>
+          <li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>
           <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
         </ul>
       </div>
@@ -47,7 +47,7 @@
     <div class="judges six lg">
       <div class="main">
         <div class="lists clearfix">
-          <div class="lists-title text-primary">Paprika for Dora Attacking</div>
+          <div class="lists-title text-primary">Guardians of the Galaxy</div>
           <div class="item sm-center" v-for="v,i in judges">
             <div class="img" :class="{active:v.active}"><img :src="require('@/'+v.url)" alt=""></div>
             <h3>{{v.name}}</h3>
@@ -63,7 +63,7 @@
 
       <div class="main">
         <div class="lists clearfix">
-          <div class="lists-title text-primary">Just for The World Peace</div>
+          <div class="lists-title text-primary">The Avengers</div>
           <div class="item sm-center" v-for="v,i in judges2">
             <div class="img" :class="{active:v.active}"><img :src="require('@/'+v.url)" alt=""></div>
             <h3>{{v.name}}</h3>
@@ -92,7 +92,7 @@
 
   <m-modal ref="layer">
     <div slot="modal-header">
-      <h4 class="title">Are you sure to join the team <span class="black">Just for The World Peace</span> ?</h4>
+      <h4 class="title">Are you sure to join the team <span class="black">The Avengers</span> ?</h4>
       <h5 class="sub-title">Application letter</h5>
     </div>
     <div slot="modal-content">
@@ -116,6 +116,7 @@
 </template>
 
 <script>
+import api from '@/api'
 import MModal from './commons/MModal'
 
 export default {
@@ -127,23 +128,25 @@ export default {
       maxTxtCount:100,
       curTxtCount:0,
       judges:[
-        {url:'images/6.png',name:'Qiu Wang',intro:`Designer`,active:false},
-        {url:'images/7.png',name:'Sijie Chen',intro:`Public Chain`,active:true},
-        {url:'images/8.png',name:'Anna Levine',intro:`DApps`,active:false}
+        // {url:'images/6.png',name:'Qiu Wang',intro:`Designer`,active:false},
+        // {url:'images/7.png',name:'Sijie Chen',intro:`Public Chain`,active:true},
+        // {url:'images/8.png',name:'Anna Levine',intro:`DApps`,active:false}
 
       ],
       judges2:[
-        {url:'images/10.png',name:'Michael Blue',intro:`Full Stack`,active:false},
-        {url:'images/11.png',name:'Yu Hagiee',intro:`Hacker`,active:false},
-        {url:'images/8.png',name:'Anna Levine',intro:`DApps`,active:false},
-        {url:'images/7.png',name:'Sijie Chen',intro:`Public Chain`,active:false}
+        // {url:'images/10.png',name:'Michael Blue',intro:`Full Stack`,active:false},
+        // {url:'images/11.png',name:'Yu Hagiee',intro:`Hacker`,active:false},
+        // {url:'images/8.png',name:'Anna Levine',intro:`DApps`,active:false},
+        // {url:'images/7.png',name:'Sijie Chen',intro:`Public Chain`,active:false}
 
 
       ],
     }
-
   },
-
+  created() {
+    api.fetch_team().then((res) => {
+    })
+  },
   methods:{
     ok(){},
     change(event){
@@ -158,7 +161,6 @@ export default {
       if(this.curTxtCount>this.allTxtCount){
         return false;
       }
-
     }
 
   }

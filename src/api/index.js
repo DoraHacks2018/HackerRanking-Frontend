@@ -35,6 +35,10 @@ export default {
     return axios.post(`${url}/register/github`, { code: code },
       { headers: { 'content-type': 'application/json' } })
   },
+  claim_auth (code, name) {
+    return axios.post(`${url}/register/claim`, { code: code, author_login: name },
+      { headers: { 'content-type': 'application/json' } })
+  },
   register_kcash (code, addr, invitation) {
     return axios.post(`${url}/register/kcash`, { code: code, addr: addr, invite: invitation },
       { headers: { 'content-type': 'application/json' } })
@@ -153,8 +157,9 @@ export default {
       }
     })
   },
-  github_contributors () {
-    return axios.get(`${url}/`)
+  github_contributors (page) {
+    return axios.post(`${url}/hacker/github-contribute`, { page: page, per_page: 10 },
+    { headers: { 'content-type': 'application/json' } })
   },
   bounty_setup (option) {
     return axios.post(`${url}/user/bounty`, {
@@ -170,10 +175,18 @@ export default {
     })
   },
   participants (role) {
-    return axios.get(`${url}/team/attenders/${role}`, {
-      headers: {
-        'X-Auth-Token': window.cookieStorage.getItem('token')
-      }
-    })
+    return axios.get(`${url}/team/attenders/${role}`)
+  },
+  fetch_team (status) {
+    return axios.get(`${url}/team/list/${status}`)
+  },
+  create_team (teamname) {
+    return axios.post(`${url}/team/manage`, { name: teamname },
+      {
+        headers: {
+          'content-type': 'application/json',
+          'X-Auth-Token': window.cookieStorage.getItem('token')
+        }
+      })
   }
 }

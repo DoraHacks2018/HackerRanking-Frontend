@@ -8,8 +8,8 @@
           <ul class="clearfix">
             <li><router-link to="/hackathon/detail"><a>Details</a></router-link></li>
             <li><router-link to="/hackathon/participants"><a>Participants</a></router-link></li>
-            <li><router-link to="/hackathon/team"><a>Team</a></router-link></li>
-            <li class="active"><a>Updates</a></li>
+            <li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>
+            <li class="active"><a>Update Project</a></li>
             <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
           </ul>
         </div>
@@ -24,7 +24,7 @@
               <label for="name" class="label">Project name</label>
               <div class="form-info">
                 <div class="area" style="width:100%">
-                  <input type="text" id="name" @input="input($event,'name')">
+                  <input type="text" id="name" @input="input($event,'name')" v-model="name">
                   <div class="count">
                     <span class="cur" :class="{red:nameCout>nameMax}">{{nameCout}}</span> /
                     <span class="all">{{nameMax}}</span>
@@ -35,7 +35,7 @@
             <div class="input-group clearfix">
               <label for="link" class="label">Github link</label>
               <div class="form-info">
-                <input type="text" id="link">
+                <input type="text" id="link" v-model="git">
               </div>
             </div>
 
@@ -43,7 +43,7 @@
               <label for="slogan" class="label">introduction</label>
               <div class="form-info">
                 <div class="area" style="width: 100%">
-                  <textarea name="" rows="6" placeholder="What problem we are committed to solving.What approach do we take. What we have already done." @input="input($event,'intro')" id="slogan" style="width: 100%"></textarea>
+                  <textarea name="" rows="6" placeholder="What problem we are committed to solving.What approach do we take. What we have already done." @input="input($event,'intro')" id="slogan" style="width: 100%" v-model="intro"></textarea>
                   <div class="count">
                     <span class="cur" :class="{red:introCount>introMax}">{{introCount}}</span> /
                     <span class="all">{{introMax}}</span>
@@ -59,7 +59,7 @@
 
               </label>
               <div class="form-info">
-                <input type="text" id="demolink">
+                <input type="text" id="demolink" v-model="demo">
               </div>
             </div>
 
@@ -119,6 +119,8 @@
 </template>
 
 <script>
+import api from '@/api'
+
 export default {
   name: 'UpdateProject',
   data () {
@@ -131,7 +133,13 @@ export default {
       logo:'',
       designs:[],
       photo: false,
-      link: false
+      link: false,
+      name: '',
+      git: '',
+      intro: '',
+      demo: '',
+      dphotos: [],
+      lphoto: ''
     }
 
   },
@@ -159,8 +167,10 @@ export default {
         let url = `${window.URL.createObjectURL(event.target.files[0])}`
         if(str=='design'){
           this.designs.push(url)
+          this.dphotos.push(event.target.files[0])
         }else{
           this.logo = url;
+          this.lphoto = event.target.files[0]
         }
       }
     },
@@ -176,6 +186,24 @@ export default {
     },
     submit () {
       const formd = new FormData()
+      if (this.lphoto) {
+        formd.append('logo', this.lphoto)
+      } else {
+        alert('Please upload the logo')
+        return
+      }
+      formd.append('name', this.name)
+      formd.append('git', this.git)
+      formd.append('desc', this.intro)
+      formd.append('demo', this.demo)
+      api.upload_project(formd).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          alert('Upload Success')
+        }
+      })
     }
   }
 

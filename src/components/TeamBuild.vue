@@ -4,10 +4,9 @@
 
     <div class="wrap">
       <a class="text-center ad" href="#">
-        <img :src="require('@/images/banner2.png')" alt="" style="width: 100%">
+        <img :src="require('@/images/banner-bch.png')" alt="" style="width: 100%">
       </a>
     </div>
-
 
     <div class="wrap">
       <div class="match">
@@ -16,17 +15,15 @@
             <li><router-link to="/hackathon/detail"><a>Details</a></router-link></li>
             <li><router-link to="/hackathon/participants"><a>Participants</a></router-link></li>
             <li class="active"><a>Organize Teams</a></li>
-            <li><router-link to="/hackathon/update"><a>Update Projects</a></router-link></li>
+            <li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>
             <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
           </ul>
         </div>
       </div>
 
-
       <div class="text-right clearfix" v-if="inTeam">
         <a v-if="isLeader" class="btn btn-cancel dismiss">Disband The Team</a>
         <a v-else class="btn btn-cancel dismiss">Leave The Team</a>
-
       </div>
     </div>
 
@@ -54,15 +51,16 @@
               <p class="sname text-center">{{v.intro}}</p>
             </div>
             <div class="item sm-center">
-              <div class="add img circle" style="border-radius: 50%" @click="change($event,1)">
-              </div>
-              <h3 class="text-primary">Invite members</h3>
+              <div class="add img circle" style="border-radius: 50%" @click="change($event,1)" v-if="inTeam"></div>
+              <div class="add img circle" style="border-radius: 50%" @click="createTeam" v-else></div>
+              <h3 class="text-primary" v-if="inTeam">Invite members</h3>
+              <h3 class="text-primary" v-else>Create team</h3>
             </div>
           </div>
         </div>
 
         <div class="text-center">
-          <button class="btn btn-primary btn-lg">Team Comeplete</button>
+          <button class="btn btn-primary btn-lg">Team Complete</button>
         </div>
 
       </div>
@@ -164,7 +162,7 @@ export default {
           {
             url: 'images/6.png',
             name: 'Qiu Wang',
-            intro: `TI will try my best to win this competition! No one is going to stop me from making it.`,
+            intro: `I will try my best to win this competition! No one is going to stop me from making it.`,
             pid: 0
           },
         ],
@@ -174,8 +172,8 @@ export default {
       }
     }
   },
-  created (){
-    this.role.filterData = this.role.items.filter(item=>item.pid==this.role.n)
+  created () {
+    this.role.filterData = this.role.items.filter(item => item.pid==this.role.n)
     api.check_team.then((res) => {
       const d = res.data
       if (d.errcode) {
@@ -187,15 +185,15 @@ export default {
       this.isLeader = d.isLeader
     })
   },
-  methods:{
-    change(event){
+  methods: {
+    change (event) {
       this.$refs.lgLayer.show = true;
 
     },
-    cancel(){
+    cancel () {
       this.$refs.layer.show = false
     },
-    input(event){
+    input (event) {
       this.curTxtCount = event.target.textLength
       if(this.curTxtCount>this.allTxtCount){
         return false;
@@ -204,16 +202,28 @@ export default {
     },
     ok(){},
 
-    invite(){
+    invite () {
       this.$refs.layer.show = true
     },
-    choose(index) {
+    choose (index) {
       this.role.n = index;
       this.role.filterData = this.role.items.filter(item=>item.pid==this.role.n)
     },
-    entername(event){
+    entername (event) {
       // console.log(event.target.innerHTML)
       this.teamName=event.target.innerHTML
+    },
+    createTeam () {
+      api.create_team(this.teamName).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          alert('A new team!')
+          this.inTeam = true
+          this.isLeader = true
+        }
+      })
     }
 
   }

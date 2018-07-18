@@ -2,7 +2,7 @@
   <div id="app" v-cloak>
     <div class="wrap">
       <a class="text-center ad" href="#">
-        <img :src="require('@/images/banner2.png')" alt="" style="width: 100%">
+        <img :src="require('@/images/banner-bch.png')" alt="" style="width: 100%">
       </a>
     </div>
 
@@ -14,7 +14,7 @@
             <li class="active"><a>Details</a></li>
             <li><router-link to="/hackathon/participants"><a>Participants</a></router-link></li>
             <li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>
-            <li><router-link to="/hackathon/update"><a>Update Projects</a></router-link></li>
+            <li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>
             <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
           </ul>
         </div>
@@ -96,36 +96,32 @@ export default {
       menuShow: false,
       txtShow: false,
       match:{
-        time:'June 26th - 27th, 2018',
-        address:`San Jose Convention Center 150 W San Carlos St. San Jose, CA 95113`,
-        txt:`DoraHacks will host Blockchain for Future Hackathon, the largest and most competitive blockchain hackathon ever, right in the heart of Silicon Valley on June 26 and 27th. The hackathon will happen in San Jose McEnery Convention Center.<br>
-
-            Themes of the hackathon include public chain security and high impact DApps. Hackers will form a team of 3-5 members prior or at the hackathon.  <br>
-
-			Judging criteria: Usability, technicality, creativity;<br>
-            24-hour increment<br>
-            Cost：free`,
+        time:'2018年7月21日~7月22日',
+        address:`裸心社三里屯社区（北京朝阳工体北路甲2号盈科中心C栋5层`,
+        txt:`为共同建设BCH核心开发社群和应用开发者社群、维护BCH，DoraHacks&BCH寻找最优秀的Hacker，开始这场24小时冒险之旅。使用最尖端的区块链技术，展开最激烈的头脑风暴，用令人折服的作品解决人类社会各行业出现的最新、最迫切的问题.<br>
+参赛选手通过专业筛选获得参赛资格，瓜分总数为¥200,000+的BCH奖金池。通过筛选的参赛者可以获得Brainstorm Creative Hacker的优秀Hacker奖，获得报销全额/部分差旅(最高1BCH)；同时比赛中按照票数多少划分项目一二三等奖，所有获得票数的选手可根据票数，获得相应份额的奖金。
+<br>
+（*BCH价格按6月14日活动发布日的收盘价格算）
+`,
         money:2200000
       },
       judges:[
-        {url:'assets/JiangXuxian.png',name:'Dr. Jiang Xuxian',intro:`ounder & CEO of Peckshield, former chief scientist of 360 and lifelong professor at North Carolina State University`},
-        {url:'assets/DawnSong.jpg',name:'Dawn Song',intro:`Founder of Oasis Lab, Professor at UC Berkeley`},
-        {url:'assets/MaQIang.png',name:'Ma Qiang',intro:`Founder of BA Capital and Hackers Fund, early investor of Bitmain`},
-        {url:'assets/anastasia.jpeg',name:'Anastasia Miron',intro:`Nebulas Ambassador, Innovation Evangelist`}],
+        {url:'assets/fangyuan.jpg',name:'方圆',intro:`得到首席架构师`},
+        {url:'assets/timyang.jpg',name:'Tim Yang',intro:`微博研发副总经理`},
+        {url:'assets/jiangjiazhi.jpg',name:'姜家志',intro:`BCH资深开发者`},
+        {url:'assets/hanjin.jpg',name:'韩进',intro:`硅谷知名区块链公司创始人兼CTO`}],
       judges2:[
-        {url:'assets/Elaine.png',name:'Elaine Shi',intro:`Co-Founder & Chief Scientist of Thunder Token`},
-        {url:'assets/jing sun.jpeg',name:'Jing Sun',intro:`Co-Founding Team of IoTeX`},
-        {url:'assets/Robin Zhong.jpg',name:'Robin Zhong',intro:`Co-Founding Team of Nebulas `},
-        {url:'assets/Hitters Xu.jpg',name:'Hitters Xu',intro:`Co-Founding Team of Nebulas `},
-        ],
-      judges3:[
-        {url:'assets/Jeffrey Wernick.jpeg',name:'Jeffery Wernick',intro:`Qtum Advisor, Early Investor of Uber & Airbnb`},
-        {url:'assets/William King.jpeg',name:'William King',intro:`PM, Consensys`},
+        {url:'assets/astaxie.jpg',name:'Asta Xie',intro:`Go语言中国首席布道师`},
       ]
     }
   },
   methods: {
     gotoInfo () {
+      let tmp = window.cookieStorage.getItem('token')
+      if (tmp === 'anyValue' || !tmp) {
+        alert('Login required.')
+        return
+      }
       this.$router.push('/hackathon/upload-info')
     },
     getImgUrl (url) {

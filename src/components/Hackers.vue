@@ -51,7 +51,7 @@
 
           </table>
           <p style="color:#b6baba;margin-left: 30px;font-size: 14px;line-height: 1">...</p>
-          <a class="btn btn-primary">Claim Identity to Get Gift &nbsp; <i class="fa fa-angle-right"></i></a>
+          <a class="btn btn-primary" @click="claimId(v.name)">Claim Identity to Get Gift &nbsp; <i class="fa fa-angle-right"></i></a>
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
 
 <script>
 import api from '@/api'
-
+import OAuthPopup from '@/utils/popup'
 
 export default {
   name: 'Hackers',
@@ -88,9 +88,33 @@ export default {
   },
   created () {
     api.github_contributors().then((res) => {
-
+      const d = res.data
+      if (d.errcode) {
+        alert(d.errmsg)
+      } else {
+        // hackers
+      }
     })
   },
+  methods: {
+    claimId (name) {
+      const url = 'https://github.com/login/oauth/authorize?client_id=ae68a17db805afccb892&scope=user'
+      const popupOptions = { width: 1020, height: 618 }
+      const redirect = this.redirect_uri
+      this.oauthPopup = new OAuthPopup(url, 'github', popupOptions)
+      this.oauthPopup.open(redirect, false).then((res) => {
+        api.claim_auth(res.code, name).then((response) => {
+          const dd = response.data
+          if (dd.errcode) {
+            alert(dd.errmsg)
+            return
+          }
+          this.show = false
+          this.$emit('update', dd)
+        })
+      })
+    }
+  }
 }
 </script>
 

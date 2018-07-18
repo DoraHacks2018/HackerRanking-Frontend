@@ -3,7 +3,7 @@
   <div v-cloak>
     <div class="wrap">
       <a class="text-center ad" href="#">
-        <img :src="require('@/images/banner2.png')" alt="" style="width: 100%">
+        <img :src="require('@/images/banner-bch.png')" alt="" style="width: 100%">
       </a>
     </div>
 
@@ -15,7 +15,7 @@
             <li><router-link to="/hackathon/detail"><a>Details</a></router-link></li>
             <li class="active"><a>Participants</a></li>
             <li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>
-            <li><router-link to="/hackathon/update"><a>Update Projects</a></router-link></li>
+            <li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>
             <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
           </ul>
         </div>
@@ -117,20 +117,20 @@ export default {
       player: [],
       act:[false,false,false,false,false,false],
       judges:[
-        {url:'images/6.png',name:'Qiu Wang',intro:`TI will try my best to win this competition! No one is going to stop me from making it.`},
-        {url:'images/7.png',name:'Sijie Chen',intro:`I will show you what the best programmer is like.`},
-        {url:'images/8.png',name:'Anna Levine',intro:`Girls are crazy creatures cuz once they find a way to do a program, then no one can prevent them winning. `},
-        {url:'images/9.png',name:'Chen Li',intro:`I will show you what the best programmer is like.`},
-        {url:'images/10.png',name:'Michael Blue',intro:`Girls are crazy creatures cuz once they find a way to do a program, then no one can prevent them ...`},
-        {url:'images/11.png',name:'Yu Hagiee',intro:`I will try my best to win this competition! No one is going to stop me from making it.`},
-        {url:'images/12.png',name:'Xueying Li',intro:`I will show you what the best programmer is like.I am what I am. that’s it.`},
-        {url:'images/13.png',name:'Michael Blue',intro:`Boys are crazy creatures once they find a way to do a program, then every one will lose. `}
+        // {url:'images/6.png',name:'Qiu Wang',intro:`TI will try my best to win this competition! No one is going to stop me from making it.`},
+        // {url:'images/7.png',name:'Sijie Chen',intro:`I will show you what the best programmer is like.`},
+        // {url:'images/8.png',name:'Anna Levine',intro:`Girls are crazy creatures cuz once they find a way to do a program, then no one can prevent them winning. `},
+        // {url:'images/9.png',name:'Chen Li',intro:`I will show you what the best programmer is like.`},
+        // {url:'images/10.png',name:'Michael Blue',intro:`Girls are crazy creatures cuz once they find a way to do a program, then no one can prevent them ...`},
+        // {url:'images/11.png',name:'Yu Hagiee',intro:`I will try my best to win this competition! No one is going to stop me from making it.`},
+        // {url:'images/12.png',name:'Xueying Li',intro:`I will show you what the best programmer is like.I am what I am. that’s it.`},
+        // {url:'images/13.png',name:'Michael Blue',intro:`Boys are crazy creatures once they find a way to do a program, then every one will lose. `}
       ]
     }
   },
   created () {
     api.participants('Full Stack').then((res) => {
-      const d = res.data()
+      const d = res.data
       if (d.errcode) {
         alert(d.errmsg)
         console.log('get participants err')

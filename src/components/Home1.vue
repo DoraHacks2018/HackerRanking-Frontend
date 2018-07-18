@@ -5,7 +5,7 @@
     <div class="swiper-container" id="swiper-container">
       <div class="swiper-wrapper">
         <div  v-for="(item,index) in carousels" class="swiper-slide relative" :style="{backgroundColor:item.bg}">
-          <img :src="require('@/images/banner1.png')" alt="">
+          <img :src="require('@/images/bch-poster.png')" alt="">
           <a @click="gotoDetail" class="join join1"></a>
         </div>
       </div>
@@ -104,8 +104,8 @@ export default {
           {id:2,title: 'On Spot'}
         ],
         items: [
-          {pid:1, url:'images/tab1.png',title:'Blockchain for Future Hackthon',subTitle:'Blockchain, connect and coherence!',address:'San Jose convention center',money:'18,000',time:'June 26th - 27th'},
-          {pid:2, url:'images/tab2.png',title:'DoraHacks & BCH Hack',subTitle:'Go for our dreams with our best hackers friends!',address:'Beijing, Peking university',money:'12,000',time:'July 21th - 22th'},
+          {pid:1, url:'images/tab1.png',title:'Blockchain for Future Hackathon',subTitle:'Blockchain, connect and coherence!',address:'San Jose convention center',money:'18,000',time:'June 26th - 27th'},
+          {pid:2, url:'images/tab2.png',title:'DoraHacks & BCH Hack',subTitle:'Go for our dreams with our best hackers friends!',address:'Beijing',money:'12,000',time:'July 21th - 22th'},
         ],
 
         filterData:[],
