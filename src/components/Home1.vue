@@ -6,7 +6,7 @@
       <div class="swiper-wrapper">
         <div  v-for="(item,index) in carousels" class="swiper-slide relative" :style="{backgroundColor:item.bg}">
           <img :src="require('@/images/bch-poster.png')" alt="">
-          <a @click="gotoDetail" class="join join1"></a>
+          <a @click="gotoDetail" class="join-bch join1"></a>
         </div>
       </div>
       <!--&lt;!&ndash; 如果需要分页器 &ndash;&gt;-->

@@ -223,16 +223,16 @@
 }
 .join-bch{
   position: absolute;
-  background-color: black;
+  background-image: url(../images/join-bch.png);
   background-repeat: no-repeat;
   background-size: 100%;
 }
 .join-bch:hover{
-  background-color: #9c9c9c;
+  background-image: url(../images/join-bch-hover.png);
 }
 .join1{
-	width: 12%;
-	height: 9%;
+	width: 18%;
+	height: 13%;
 	left: 23.8%;
 	top: 60%;
 }

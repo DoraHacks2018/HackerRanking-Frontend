@@ -231,6 +231,8 @@ export default {
           alert('A new team!')
           this.inTeam = true
           this.isLeader = true
+          this.judges.push({url: window.cookieStorage.getItem('avatar'), name: window.cookieStorage.getItem('name'), intro: window.cookieStorage.getItem('role'), active: false})
+          // {url:'images/6.png',name:'Qiu Wang',intro:`Designer`,active:true}
         }
       })
     }

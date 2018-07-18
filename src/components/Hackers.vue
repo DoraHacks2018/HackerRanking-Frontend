@@ -14,8 +14,8 @@
         <span class="rank">#{{v.rank}}</span>
         <div class="left clearfix">
           <div class="user">
-            <img :src="require('@/'+v.avatar)" alt="">
-            <h5>a{{v.id}}</h5>
+            <img :src=v.avatar alt="">
+            <h5>{{v.id}}</h5>
             <h6>Commits</h6>
           </div>
           <div class="follow">
@@ -51,10 +51,34 @@
 
           </table>
           <p style="color:#b6baba;margin-left: 30px;font-size: 14px;line-height: 1">...</p>
-          <a class="btn btn-primary" @click="claimId(v.name)">Claim Identity to Get Gift &nbsp; <i class="fa fa-angle-right"></i></a>
+          <a class="btn btn-primary" @click="claimId(v.name)">Claim Identity to Get {{v.gift}} Gift &nbsp; <i class="fa fa-angle-right"></i></a>
         </div>
       </div>
     </div>
+
+    <div class="wrap">
+      <ul class="pagination clearfix">
+        <li><a href="" class="fa fa-chevron-left"></a></li>
+        <li class="active"><a href="">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li><a href="">4</a></li>
+        <li class="ellip"><a></a></li>
+        <li><a href="">{{total_data.total}}</a></li>
+        <li><a href="" class="fa fa-chevron-right"></a></li>
+      </ul>
+    </div>
+
+    <footer>
+      <div class="wrap">
+        <ul class="flex">
+          <li><a href="">ABOUT US</a></li>
+          <li>FEEDBACK support@dorahacks.com</li>
+          <li>COOPERATION bd@dorahacks.com</li>
+        </ul>
+      </div>
+    </footer>
+
   </div>
 </template>
 
@@ -69,32 +93,12 @@ export default {
       menuShow:false,
       hackers:[
         {rank:1,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:2,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:3,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:4,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:5,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:6,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:7,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:8,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:9,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:10,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:11,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:12,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:13,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:14,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
-        {rank:15,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'}
-      ]
+      ],
+      total_data: null
     }
   },
   created () {
-    api.github_contributors().then((res) => {
-      const d = res.data
-      if (d.errcode) {
-        alert(d.errmsg)
-      } else {
-        // hackers
-      }
-    })
+    this.fetch_page(1)
   },
   methods: {
     claimId (name) {
@@ -112,6 +116,35 @@ export default {
           this.show = false
           this.$emit('update', dd)
         })
+      })
+    },
+    fetch_page (page) {
+      this.hackers = []
+      api.github_contributors(page).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          if (d.errmsg) {
+            alert(d.errmsg)
+          } else {
+            alert('Internal Server Error')
+          }
+        } else {
+          this.total_data = d
+          for (let i = 0; i < 10; i += 1) {
+            const tmp = d.items[i]
+            const record = tmp.commit
+            let h = {}
+            if (record.length === 2) {
+              h = {rank:tmp.rank,avatar:tmp.author_avatar,id:tmp.id,name:tmp.author_login,follower:'0',t1:record[0].chain_name,c1:record[0].commit,p1:record[0].add,d1:record[0].delete,t2:record[1].chain_name,c2:record[1].commit,p2:record[1].add,d2:record[1].delete}
+            } else if (record.length === 1) {
+              h = {rank:tmp.rank,avatar:tmp.author_avatar,id:tmp.id,name:tmp.author_login,follower:'0',t1:record[0].chain_name,c1:record[0].commit,p1:record[0].add,d1:record[0].delete,t2:'-',c2:'-',p2:'-',d2:'-'}
+            } else {
+              h = {rank:tmp.rank,avatar:tmp.author_avatar,id:tmp.id,name:tmp.author_login,follower:'0',t1:'-',c1:'-',p1:'-',d1:'-',t2:'-',c2:'-',p2:'-',d2:'-'}
+            }
+            console.log(h)
+            this.hackers.push(h)
+          }
+        }
       })
     }
   }

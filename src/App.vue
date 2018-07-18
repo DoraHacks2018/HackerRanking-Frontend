@@ -277,12 +277,14 @@ export default {
         this.user = {
           name: data.user_info.username,
           id: data.user_info.id,
-          avatar: data.user_info.avatar
+          avatar: data.user_info.avatar,
+          role: data.user_info.role
         }
         window.cookieStorage.setItem('token', data.auth_token, {expires: d})
         window.cookieStorage.setItem('name', data.user_info.username, {expires: d})
         window.cookieStorage.setItem('id', data.user_info.id, {expires: d})
         window.cookieStorage.setItem('avatar', data.user_info.avatar, {expires: d})
+        window.cookieStorage.setItem('role', data.user_info.role, {expires: d})
         this.notify(this.user.id)
       } else {
         this.$router.push('/')
@@ -291,6 +293,7 @@ export default {
         window.cookieStorage.setItem('name', 'anyValue', {expires: d})
         window.cookieStorage.setItem('id', 'anyValue', {expires: d})
         window.cookieStorage.setItem('avatar', 'anyValue', {expires: d})
+        window.cookieStorage.setItem('role', 'anyValue', {expires: d})
         this.notifications = []
       }
     },

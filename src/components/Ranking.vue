@@ -98,83 +98,50 @@ export default {
     return {
       menuShow: false,
       list: [
-        {
-          prize: false,
-          limit: true,
-          dollor: 100000,
-          hackers: 313,
-          judges: 43,
-          url: 'images/cat.png',
-          title: 'Looking for Best Designers',
-          team: 'Hacking to The Gate',
-          txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the`
-        },
-        {
-          prize: true,
-          limit: true,
-          dollor: 800000,
-          hackers: 313,
-          judges: 43,
-          url: 'images/cat.png',
-          title: 'Looking for Best Designers',
-          team: 'Hacking to The Gate',
-          txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools.`
-        },
-        {
-          prize: true,
-          limit: false,
-          dollor: 600000,
-          hackers: 313,
-          judges: 43,
-          url: 'images/cat.png',
-          title: 'Looking for Best Designers',
-          team: 'Hacking to The Gate',
-          txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. `
-        },
-        {
-          prize: false,
-          limit: true,
-          dollor: 460000,
-          hackers: 313,
-          judges: 43,
-          url: 'images/cat.png',
-          title: 'Looking for Best Designers',
-          team: 'Hacking to The Gate',
-          txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools.`
-        },
-        {
-          prize: false,
-          limit: true,
-          dollor: 320000,
-          hackers: 313,
-          judges: 43,
-          url: 'images/cat.png',
-          title: 'Looking for Best Designers',
-          team: 'Hacking to The Gate',
-          txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools.`
-        },
-        {
-          prize: false,
-          limit: true,
-          dollor: 220000,
-          hackers: 313,
-          judges: 43,
-          url: 'images/cat.png',
-          title: 'Looking for Best Designers',
-          team: 'Hacking to The Gate',
-          txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools.`
-        },
-        {
-          prize: false,
-          limit: true,
-          dollor: 140000,
-          hackers: 313,
-          judges: 43,
-          url: 'images/cat.png',
-          title: 'Looking for Best Designers',
-          team: 'Hacking to The Gate',
-          txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools.`
-        }
+        // {
+        //   prize: false,
+        //   limit: true,
+        //   dollor: 100000,
+        //   hackers: 313,
+        //   judges: 43,
+        //   url: 'images/cat.png',
+        //   title: 'Looking for Best Designers',
+        //   team: 'Hacking to The Gate',
+        //   txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the`
+        // },
+        // {
+        //   prize: true,
+        //   limit: true,
+        //   dollor: 800000,
+        //   hackers: 313,
+        //   judges: 43,
+        //   url: 'images/cat.png',
+        //   title: 'Looking for Best Designers',
+        //   team: 'Hacking to The Gate',
+        //   txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools.`
+        // },
+        // {
+        //   prize: true,
+        //   limit: false,
+        //   dollor: 600000,
+        //   hackers: 313,
+        //   judges: 43,
+        //   url: 'images/cat.png',
+        //   title: 'Looking for Best Designers',
+        //   team: 'Hacking to The Gate',
+        //   txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. `
+        // },
+        // {
+        //   prize: false,
+        //   limit: true,
+        //   dollor: 460000,
+        //   hackers: 313,
+        //   judges: 43,
+        //   url: 'images/cat.png',
+        //   title: 'Looking for Best Designers',
+        //   team: 'Hacking to The Gate',
+        //   txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools.`
+        // }
       ]
     }
   },
