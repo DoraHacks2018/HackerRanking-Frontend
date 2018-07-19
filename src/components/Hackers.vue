@@ -3,8 +3,8 @@
     <div class="wrap">
       <div class="search fl">
         <form action="">
-          <input type="text" class="key" placeholder="Search by hacker’s name">
-          <button type="submit" class="sub"></button>
+          <input type="text" class="key" placeholder="Search by hacker’s name" v-model="searchName">
+          <button type="submit" class="sub" @click="toProfile(searchName, 0)"></button>
         </form>
       </div>
     </div>
@@ -14,13 +14,13 @@
         <span class="rank">#{{v.rank}}</span>
         <div class="left clearfix">
           <div class="user">
-            <img :src=v.avatar alt="" @click="toProfile(v.id)" style="cursor: pointer">
+            <img :src=v.avatar alt="" @click="toProfile('', v.id)" style="cursor: pointer">
             <h5>{{v.id}}</h5>
             <h6>Commits</h6>
           </div>
           <div class="follow">
             <h4>{{v.name}}</a></h4>
-            <p><span class="text-primary">{{v.follow}}</span> Folllowers</p>
+            <p><span class="text-primary">{{v.follower}}</span> Followers</p>
             <div class="">
               <a href="" class="btn btn-primary">Follow</a>
               <a href="" class="btn btn-cancel">Message</a>
@@ -91,6 +91,7 @@ export default {
   data () {
     return {
       menuShow:false,
+      searchName:'',
       hackers:[
         {rank:1,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
       ],
@@ -135,11 +136,11 @@ export default {
             const record = tmp.commit
             let h = {}
             if (record.length === 2) {
-              h = {rank:tmp.rank,avatar:tmp.author_avatar,id:tmp.id,name:tmp.author_login,follower:'0',t1:record[0].chain_name,c1:record[0].commit,p1:record[0].add,d1:record[0].delete,t2:record[1].chain_name,c2:record[1].commit,p2:record[1].add,d2:record[1].delete}
+              h = {rank:tmp.rank,avatar:tmp.author_avatar,id:tmp.id,name:tmp.author_login, gift:tmp.gift, follower:'0',t1:record[0].chain_name,c1:record[0].commit,p1:record[0].add,d1:record[0].delete,t2:record[1].chain_name,c2:record[1].commit,p2:record[1].add,d2:record[1].delete}
             } else if (record.length === 1) {
-              h = {rank:tmp.rank,avatar:tmp.author_avatar,id:tmp.id,name:tmp.author_login,follower:'0',t1:record[0].chain_name,c1:record[0].commit,p1:record[0].add,d1:record[0].delete,t2:'-',c2:'-',p2:'-',d2:'-'}
+              h = {rank:tmp.rank,avatar:tmp.author_avatar,id:tmp.id,name:tmp.author_login,gift:tmp.gift,follower:'0',t1:record[0].chain_name,c1:record[0].commit,p1:record[0].add,d1:record[0].delete,t2:'-',c2:'-',p2:'-',d2:'-'}
             } else {
-              h = {rank:tmp.rank,avatar:tmp.author_avatar,id:tmp.id,name:tmp.author_login,follower:'0',t1:'-',c1:'-',p1:'-',d1:'-',t2:'-',c2:'-',p2:'-',d2:'-'}
+              h = {rank:tmp.rank,avatar:tmp.author_avatar,id:tmp.id,name:tmp.author_login,gift:tmp.gift,follower:'0',t1:'-',c1:'-',p1:'-',d1:'-',t2:'-',c2:'-',p2:'-',d2:'-'}
             }
             console.log(h)
             this.hackers.push(h)
@@ -147,8 +148,11 @@ export default {
         }
       })
     },
-    toProfile (cid) {
-      this.$router.push({'name': 'HackerView', query: { cid: cid }})
+    toProfile (name, cid) {
+      if (name===''&&cid===0) {
+        alert('Please input hacker\'s name')
+      }
+      this.$router.push({'name': 'HackerGithub', query: { name: name, cid: cid }})
     }
   }
 }

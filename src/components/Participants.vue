@@ -34,22 +34,22 @@
       <div class="nav">
         <div class="list-group clearfix">
           <a class="item" :class="{active: act[0]}" @click="getFS" >
-            Full Stack
+            全栈
           </a>
           <a class="item" :class="{active: act[1]}" @click="getDesigner">
-            Designer
+            前端
           </a>
           <a class="item" :class="{active: act[2]}" @click="getDApps">
-            DApps
+            后端
           </a>
           <a class="item" :class="{active: act[3]}" @click="getSecurity">
-            Security
+            产品设计
           </a>
           <a class="item" :class="{active: act[4]}" @click="getChain">
-            Public Chain
+            UI
           </a>
           <a class="item" :class="{active: act[5]}" @click="getHacker">
-            Hacker
+            其他
           </a>
         </div>
       </div>
@@ -57,7 +57,7 @@
         <div class="main">
           <div class="lists clearfix" id="lists">
             <div class="item sm-center" v-for="v in judges">
-              <div class="img"><img :src="require('@/'+v.url)" alt=""></div>
+              <div class="img"><img :src=v.url alt=""></div>
               <h3>{{v.name}}</h3>
               <p class="intro">{{v.intro}}
               </p>
@@ -177,7 +177,7 @@ export default {
     },
     getDesigner () {
       this.chooseRole(1)
-      api.participants('Designer').then((res) => {
+      api.participants('Frontend').then((res) => {
         const d = res.data
         if (d.errcode) {
           alert(d.errmsg)
@@ -190,7 +190,7 @@ export default {
     },
     getDApps () {
       this.chooseRole(2)
-      api.participants('DApps').then((res) => {
+      api.participants('Backend').then((res) => {
         const d = res.data
         if (d.errcode) {
           alert(d.errmsg)
@@ -203,7 +203,7 @@ export default {
     },
     getSecurity () {
       this.chooseRole(3)
-      api.participants('Security').then((res) => {
+      api.participants('Product').then((res) => {
         const d = res.data
         if (d.errcode) {
           alert(d.errmsg)
@@ -216,7 +216,7 @@ export default {
     },
     getChain () {
       this.chooseRole(4)
-      api.participants('Public Chain').then((res) => {
+      api.participants('UI').then((res) => {
         const d = res.data
         if (d.errcode) {
           alert(d.errmsg)
@@ -229,7 +229,7 @@ export default {
     },
     getHacker () {
       this.chooseRole(5)
-      api.participants('Hacker').then((res) => {
+      api.participants('Others').then((res) => {
         const d = res.data
         if (d.errcode) {
           alert(d.errmsg)

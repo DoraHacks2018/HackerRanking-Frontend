@@ -16,8 +16,8 @@
           <p>Following</p>
         </div>
       </div>
-      <div class="map">{{user.address}}</div>
-      <a href="" class="git">Github</a>
+      <!--<div class="map">{{user.address}}</div>-->
+      <!--<a href="" class="git">Github</a>-->
     </div>
     <div class="sidebtn">
       <a href="" class="btn btn-primary">Follow</a>
@@ -43,13 +43,13 @@
   <div class="pcwrap">
     <div class="list-group f20" v-for="v,i in items" style="margin-bottom: 20px">
       <div class="item">
-        <h2 class="text-primary fontlg">{{v.t1}}</h2>
+        <h2 class="text-primary fontlg">{{v.chain_name}}/{{v.github_project_name}}</h2>
       </div>
       <div class="item">
         <div class="flex">
-          <h2 class="item text-gray">{{v.c1}} <span class="text-light">Commits</span></h2>
-          <div class="item text-gray">{{v.p1}} <span class="text-primary">++</span></div>
-          <div class="item text-gray">{{v.d1}} <span style="color:#65a3ff">--</span></div>
+          <h2 class="item text-gray">{{v.commit}} <span class="text-light">Commits</span></h2>
+          <div class="item text-gray">{{v.add}} <span class="text-primary">++</span></div>
+          <div class="item text-gray">{{v.delete}} <span style="color:#65a3ff">--</span></div>
         </div>
       </div>
 
@@ -83,36 +83,48 @@
 </template>
 
 <script>
+import api from '@/api'
 export default {
   name: 'HackerGithub',
   data () {
     return {
       menuShow:false,
       user:{
-        url:'images/pig.png',
-        name:'Peggi Whistle',
-        followers:286,
-        following:6,
-        address:'BJTU,Beijing'
+        url:'',
+        name:'',
+        followers:0,
+        following:0,
+        address:''
       },
       items:[
         // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'}
       ]
     }
 
   },
   created () {
-    if (this.$route.query.cid) {
-
+    if (this.$route.query.cid !== 0) {
+      api.hacker_view('', this.$route.query.cid).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          this.user.url = d.author_avatar
+          this.name = d.author_login
+          this.items = d.commit_info
+        }
+      })
+    } else if (this.$route.query.name !== '') {
+      api.hacker_view(this.$route.query.name, 0).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          this.user.url = d.author_avatar
+          this.name = d.author_login
+          this.items = d.commit_info
+        }
+      })
     }
   },
   methods: {

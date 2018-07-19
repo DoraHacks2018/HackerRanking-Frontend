@@ -12,48 +12,48 @@
               </div>
               <p class="p">Upload real you</p>
               <div class="input-group clearfix">
-                <label for="name" class="label">Real name</label>
+                <label for="name" class="label">真实姓名</label>
                 <div class="form-info">
                   <input type="text" id="name" v-model="name">
                 </div>
               </div>
               <div class="input-group clearfix">
-                <label for="residence" class="label">Residence</label>
+                <label for="residence" class="label">所在城市</label>
                 <div class="form-info">
                   <input type="text" id="residence" v-model="city">
                 </div>
               </div>
               <div class="input-group clearfix" style="margin-bottom: 10px">
-                <label class="label">Choose a role</label>
+                <label class="label">比赛角色</label>
                 <div class="form-info">
                   <input class="magic btn-check" type="radio" name="role" id="stack">
-                  <label for="stack" class="fontnormal">Full Stack</label>
+                  <label for="stack" class="fontnormal">全栈</label>
                   <input class="magic btn-check" type="radio" name="role" id="designer">
-                  <label for="designer" class="fontnormal">Designer</label>
+                  <label for="designer" class="fontnormal">前端</label>
                   <input class="magic btn-check" type="radio" name="role"  id="dapps">
-                  <label for="dapps" class="fontnormal">DApps</label>
+                  <label for="dapps" class="fontnormal">后端</label>
                   <input class="magic btn-check" type="radio" name="role" id="security">
-                  <label for="security" class="fontnormal">Security</label>
+                  <label for="security" class="fontnormal">产品设计</label>
                   <input class="magic btn-check" type="radio" name="role" id="chain">
-                  <label for="chain" class="fontnormal">Public Chain</label>
+                  <label for="chain" class="fontnormal">UI</label>
                   <input class="magic btn-check" type="radio" name="role" id="hacker">
-                  <label for="hacker" class="fontnormal">Hacker</label>
+                  <label for="hacker" class="fontnormal">其他</label>
                 </div>
               </div>
               <div class="input-group clearfix">
-                <label for="work" class="label">Your work information</label>
+                <label for="work" class="label">学校/公司</label>
                 <div class="form-info">
                   <input type="text" id="work" v-model="org">
                 </div>
               </div>
               <div class="input-group clearfix">
-                <label for="address" class="label">ETH address</label>
+                <label for="address" class="label">发放奖金ETH钱包地址</label>
                 <div class="form-info">
                   <input type="text" id="address" v-model="eth">
                 </div>
               </div>
               <div class="input-group clearfix">
-                <label for="slogan" class="label">Teaming slogan</label>
+                <label for="slogan" class="label">召集队友宣言(Optional)</label>
                 <div class="form-info">
                   <div class="area">
                     <textarea name="" rows="5" v-model="slogan" placeholder="eg: I have a good idea about..." @input="input($event)" id="slogan"></textarea>
@@ -64,13 +64,13 @@
                   </div>
                 </div>
               </div>
-              <div class="input-group clearfix">
-                <label for="" class="label">&nbsp;</label>
-                <div class="form-info">
-                  <input class="magic magic-check" type="checkbox" id="save">
-                  <label for="save">Save for next Hackthon</label>
-                </div>
-              </div>
+              <!--<div class="input-group clearfix">-->
+                <!--<label for="" class="label">&nbsp;</label>-->
+                <!--<div class="form-info">-->
+                  <!--<input class="magic magic-check" type="checkbox" id="save">-->
+                  <!--<label for="save">Save for next Hackthon</label>-->
+                <!--</div>-->
+              <!--</div>-->
               <div class="input-group">
                 <button type="submit" class="btn-primary" @click="submit">Submit And Upload</button>
               </div>
@@ -111,11 +111,11 @@ export default {
       sloagn: '',
       rolecontent: [
         'Full Stack',
-        'Designer',
-        'DApps',
-        'Security',
-        'Public Chain',
-        'Hacker'
+        'Frontend',
+        'Backend',
+        'Product',
+        'UI',
+        'Others'
       ]
     }
   },
@@ -166,6 +166,7 @@ export default {
           alert(d.errmsg)
         } else {
           alert('Upload Success')
+          this.$router.push('/hackathon/participants')
         }
       })
     }

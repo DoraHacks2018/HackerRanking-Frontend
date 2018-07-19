@@ -18,6 +18,7 @@ import TrueChain from '@/components/TrueChain'
 import Hackers from '@/components/Hackers'
 import ProfileEdit from '@/components/ProfileEdit'
 import HackerGithub from '@/components/HackerGithub'
+import Blockchain from '@/components/Blockchain'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
       path: '/hackathon/detail',
       name: 'Detail',
       component: Detail
+    },
+    {
+      path: '/hackathon/blockchain',
+      name: 'Blockchain',
+      component: Blockchain
     },
     {
       path: '/hackathon/participants',

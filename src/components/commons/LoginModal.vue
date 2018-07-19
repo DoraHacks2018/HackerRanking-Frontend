@@ -17,6 +17,7 @@
       </div>
       <div class="signform" v-show="n==0">
         <form action="">
+          <p class="propt">{{prompt}}</p>
           <input type="text" placeholder="Enter A Crypto Name" v-model="cryptoName">
           <input type="text" placeholder="Enter Email Adress" v-model="email">
           <input type="text" placeholder="Enter Password" v-model="passwd">
@@ -47,6 +48,7 @@ export default {
       passwd: '',
       email: '',
       redirect_uri: 'https://ranking.dorahacks.com/',
+      prompt: '3-20位以字母开头、可带数字、“_”、“.”'
     }
   },
   methods: {
@@ -96,6 +98,10 @@ export default {
       })
     },
     register () {
+      if (!this.verifyUsername()) {
+        alert('CryptoName只允许3-20个以字母开头、可带数字、“_”、“.”的字串')
+        return
+      }
       api.register(this.cryptoName, this.email, this.passwd).then((res) => {
         const d = res.data
         if (d.errcode) {
@@ -104,11 +110,22 @@ export default {
           this.sendLogin()
         }
       })
+    },
+    verifyUsername () {
+      var patn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){2,19}$/;
+      if (!patn.exec(this.cryptoName)) return false
+      return true
     }
   }
 }
 </script>
 
 <style scoped>
-
+.propt {
+  color: red;
+  font-size: 10px;
+  margin-bottom: 8px;
+  margin-top: -20px;
+  text-align: right;
+}
 </style>

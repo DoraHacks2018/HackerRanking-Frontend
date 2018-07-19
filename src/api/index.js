@@ -205,4 +205,13 @@ export default {
       }
     })
   },
+  hacker_view (name, cid) {
+    return axios.post(`${url}/team/manage`, { code: code },
+      {
+        headers: {
+          'content-type': 'application/json',
+          'X-Auth-Token': window.cookieStorage.getItem('token')
+        }
+      })
+  }
 }
