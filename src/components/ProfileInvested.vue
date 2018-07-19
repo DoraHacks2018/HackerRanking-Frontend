@@ -142,36 +142,36 @@ export default {
         mail:'872575540@qq.com'
       },
       list:[
-        {
-          url:'images/cat.png',
-          title:'Looking for Best Designers',
-          team:'Hacking to The Gate',
-          txt:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the`
-        },
-        {
-          url:'images/cat.png',
-          title:'Looking for Best Designers',
-          team:'Hacking to The Gate',
-          txt:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the`
-        },
-        {
-          url:'images/cat.png',
-          title:'Looking for Best Designers',
-          team:'Hacking to The Gate',
-          txt:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the`
-        },
-        {
-          url:'images/cat.png',
-          title:'Looking for Best Designers',
-          team:'Hacking to The Gate',
-          txt:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the`
-        },
-        {
-          url:'images/cat.png',
-          title:'Looking for Best Designers',
-          team:'Hacking to The Gate',
-          txt:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the`
-        }
+        // {
+        //   url:'images/cat.png',
+        //   title:'Looking for Best Designers',
+        //   team:'Hacking to The Gate',
+        //   txt:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the`
+        // },
+        // {
+        //   url:'images/cat.png',
+        //   title:'Looking for Best Designers',
+        //   team:'Hacking to The Gate',
+        //   txt:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the`
+        // },
+        // {
+        //   url:'images/cat.png',
+        //   title:'Looking for Best Designers',
+        //   team:'Hacking to The Gate',
+        //   txt:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the`
+        // },
+        // {
+        //   url:'images/cat.png',
+        //   title:'Looking for Best Designers',
+        //   team:'Hacking to The Gate',
+        //   txt:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the`
+        // },
+        // {
+        //   url:'images/cat.png',
+        //   title:'Looking for Best Designers',
+        //   team:'Hacking to The Gate',
+        //   txt:`The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the`
+        // }
       ],
       investIndex:-1
     }

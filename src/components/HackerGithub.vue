@@ -30,8 +30,8 @@
     <div class="match">
       <div class="tab">
         <ul class="clearfix">
-          <li><a href="hackers_projects.html">Projects</a></li>
-          <li><a href="hackers_hackthons.html">Hackthons</a></li>
+          <!--<li><a href="hackers_projects.html">Projects</a></li>-->
+          <!--<li><a href="hackers_hackthons.html">Hackthons</a></li>-->
           <li class="active"><a href="hackers_github.html">Github Repo</a></li>
         </ul>
       </div>
@@ -55,9 +55,6 @@
 
     </div>
   </div>
-
-
-
 
   <div class="wrap">
     <ul class="pagination clearfix">
@@ -99,19 +96,24 @@ export default {
         address:'BJTU,Beijing'
       },
       items:[
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'}
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'}
       ]
     }
 
+  },
+  created () {
+    if (this.$route.query.cid) {
+
+    }
   },
   methods: {
 

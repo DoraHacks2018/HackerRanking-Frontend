@@ -16,6 +16,8 @@ import TeamCompleted from '@/components/TeamCompleted'
 import TeamBuild from '@/components/TeamBuild'
 import TrueChain from '@/components/TrueChain'
 import Hackers from '@/components/Hackers'
+import ProfileEdit from '@/components/ProfileEdit'
+import HackerGithub from '@/components/HackerGithub'
 
 Vue.use(Router)
 
@@ -25,6 +27,11 @@ export default new Router({
       path: '/hackers',
       name: 'Hackers',
       component: Hackers
+    },
+    {
+      path: '/hacker',
+      name: 'HackerGithub',
+      component: HackerGithub
     },
     {
       path: '/',
@@ -70,6 +77,11 @@ export default new Router({
       path: '/hackathon/upload-info',
       name: 'UploadInfo',
       component: UploadInfo
+    },
+    {
+      path: '/profile/edit',
+      name: 'ProfileEdit',
+      component: ProfileEdit
     },
     {
       path: '/profile/project',

@@ -11,11 +11,13 @@
       <div class="match">
         <div class="tab">
           <ul class="clearfix">
+            <!--<li class="active"><a>比赛详情</a></li>-->
+            <!--<li><router-link to="/hackathon/participants"><a>参赛者</a></router-link></li>-->
             <li class="active"><a>Details</a></li>
             <li><router-link to="/hackathon/participants"><a>Participants</a></router-link></li>
-            <li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>
-            <li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>
-            <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
+            <!--<li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>-->
+            <!--<li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>-->
+            <!--<li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>-->
           </ul>
         </div>
         <div class="content clearfix">
@@ -28,9 +30,10 @@
             </div>
           </div>
           <div class="info">
+            <!--<a class="upload" @click="gotoInfo">完善参赛信息 <i class="fa fa-arrow-right" aria-hidden="true"></i></a>-->
             <a class="upload" @click="gotoInfo">I'm a hacker <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
             <div class="cup text-center">
-              <p>20 ETH</p>
+              <p>￥200,000等值BCH</p>
             </div>
           </div>
         </div>
@@ -97,7 +100,7 @@ export default {
       txtShow: false,
       match:{
         time:'2018年7月21日~7月22日',
-        address:`裸心社三里屯社区（北京朝阳工体北路甲2号盈科中心C栋5层`,
+        address:`裸心社三里屯社区（北京朝阳工体北路甲2号盈科中心C栋5层）`,
         txt:`为共同建设BCH核心开发社群和应用开发者社群、维护BCH，DoraHacks&BCH寻找最优秀的Hacker，开始这场24小时冒险之旅。使用最尖端的区块链技术，展开最激烈的头脑风暴，用令人折服的作品解决人类社会各行业出现的最新、最迫切的问题.<br>
 参赛选手通过专业筛选获得参赛资格，瓜分总数为¥200,000+的BCH奖金池。通过筛选的参赛者可以获得Brainstorm Creative Hacker的优秀Hacker奖，获得报销全额/部分差旅(最高1BCH)；同时比赛中按照票数多少划分项目一二三等奖，所有获得票数的选手可根据票数，获得相应份额的奖金。
 <br>

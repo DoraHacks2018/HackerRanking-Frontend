@@ -188,5 +188,21 @@ export default {
           'X-Auth-Token': window.cookieStorage.getItem('token')
         }
       })
-  }
+  },
+  bind_git (code) {
+    return axios.post(`${url}/team/manage`, { code: code },
+      {
+        headers: {
+          'content-type': 'application/json',
+          'X-Auth-Token': window.cookieStorage.getItem('token')
+        }
+      })
+  },
+  upload_profile (formData) {
+    return axios.post(`${url}/profile/edit`, formData, {
+      headers: {
+        'X-Auth-Token': window.cookieStorage.getItem('token')
+      }
+    })
+  },
 }

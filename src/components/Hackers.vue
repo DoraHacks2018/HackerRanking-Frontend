@@ -14,7 +14,7 @@
         <span class="rank">#{{v.rank}}</span>
         <div class="left clearfix">
           <div class="user">
-            <img :src=v.avatar alt="">
+            <img :src=v.avatar alt="" @click="toProfile(v.id)" style="cursor: pointer">
             <h5>{{v.id}}</h5>
             <h6>Commits</h6>
           </div>
@@ -146,6 +146,9 @@ export default {
           }
         }
       })
+    },
+    toProfile (cid) {
+      this.$router.push({'name': 'HackerView', query: { cid: cid }})
     }
   }
 }

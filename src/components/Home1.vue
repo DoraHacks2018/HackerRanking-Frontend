@@ -5,7 +5,7 @@
     <div class="swiper-container" id="swiper-container">
       <div class="swiper-wrapper">
         <div  v-for="(item,index) in carousels" class="swiper-slide relative" :style="{backgroundColor:item.bg}">
-          <img :src="require('@/images/bch-poster.png')" alt="">
+          <img :src="require('@/images/bch.png')" alt="">
           <a @click="gotoDetail" class="join-bch join1"></a>
         </div>
       </div>
@@ -49,7 +49,7 @@
       </div>
       <div class="pcwrap">
         <div class="list-group">
-          <a href="#" class="item clearfix card" v-for="value,index in calendars.filterData">
+          <a class="item clearfix card" v-for="value,index in calendars.filterData" @click="toDetail(value.detail)">
             <img :src="require('@/'+value.url)" alt="" class="pull-left" >
             <div class="main pull-left">
               <h4 class="title">{{value.title}}</h4>
@@ -57,7 +57,7 @@
               <p class="address">{{value.address}}</p>
             </div>
             <div class="side pull-right">
-              <p class="money">${{value.money}}</p>
+              <p class="money">{{value.money}}</p>
               <time>{{value.time}}</time>
             </div>
           </a>
@@ -101,11 +101,11 @@ export default {
         tab:[
           {id:0,title: 'All'},
           {id:1,title: 'Upcoming'},
-          {id:2,title: 'On Spot'}
+          {id:2,title: 'Closed'}
         ],
         items: [
-          {pid:1, url:'images/tab1.png',title:'Blockchain for Future Hackathon',subTitle:'Blockchain, connect and coherence!',address:'San Jose convention center',money:'18,000',time:'June 26th - 27th'},
-          {pid:2, url:'images/tab2.png',title:'DoraHacks & BCH Hack',subTitle:'Go for our dreams with our best hackers friends!',address:'Beijing',money:'12,000',time:'July 21th - 22th'},
+          {pid:1, url:'images/tab1.png',title:'Blockchain for Future Hackathon',subTitle:'Blockchain, connect and coherence!',address:'San Jose convention center',money:'$18,000',time:'June 26th - 27th', detail:'/hackathon/blockchain'},
+          {pid:2, url:'images/tab2.png',title:'DoraHacks & BCH Hack',subTitle:'Go for our dreams with our best hackers friends!',address:'Beijing',money:'￥200,000',time:'July 21th - 22th', detail: '/hackathon/detail'},
         ],
 
         filterData:[],
@@ -152,7 +152,11 @@ export default {
       this.$router.push('/partner/truechain')
     },
     gotoGit () {
+      this.$emit('navigator', 1)
       this.$router.push('/hackers')
+    },
+    toDetail (url) {
+      this.$router.push(url)
     }
   }
 }

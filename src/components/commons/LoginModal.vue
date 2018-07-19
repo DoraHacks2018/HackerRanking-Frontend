@@ -23,7 +23,7 @@
           <div class="log-btns">
             <button class="btn btn-cancel" @click="register">Sign Up with Email</button>
             <div class="or">or</div>
-            <button class="btn btn-primary github" @click="register_auth('github')"><span>Register with Github</span></button>
+            <button class="btn btn-primary github" @click="login_auth('github')"><span>Login with Github</span></button>
           </div>
         </form>
       </div>

@@ -5,7 +5,7 @@
     <div class="hackertop self">
       <div class="wrap clearfix relative">
         <div class="sideuser">
-          <img :src="user.url" alt="">
+          <img :src=user.url alt="">
           <h2>{{user.name}}</h2>
         </div>
         <div class="sideinfo">
@@ -25,7 +25,7 @@
         <div class="sidebtn">
           <p class="text-bold text-gray">Total <span class="text-primary">66482020</span> Gift</p>
           <div class="relative" @click.stop = "drawShow = showDraw">
-            <button class="btn btn-cancel">Withdraw</button>
+            <!--<button class="btn btn-cancel">Withdraw</button>-->
             <div class="confirm" style="right: 0;left: auto;" v-show="drawShow">
               <form action="" class="form">
                 <div>Withdraw</div>
@@ -116,26 +116,26 @@ export default {
       menuShow:false,
       drawShow:false,
       user:{
-        url:'images/pig.png',
-        name:'Peggi Whistle',
-        followers:286,
-        following:6,
-        address:'BJTU,Beijing',
+        url:'',
+        name:'',
+        followers:0,
+        following:0,
+        address:'',
         eth:'0x61c55E4b294f771DF396a790c23FBd9aB8F2C1d7',
         gift:'NOT SAVE',
         mail:'872575540@qq.com'
       },
       items:[
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
-        {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'}
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'},
+        // {t1:'Truechain',c1:'2850842',p1:'92839828734',d1:'8837476'}
       ]
     }
   },

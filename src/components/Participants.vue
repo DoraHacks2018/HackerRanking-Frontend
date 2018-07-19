@@ -14,20 +14,20 @@
           <ul class="clearfix">
             <li><router-link to="/hackathon/detail"><a>Details</a></router-link></li>
             <li class="active"><a>Participants</a></li>
-            <li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>
-            <li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>
-            <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
+            <!--<li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>-->
+            <!--<li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>-->
+            <!--<li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>-->
           </ul>
         </div>
       </div>
 
 
-      <div class="search">
-        <form action="">
-          <input type="text" class="key" placeholder="Search by member name"><!-- 6.24-1 -->
-          <button type="submit" class="sub"></button>
-        </form>
-      </div>
+      <!--<div class="search">-->
+        <!--<form action="">-->
+          <!--<input type="text" class="key" placeholder="Search by member name">&lt;!&ndash; 6.24-1 &ndash;&gt;-->
+          <!--<button type="submit" class="sub"></button>-->
+        <!--</form>-->
+      <!--</div>-->
     </div>
 
     <div class="lrlayout clearfix">
@@ -61,7 +61,7 @@
               <h3>{{v.name}}</h3>
               <p class="intro">{{v.intro}}
               </p>
-              <button class="btn btn-primary" @click="invite()">Invite</button>
+              <!--<button class="btn btn-primary" @click="invite()">Invite</button>-->
             </div>
           </div>
         </div>
