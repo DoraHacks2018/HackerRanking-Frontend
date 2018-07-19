@@ -116,6 +116,7 @@ export default {
       menuShow:false,
       maxTxtCount:80,
       curTxtCount:0,
+      curTxt:null,
       player: [],
       act:[false,false,false,false,false,false],
       s_uid : 0,
@@ -134,7 +135,7 @@ export default {
     }
   },
   created () {
-    
+
     api.participants('Full Stack').then((res) => {
       const d = res.data()
       if (d.errcode) {
@@ -146,13 +147,13 @@ export default {
       }
     })
     this.act[0] = true
-   
+
   },
   methods:{
     ok(){
-      
+
       console.log(this.s_uid)
-      this.$socket.emit('add_group', {'from_id':this.uid,'to_id':this.s_uid,'isinvitation':1})
+      this.$socket.emit('add_group', {'from_id':this.uid,'to_id':this.s_uid,msg:this.curTxt,'isinvitation':1})
 
       // this.$refs.layer.show = false
     },
@@ -164,10 +165,12 @@ export default {
       this.$refs.layer.show = false
     },
     input(event){
+      this.curTxt = event.target.value
       this.curTxtCount = event.target.textLength
       if(this.curTxtCount>this.allTxtCount){
         return false;
       }
+
 
     },
     chooseRole (i) {
