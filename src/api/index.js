@@ -126,10 +126,10 @@ export default {
       }
     })
   },
-  upload_info (formData) {
+  upload_info (formData, token) {
     return axios.post(`${url}/user/upload-info`, formData, {
       headers: {
-        'X-Auth-Token': window.cookieStorage.getItem('token')
+        'X-Auth-Token': token
       }
     })
   },

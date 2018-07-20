@@ -19,7 +19,7 @@
             <h6>Commits</h6>
           </div>
           <div class="follow">
-            <h4>{{v.name}}</a></h4>
+            <h4>{{v.name}}</h4>
             <p><span class="text-primary">{{v.follower}}</span> Followers</p>
             <div class="">
               <a href="" class="btn btn-primary">Follow</a>
@@ -100,10 +100,11 @@ export default {
   },
   created () {
     this.fetch_page(1)
+    this.$emit('navigator', '1')
   },
   methods: {
     claimId (name) {
-      const url = 'https://github.com/login/oauth/authorize?client_id=ae68a17db805afccb892&scope=user'
+      const url = 'https://github.com/login/oauth/authorize?client_id=&scope=user'
       const popupOptions = { width: 1020, height: 618 }
       const redirect = this.redirect_uri
       this.oauthPopup = new OAuthPopup(url, 'github', popupOptions)

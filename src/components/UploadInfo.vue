@@ -14,7 +14,7 @@
               <div class="input-group clearfix">
                 <label for="name" class="label">真实姓名</label>
                 <div class="form-info">
-                  <input type="text" id="name" v-model="name">
+                  <input type="text" id="name" style="-webkit-appearance:none;" v-model="name">
                 </div>
               </div>
               <div class="input-group clearfix">
@@ -150,9 +150,11 @@ export default {
         return
       }
       const radio = document.getElementsByName('role')
+      let role = null
       for (let i = 0; i < radio.length; i += 1) {
         if (radio[i].checked) {
           formd.append('role', this.rolecontent[i])
+          role = this.rolecontent[i]
         }
       }
       formd.append('name', this.name)
@@ -160,13 +162,19 @@ export default {
       formd.append('org', this.org)
       formd.append('eth', this.eth)
       formd.append('slogan', this.slogan)
-      api.upload_info(formd).then((res) => {
+      const token = window.cookieStorage.getItem('token')
+      api.upload_info(formd, token).then((res) => {
         const d = res.data
         if (d.errcode) {
-          alert(d.errmsg)
+          if (d.errmsg) {
+            alert(d.errmsg)
+          } else {
+            alert('Upload Fail..Please upload again')
+          }
+          console.log('fail')
         } else {
           alert('Upload Success')
-          this.$router.push('/hackathon/participants')
+          this.$router.push({'name': 'Participants', query: { role: role}})
         }
       })
     }

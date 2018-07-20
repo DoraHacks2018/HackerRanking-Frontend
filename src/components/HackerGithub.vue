@@ -32,7 +32,7 @@
         <ul class="clearfix">
           <!--<li><a href="hackers_projects.html">Projects</a></li>-->
           <!--<li><a href="hackers_hackthons.html">Hackthons</a></li>-->
-          <li class="active"><a href="hackers_github.html">Github Repo</a></li>
+          <li class="active"><a>Github Repo</a></li>
         </ul>
       </div>
     </div>
@@ -103,6 +103,7 @@ export default {
 
   },
   created () {
+    console.log('cid=',this.$route.query.cid, 'name=',this.$route.query.name)
     if (this.$route.query.cid !== 0) {
       api.hacker_view('', this.$route.query.cid).then((res) => {
         const d = res.data

@@ -14,9 +14,9 @@
           <ul class="clearfix">
             <li><router-link to="/hackathon/detail"><a>Details</a></router-link></li>
             <li class="active"><a>Participants</a></li>
-            <!--<li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>-->
-            <!--<li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>-->
-            <!--<li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>-->
+            <li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>
+            <li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>
+            <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
           </ul>
         </div>
       </div>
@@ -116,20 +116,19 @@ export default {
       curTxtCount:0,
       player: [],
       act:[false,false,false,false,false,false],
+      roles:['Full Stack', 'Frontend', 'Backend', 'Product', 'UI', 'Others'],
       judges:[
-        // {url:'images/6.png',name:'Qiu Wang',intro:`TI will try my best to win this competition! No one is going to stop me from making it.`},
-        // {url:'images/7.png',name:'Sijie Chen',intro:`I will show you what the best programmer is like.`},
-        // {url:'images/8.png',name:'Anna Levine',intro:`Girls are crazy creatures cuz once they find a way to do a program, then no one can prevent them winning. `},
-        // {url:'images/9.png',name:'Chen Li',intro:`I will show you what the best programmer is like.`},
-        // {url:'images/10.png',name:'Michael Blue',intro:`Girls are crazy creatures cuz once they find a way to do a program, then no one can prevent them ...`},
-        // {url:'images/11.png',name:'Yu Hagiee',intro:`I will try my best to win this competition! No one is going to stop me from making it.`},
-        // {url:'images/12.png',name:'Xueying Li',intro:`I will show you what the best programmer is like.I am what I am. that’s it.`},
-        // {url:'images/13.png',name:'Michael Blue',intro:`Boys are crazy creatures once they find a way to do a program, then every one will lose. `}
+        // {url:'images/6.png',name:'Qiu Wang',intro:`I will try my best to win this competition! No one is going to stop me from making it.`},
       ]
     }
   },
   created () {
-    api.participants('Full Stack').then((res) => {
+    this.$emit('navigator', '0')
+    let role = 'Full Stack'
+    if (this.$route.query.role) {
+      role = this.$route.query.role
+    }
+    api.participants(role).then((res) => {
       const d = res.data
       if (d.errcode) {
         alert(d.errmsg)
@@ -139,7 +138,7 @@ export default {
         this.judges = d
       }
     })
-    this.act[0] = true
+    this.act[this.roles.indexOf(role)] = true
   },
   methods:{
     ok(){},

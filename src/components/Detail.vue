@@ -15,9 +15,9 @@
             <!--<li><router-link to="/hackathon/participants"><a>参赛者</a></router-link></li>-->
             <li class="active"><a>Details</a></li>
             <li><router-link to="/hackathon/participants"><a>Participants</a></router-link></li>
-            <!--<li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>-->
-            <!--<li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>-->
-            <!--<li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>-->
+            <li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>
+            <li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>
+            <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
           </ul>
         </div>
         <div class="content clearfix">
@@ -117,6 +117,9 @@ export default {
         {url:'assets/astaxie.jpg',name:'Asta Xie',intro:`Go语言中国首席布道师`},
       ]
     }
+  },
+  created () {
+    this.$emit('navigator', '0')
   },
   methods: {
     gotoInfo () {
