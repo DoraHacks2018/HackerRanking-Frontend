@@ -61,7 +61,7 @@
               <h3>{{v.name}}</h3>
               <p class="intro">{{v.intro}}
               </p>
-              <!--<button class="btn btn-primary" @click="invite()">Invite</button>-->
+              <button class="btn btn-primary" @click="invite()">Invite</button>
             </div>
           </div>
         </div>

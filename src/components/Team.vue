@@ -45,38 +45,24 @@
       </div>
     </div>
     <div class="judges six lg">
-      <div class="main">
+      <div class="main" v-for="t,index in teams">
         <div class="lists clearfix">
-          <div class="lists-title text-primary">Guardians of the Galaxy</div>
-          <div class="item sm-center" v-for="v,i in judges">
-            <div class="img" :class="{active:v.active}"><img :src="require('@/'+v.url)" alt=""></div>
-            <h3>{{v.name}}</h3>
-            <p class="sname text-center">{{v.intro}}</p>
+          <div class="lists-title text-primary">{{t.name}}</div>
+          <div class="item sm-center" v-for="v in t.members">
+            <!--<div class="img" :class="{active:v.active}"><img :src=v.url alt=""></div>-->
+            <div class="img"><img :src=v.avatar alt=""></div><h3>{{v.username}}</h3>
+            <p class="sname text-center">{{v.role}}</p>
           </div>
           <div class="item sm-center">
-            <div class="add img circle" style="border-radius: 50%" @click="change($event,1)">
-            </div>
-            <h3 class="text-primary">Join The Team</h3>
-          </div>
-        </div>
-      </div>
-
-      <div class="main">
-        <div class="lists clearfix">
-          <div class="lists-title text-primary">The Avengers</div>
-          <div class="item sm-center" v-for="v,i in judges2">
-            <div class="img" :class="{active:v.active}"><img :src="require('@/'+v.url)" alt=""></div>
-            <h3>{{v.name}}</h3>
-            <p class="sname text-center">{{v.intro}}</p>
-          </div>
-          <div class="item sm-center">
-            <div class="add img circle" style="border-radius: 50%" @click="change($event,2)">
+            <div class="add img circle" style="border-radius: 50%" @click="change($event,index+1)">
             </div>
             <h3 class="text-primary">Join The Team</h3>
           </div>
         </div>
       </div>
     </div>
+
+
   </div>
 
   <footer>
@@ -92,7 +78,7 @@
 
   <m-modal ref="layer">
     <div slot="modal-header">
-      <h4 class="title">Are you sure to join the team <span class="black">The Avengers</span> ?</h4>
+      <h4 class="title">Are you sure to join the team <span class="black">{{teams[toTeam].name}}</span> ?</h4>
       <h5 class="sub-title">Application letter</h5>
     </div>
     <div slot="modal-content">
@@ -127,30 +113,31 @@ export default {
       menuShow:false,
       maxTxtCount:100,
       curTxtCount:0,
+      teams: [],
       judges:[
         // {url:'images/6.png',name:'Qiu Wang',intro:`Designer`,active:false},
         // {url:'images/7.png',name:'Sijie Chen',intro:`Public Chain`,active:true},
         // {url:'images/8.png',name:'Anna Levine',intro:`DApps`,active:false}
 
       ],
-      judges2:[
-        // {url:'images/10.png',name:'Michael Blue',intro:`Full Stack`,active:false},
-        // {url:'images/11.png',name:'Yu Hagiee',intro:`Hacker`,active:false},
-        // {url:'images/8.png',name:'Anna Levine',intro:`DApps`,active:false},
-        // {url:'images/7.png',name:'Sijie Chen',intro:`Public Chain`,active:false}
-
-
-      ],
+      toTeam: 0
     }
   },
   created() {
-    api.fetch_team().then((res) => {
+    api.fetch_team(0).then((res) => {
+      const d = res.data
+      if (d.errcode) {
+        alert(d.errmsg)
+      } else {
+        this.teams = d
+        console.log(this.teams)
+      }
     })
   },
   methods:{
     ok(){},
-    change(event){
-      console.log(0)
+    change(event, index){
+      this.toTeam = index
       this.$refs.layer.show = true
     },
     cancel(){

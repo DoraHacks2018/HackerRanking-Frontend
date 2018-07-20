@@ -46,27 +46,17 @@
         </div>
       </div>
       <div class="judges six lg">
-        <div class="main">
+        <div class="main" v-for="t,index in teams">
           <div class="lists clearfix">
-            <div class="lists-title text-primary">Paprika for Dora Attacking</div>
-            <div class="item" v-for="v,i in judges">
-              <div class="img" :class="{active:v.active}"><img :src="require('@/'+v.url)" alt=""></div>
-              <h3>{{v.name}}</h3>
-              <p class="sname text-center">{{v.intro}}</p>
+            <div class="lists-title text-primary">{{t.name}}</div>
+            <div class="item" v-for="v in t.members">
+              <div class="img"><img :src=v.url alt=""></div>
+              <h3>{{v.username}}</h3>
+              <p class="sname text-center">{{v.role}}</p>
             </div>
           </div>
         </div>
 
-        <div class="main">
-          <div class="lists clearfix">
-            <div class="lists-title text-primary">Just for The World Peace</div>
-            <div class="item" v-for="v,i in judges2">
-              <div class="img" :class="{active:v.active}"><img :src="require('@/'+v.url)" alt=""></div>
-              <h3>{{v.name}}</h3>
-              <p class="sname text-center">{{v.intro}}</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -80,33 +70,12 @@
       </div>
     </footer>
 
-
-    <m-modal ref="layer">
-      <div slot="modal-header">
-        <h4 class="title">Are you sure to send this invitation to <span class="black">Anna Levine</span> ?</h4>
-        <h5 class="sub-title">Invitation Card</h5>
-      </div>
-      <div slot="modal-content">
-        <form action="">
-          <div class="area">
-            <textarea name="" placeholder="eg: I’m glad to introduce our project to you...." @input="input($event)" autofocus="autofocus"></textarea>
-            <div class="count">
-              <span class="cur" :class="{red:curTxtCount>maxTxtCount}">{{curTxtCount}}</span> /
-              <span class="all">{{maxTxtCount}}</span>
-            </div>
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-primary" @click="ok">Confirm</button>
-            <button type="button" class="btn btn-cancel" @click="cancel">Cancel</button>
-          </div>
-        </form>
-      </div>
-    </m-modal>
   </div>
 </template>
 
 <script>
 import MModal from './commons/MModal'
+import api from '@/api'
 
 export default {
   name: 'TeamCompleted',
@@ -118,22 +87,19 @@ export default {
       curTxtCount:0,
       judges:[
         {url:'images/6.png',name:'Qiu Wang',intro:`Designer`,active:false},
-        {url:'images/7.png',name:'Sijie Chen',intro:`Public Chain`,active:true},
-        {url:'images/8.png',name:'Anna Levine',intro:`DApps`,active:false},
-        {url:'images/9.png',name:'Chen Li',intro:`Security`,active:false},
-        {url:'images/10.png',name:'Michael Blue',intro:`Full Stack`,active:false},
-        {url:'images/11.png',name:'Yu Hagiee',intro:`Hacker`,active:false}
-
       ],
-      judges2:[
-        {url:'images/10.png',name:'Michael Blue',intro:`Full Stack`,active:false},
-        {url:'images/11.png',name:'Yu Hagiee',intro:`Hacker`,active:false},
-        {url:'images/8.png',name:'Anna Levine',intro:`DApps`,active:false},
-        {url:'images/7.png',name:'Sijie Chen',intro:`Public Chain`,active:false},
-        {url:'images/9.png',name:'Chen Li',intro:`Security`,active:false},
-        {url:'images/6.png',name:'Qiu Wang',intro:`Designer`,active:true}
-      ],
+      teams: []
     }
+  },
+  created() {
+    api.fetch_team(1).then((res) => {
+      const d = res.data
+      if (d.errcode) {
+        alert(d.errmsg)
+      } else {
+        this.teams = d
+      }
+    })
   },
   methods:{
     ok(){},
