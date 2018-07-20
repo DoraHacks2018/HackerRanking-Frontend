@@ -173,7 +173,6 @@ export default {
         if (d.errcode) {
           alert(d.errmsg)
         } else if (parseInt(d, 10)) {
-          console.log(d)
           this.user.gift = d
           alert('10 Gift got.')
         } else {

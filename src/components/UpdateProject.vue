@@ -9,7 +9,7 @@
             <li><router-link to="/hackathon/detail"><a>Details</a></router-link></li>
             <li><router-link to="/hackathon/participants"><a>Participants</a></router-link></li>
             <li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>
-            <li class="active"><a>Update Project</a></li>
+            <li class="active"><a>Update Projects</a></li>
             <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
           </ul>
         </div>

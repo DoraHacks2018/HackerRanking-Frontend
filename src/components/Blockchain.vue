@@ -14,7 +14,7 @@
             <li class="active"><a>Details</a></li>
             <!--<li><router-link to="/hackathon/participants"><a>Participants</a></router-link></li>-->
             <!--<li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>-->
-            <!--<li><router-link to="/hackathon/update"><a>Update Projects</a></router-link></li>-->
+            <!--<li><router-link to="/hackathon/update"><a>Update Projectss</a></router-link></li>-->
             <!--<li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>-->
           </ul>
         </div>

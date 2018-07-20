@@ -180,17 +180,17 @@ export default {
   fetch_team (status) {
     return axios.get(`${url}/team/list/${status}`)
   },
-  create_team (teamname) {
-    return axios.post(`${url}/team/manage`, { name: teamname },
+  create_team (teamname, token) {
+    return axios.post(`${url}/user/team-manage`, { name: teamname },
       {
         headers: {
           'content-type': 'application/json',
-          'X-Auth-Token': window.cookieStorage.getItem('token')
+          'X-Auth-Token': token
         }
       })
   },
   bind_git (code) {
-    return axios.post(`${url}/team/manage`, { code: code },
+    return axios.post(`${url}/profile/bind-github`, { code: code },
       {
         headers: {
           'content-type': 'application/json',

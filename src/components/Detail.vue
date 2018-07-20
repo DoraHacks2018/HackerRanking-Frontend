@@ -16,7 +16,7 @@
             <li class="active"><a>Details</a></li>
             <li><router-link to="/hackathon/participants"><a>Participants</a></router-link></li>
             <li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>
-            <li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>
+            <li><router-link to="/hackathon/update"><a>Update Projects</a></router-link></li>
             <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
           </ul>
         </div>
@@ -115,6 +115,8 @@ export default {
         {url:'assets/hanjin.jpg',name:'韩进',intro:`硅谷知名区块链公司创始人兼CTO`}],
       judges2:[
         {url:'assets/astaxie.jpg',name:'Asta Xie',intro:`Go语言中国首席布道师`},
+        {url:'assets/shenbo.jpeg',name:'沈波',intro:`分布式资本创始人`},
+
       ]
     }
   },

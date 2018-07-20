@@ -23,7 +23,7 @@ button{border:none;outline: none;cursor: pointer;}
 .flex{display: flex}
 .flex>.item{flex-grow: 1}
 @media (min-width: 768px){
-	input,textarea{font-size: 14px;resize: vertical;}
+  input[type=text],textarea{font-size: 14px;resize: vertical;}/*2018.7.20(1)*/
 	.visible-xs{display: none}
 	input[type=text]{height: 36px;}
 	textarea{min-height: 122px;}

@@ -15,7 +15,7 @@
             <li><router-link to="/hackathon/detail"><a>Details</a></router-link></li>
             <li class="active"><a>Participants</a></li>
             <li><router-link to="/hackathon/team"><a>Organize Teams</a></router-link></li>
-            <li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>
+            <li><router-link to="/hackathon/update"><a>Update Projects</a></router-link></li>
             <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
           </ul>
         </div>
@@ -33,22 +33,22 @@
     <div class="lrlayout clearfix">
       <div class="nav">
         <div class="list-group clearfix">
-          <a class="item" :class="{active: act[0]}" @click="getFS" >
+          <a class="item" :class="{active: act[0]}" @click="getRole(0)" >
             全栈
           </a>
-          <a class="item" :class="{active: act[1]}" @click="getDesigner">
+          <a class="item" :class="{active: act[1]}" @click="getRole(1)">
             前端
           </a>
-          <a class="item" :class="{active: act[2]}" @click="getDApps">
+          <a class="item" :class="{active: act[2]}" @click="getRole(2)">
             后端
           </a>
-          <a class="item" :class="{active: act[3]}" @click="getSecurity">
+          <a class="item" :class="{active: act[3]}" @click="getRole(3)">
             产品设计
           </a>
-          <a class="item" :class="{active: act[4]}" @click="getChain">
+          <a class="item" :class="{active: act[4]}" @click="getRole(4)">
             UI
           </a>
-          <a class="item" :class="{active: act[5]}" @click="getHacker">
+          <a class="item" :class="{active: act[5]}" @click="getRole(5)">
             其他
           </a>
         </div>
@@ -161,80 +161,14 @@ export default {
       }
       this.act[i] = true
     },
-    getFS () {
-      this.chooseRole(0)
-      api.participants('Full Stack').then((res) => {
+    getRole (i) {
+      this.chooseRole(i)
+      api.participants(this.roles[i]).then((res) => {
         const d = res.data
         if (d.errcode) {
           alert(d.errmsg)
           console.log('get participants err')
         } else {
-          console.log(d)
-          this.judges = d
-        }
-      })
-    },
-    getDesigner () {
-      this.chooseRole(1)
-      api.participants('Frontend').then((res) => {
-        const d = res.data
-        if (d.errcode) {
-          alert(d.errmsg)
-          console.log('get participants err')
-        } else {
-          console.log(d)
-          this.judges = d
-        }
-      })
-    },
-    getDApps () {
-      this.chooseRole(2)
-      api.participants('Backend').then((res) => {
-        const d = res.data
-        if (d.errcode) {
-          alert(d.errmsg)
-          console.log('get participants err')
-        } else {
-          console.log(d)
-          this.judges = d
-        }
-      })
-    },
-    getSecurity () {
-      this.chooseRole(3)
-      api.participants('Product').then((res) => {
-        const d = res.data
-        if (d.errcode) {
-          alert(d.errmsg)
-          console.log('get participants err')
-        } else {
-          console.log(d)
-          this.judges = d
-        }
-      })
-    },
-    getChain () {
-      this.chooseRole(4)
-      api.participants('UI').then((res) => {
-        const d = res.data
-        if (d.errcode) {
-          alert(d.errmsg)
-          console.log('get participants err')
-        } else {
-          console.log(d)
-          this.judges = d
-        }
-      })
-    },
-    getHacker () {
-      this.chooseRole(5)
-      api.participants('Others').then((res) => {
-        const d = res.data
-        if (d.errcode) {
-          alert(d.errmsg)
-          console.log('get participants err')
-        } else {
-          console.log(d)
           this.judges = d
         }
       })

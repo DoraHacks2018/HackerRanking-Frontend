@@ -15,7 +15,7 @@
             <li><router-link to="/hackathon/detail"><a>Details</a></router-link></li>
             <li><router-link to="/hackathon/participants"><a>Participants</a></router-link></li>
             <li class="active"><a>Organize Teams</a></li>
-            <li><router-link to="/hackathon/update"><a>Update Project</a></router-link></li>
+            <li><router-link to="/hackathon/update"><a>Update Projects</a></router-link></li>
             <li><router-link to="/hackathon/ranking"><a>Ranking</a></router-link></li>
           </ul>
         </div>
@@ -46,7 +46,7 @@
           <div class="lists clearfix">                <!-- 6.24-1 -->
             <div class="lists-title text-primary" contenteditable="true" @blur="entername($event)">{{teamName}}</div>
             <div class="item sm-center" v-for="v,i in judges">
-              <div class="img" :class="{active:v.active}"><img :src="require('@/'+v.url)" alt=""></div>
+              <div class="img" :class="{active:v.active}"><img :src=v.url alt=""></div>
               <h3>{{v.name}}</h3>
               <p class="sname text-center">{{v.intro}}</p>
             </div>
@@ -59,7 +59,7 @@
           </div>
         </div>
 
-        <div class="text-center">
+        <div class="text-center" v-if="inTeam">
           <button class="btn btn-primary btn-lg">Team Complete</button>
         </div>
 
@@ -76,56 +76,56 @@
       </div>
     </footer>
 
-    <lg-modal ref = "lgLayer" modal-title="Send Invitation">
-      <div slot="modal-content">
-        <div class="search" style="width: 100%;margin: 0">
-          <form action="">
-            <input type="text" class="key">
-            <button type="submit" class="sub"></button>
-          </form>
-        </div>
-        <div class="tab">
-          <ul>
-            <li v-for="value,index in role.tab"
-                :class="{'active': index == role.n}"
-                @mouseover="choose(index)"
-            >{{value.title}}</li>
-          </ul>
-        </div>
-        <div class="judges three webkitscroll">
-          <div class="lists clearfix" id="lists">
-            <div class="item text-center" v-for="v,i in role.filterData">
-              <div class="img"><img :src="require('@/'+v.url)" alt=""></div>
-              <h3>{{v.name}}</h3>
-              <p class="intro" style="text-align: left;">{{v.intro}}
-              </p>
-              <button class="btn btn-primary" @click="invite()">Add</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </lg-modal>
-    <m-modal ref="layer">
-      <div slot="modal-header">
-        <h4 class="title">Are you sure to send this invitation to <span class="black">Anna Levine</span> ?</h4>
-        <h5 class="sub-title">Invitation Card</h5>
-      </div>
-      <div slot="modal-content">
-        <form action="">
-          <div class="area">
-            <textarea name="" rows="6" placeholder="eg: I’m glad to introduce our project to you...." @input="input($event)" autofocus="autofocus"></textarea>
-            <div class="count">
-              <span class="cur" :class="{red:curTxtCount>maxTxtCount}">{{curTxtCount}}</span> /
-              <span class="all">{{maxTxtCount}}</span>
-            </div>
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-primary" @click="ok">Confirm</button>
-            <button type="button" class="btn btn-cancel" @click="cancel">Cancel</button>
-          </div>
-        </form>
-      </div>
-    </m-modal>
+    <!--<lg-modal ref = "lgLayer" modal-title="Send Invitation">-->
+      <!--<div slot="modal-content">-->
+        <!--<div class="search" style="width: 100%;margin: 0">-->
+          <!--<form action="">-->
+            <!--<input type="text" class="key">-->
+            <!--<button type="submit" class="sub"></button>-->
+          <!--</form>-->
+        <!--</div>-->
+        <!--<div class="tab">-->
+          <!--<ul>-->
+            <!--<li v-for="value,index in role.tab"-->
+                <!--:class="{'active': index == role.n}"-->
+                <!--@mouseover="choose(index)"-->
+            <!--&gt;{{value.title}}</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="judges three webkitscroll">-->
+          <!--<div class="lists clearfix" id="lists">-->
+            <!--<div class="item text-center" v-for="v,i in role.filterData">-->
+              <!--<div class="img"><img :src="require('@/'+v.url)" alt=""></div>-->
+              <!--<h3>{{v.name}}</h3>-->
+              <!--<p class="intro" style="text-align: left;">{{v.intro}}-->
+              <!--</p>-->
+              <!--<button class="btn btn-primary" @click="invite()">Add</button>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</lg-modal>-->
+    <!--<m-modal ref="layer">-->
+      <!--<div slot="modal-header">-->
+        <!--<h4 class="title">Are you sure to send this invitation to <span class="black">Anna Levine</span> ?</h4>-->
+        <!--<h5 class="sub-title">Invitation Card</h5>-->
+      <!--</div>-->
+      <!--<div slot="modal-content">-->
+        <!--<form action="">-->
+          <!--<div class="area">-->
+            <!--<textarea name="" rows="6" placeholder="eg: I’m glad to introduce our project to you...." @input="input($event)" autofocus="autofocus"></textarea>-->
+            <!--<div class="count">-->
+              <!--<span class="cur" :class="{red:curTxtCount>maxTxtCount}">{{curTxtCount}}</span> /-->
+              <!--<span class="all">{{maxTxtCount}}</span>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="text-center">-->
+            <!--<button type="submit" class="btn btn-primary" @click="ok">Confirm</button>-->
+            <!--<button type="button" class="btn btn-cancel" @click="cancel">Cancel</button>-->
+          <!--</div>-->
+        <!--</form>-->
+      <!--</div>-->
+    <!--</m-modal>-->
   </div>
 </template>
 
@@ -223,15 +223,19 @@ export default {
         alert('Please name your team.')
         return
       }
-      api.create_team(this.teamName).then((res) => {
+      const token = window.cookieStorage.getItem('token')
+      api.create_team(this.teamName, token).then((res) => {
         const d = res.data
         if (d.errcode) {
           alert(d.errmsg)
         } else {
-          alert('A new team!')
           this.inTeam = true
           this.isLeader = true
           this.judges.push({url: window.cookieStorage.getItem('avatar'), name: window.cookieStorage.getItem('name'), intro: window.cookieStorage.getItem('role'), active: false})
+          console.log(this.judges)
+          console.log(this.inTeam)
+          console.log(this.isLeader)
+          alert('You are the team leader now!')
           // {url:'images/6.png',name:'Qiu Wang',intro:`Designer`,active:true}
         }
       })
