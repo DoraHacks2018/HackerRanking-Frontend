@@ -54,12 +54,13 @@
             <p class="sname text-center">{{v.role}}</p>
           </div>
           <div class="item sm-center">
-            <div class="add img circle" style="border-radius: 50%" @click="change($event,index+1)">
+            <div class="add img circle" style="border-radius: 50%" @click="change($event,index)">
             </div>
             <h3 class="text-primary">Join The Team</h3>
           </div>
         </div>
       </div>
+
     </div>
 
 
@@ -74,29 +75,28 @@
       </ul>
     </div>
   </footer>
-
-
   <m-modal ref="layer">
-    <div slot="modal-header">
-      <h4 class="title">Are you sure to join the team <span class="black">{{teams[toTeam].name}}</span> ?</h4>
-      <h5 class="sub-title">Application letter</h5>
-    </div>
-    <div slot="modal-content">
-      <form action="">
-        <div class="area">
-          <textarea name="" rows="6" placeholder="eg: I'd like to join your team..." @input="input($event)" autofocus="autofocus"></textarea>
-          <div class="count">
-            <span class="cur" :class="{red:curTxtCount>maxTxtCount}">{{curTxtCount}}</span> /
-            <span class="all">{{maxTxtCount}}</span>
+      <div slot="modal-header">
+        <h4 class="title">Are you sure to send this invitation to <span class="black">{{teams[toTeam].name}}</span> ?</h4>
+        <h5 class="sub-title">Invitation Card</h5>
+      </div>
+      <div slot="modal-content">
+        <form action="">
+          <div class="area">
+            <textarea name="" placeholder="eg: I’m glad to introduce our project to you...." @input="input($event)" rows="5" autofocus="autofocus"></textarea>
+            <div class="count">
+              <span class="cur" :class="{red:curTxtCount>maxTxtCount}">{{curTxtCount}}</span> /
+              <span class="all">{{maxTxtCount}}</span>
+            </div>
           </div>
-        </div>
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary" @click="ok">Confirm</button>
-          <button type="button" class="btn btn-cancel" @click="cancel">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </m-modal>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary" @click="ok">Confirm</button>
+            <button type="button" class="btn btn-cancel" @click="cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </m-modal>
+
 
 </div>
 </template>
@@ -114,13 +114,15 @@ export default {
       maxTxtCount:100,
       curTxtCount:0,
       teams: [],
-      judges:[
-        // {url:'images/6.png',name:'Qiu Wang',intro:`Designer`,active:false},
-        // {url:'images/7.png',name:'Sijie Chen',intro:`Public Chain`,active:true},
-        // {url:'images/8.png',name:'Anna Levine',intro:`DApps`,active:false}
-
-      ],
-      toTeam: 0
+      toTeam: 0,
+      curTxt:null,
+      talkShow:false,
+			newsend:'',
+			img_url:'',
+			u_id : parseInt(window.cookieStorage.getItem('id')),
+			to_u_id : -1,
+      guid:-1,
+			talk_t:{},
     }
   },
   created() {
@@ -135,23 +137,38 @@ export default {
     })
   },
   methods:{
-    ok(){},
+    ok(){
+			this.$socket.emit('add_group', {'from_id':this.u_id,'to_id':this.guid,msg:this.curTxt,'isinvitation':0})
+			this.$refs.layer.show = false
+		},
     change(event, index){
       this.toTeam = index
+      this.guid=this.teams[index].id
       this.$refs.layer.show = true
-    },
+		},
     cancel(){
       this.$refs.layer.show = false
     },
     input(event){
+      this.curTxt = event.target.value
       this.curTxtCount = event.target.textLength
       if(this.curTxtCount>this.allTxtCount){
         return false;
       }
     }
-
   }
 }
+
+function copylist(obj){
+	let res = []
+    for (let i = 0; i < obj.length; i++) {
+     res.push(obj[i])
+     res[i].pindex = i;
+    }
+    return res
+}
+
+
 </script>
 
 <style scoped>

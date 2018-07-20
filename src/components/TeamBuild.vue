@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <div class="text-right clearfix" v-if="inTeam">
+      <div class="text-right clearfix" v-if="inTeam" @click="exit">
         <a v-if="isLeader" class="btn btn-cancel dismiss">Disband The Team</a>
         <a v-else class="btn btn-cancel dismiss">Leave The Team</a>
       </div>
@@ -58,7 +58,6 @@
             </div>
           </div>
         </div>
-
         <div class="text-center" v-if="inTeam">
           <button class="btn btn-primary btn-lg">Team Complete</button>
         </div>
@@ -145,6 +144,7 @@ export default {
       curTxtCount:0,
       inTeam: false,
       isLeader: false,
+      u_id : parseInt(window.cookieStorage.getItem('id')),
       judges: [
         // {url:'images/6.png',name:'Qiu Wang',intro:`Designer`,active:true}
 
@@ -231,16 +231,20 @@ export default {
         } else {
           this.inTeam = true
           this.isLeader = true
-          this.judges.push({url: window.cookieStorage.getItem('avatar'), name: window.cookieStorage.getItem('name'), intro: window.cookieStorage.getItem('role'), active: false})
-          console.log(this.judges)
-          console.log(this.inTeam)
-          console.log(this.isLeader)
+          this.judges.push({
+            url: window.cookieStorage.getItem('avatar'),
+            name: window.cookieStorage.getItem('name'),
+            intro: window.cookieStorage.getItem('role'),
+            active: false
+          })
           alert('You are the team leader now!')
-          // {url:'images/6.png',name:'Qiu Wang',intro:`Designer`,active:true}
         }
       })
-    }
+    },
+    exit(){
+      this.$socket.emit('exit_group', {'from_id':this.u_id})
 
+    }
   }
 }
 </script>

@@ -61,7 +61,7 @@
               <h3>{{v.name}}</h3>
               <p class="intro">{{v.intro}}
               </p>
-              <button class="btn btn-primary" @click="invite()">Invite</button>
+              <button class="btn btn-primary" @click="invite(v.uid)" v-if="v.teamId==0">Invite</button>
             </div>
           </div>
         </div>
@@ -106,6 +106,7 @@
 import api from '@/api'
 import MModal from './commons/MModal'
 
+
 export default {
   name: 'Participants',
   components: { MModal },
@@ -114,6 +115,7 @@ export default {
       menuShow:false,
       maxTxtCount:80,
       curTxtCount:0,
+      curTxt:null,
       player: [],
       act:[false,false,false,false,false,false],
       roles:['Full Stack', 'Frontend', 'Backend', 'Product', 'UI', 'Others'],
@@ -141,18 +143,26 @@ export default {
     this.act[this.roles.indexOf(role)] = true
   },
   methods:{
-    ok(){},
-    invite(){
+    ok(){
+
+      console.log(this.s_uid)
+      this.$socket.emit('add_group', {'from_id':this.uid,'to_id':this.s_uid,msg:this.curTxt,'isinvitation':1})
+      this.$refs.layer.show = false
+    },
+    invite(s_uid){
       this.$refs.layer.show = true
+      this.s_uid= s_uid
     },
     cancel(){
       this.$refs.layer.show = false
     },
     input(event){
+      this.curTxt = event.target.value
       this.curTxtCount = event.target.textLength
       if(this.curTxtCount>this.allTxtCount){
         return false;
       }
+
 
     },
     chooseRole (i) {
