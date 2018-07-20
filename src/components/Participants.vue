@@ -61,7 +61,7 @@
               <h3>{{v.name}}</h3>
               <p class="intro">{{v.intro}}
               </p>
-              <button class="btn btn-primary" @click="invite(v.uid)" v-if="v.teamId==0">Invite</button>
+              <button class="btn btn-primary" @click="invite(v.name, v.uid)" v-if="v.team_id===0 && v.uid!==myid">Invite</button>
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@
 
     <m-modal ref="layer">
       <div slot="modal-header">
-        <h4 class="title">Are you sure to send this invitation to <span class="black">Anna Levine</span> ?</h4>
+        <h4 class="title">Are you sure to send this invitation to <span class="black">{{toHacker}}</span> ?</h4>
         <h5 class="sub-title">Invitation Card</h5>
       </div>
       <div slot="modal-content">
@@ -119,6 +119,11 @@ export default {
       player: [],
       act:[false,false,false,false,false,false],
       roles:['Full Stack', 'Frontend', 'Backend', 'Product', 'UI', 'Others'],
+      myid: 0,
+      s_uid : 0,
+      uid : parseInt(window.cookieStorage.getItem('id')),
+      socket:null,
+      toHacker: '',
       judges:[
         // {url:'images/6.png',name:'Qiu Wang',intro:`I will try my best to win this competition! No one is going to stop me from making it.`},
       ]
@@ -136,20 +141,21 @@ export default {
         alert(d.errmsg)
         console.log('get participants err')
       } else {
-        console.log(d)
         this.judges = d
       }
     })
+    this.myid = parseInt(window.cookieStorage.getItem('id'))
+    console.log(this.myid)
     this.act[this.roles.indexOf(role)] = true
   },
   methods:{
     ok(){
-
       console.log(this.s_uid)
       this.$socket.emit('add_group', {'from_id':this.uid,'to_id':this.s_uid,msg:this.curTxt,'isinvitation':1})
       this.$refs.layer.show = false
     },
-    invite(s_uid){
+    invite(uname, s_uid){
+      this.toHacker = uname
       this.$refs.layer.show = true
       this.s_uid= s_uid
     },

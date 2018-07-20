@@ -145,7 +145,7 @@ export default {
       intro: '',
       demo: '',
       dphotos: [],
-      lphoto: ''
+      lphoto: null
     }
 
   },
@@ -192,6 +192,11 @@ export default {
     },
     submit () {
       const formd = new FormData()
+      if (this.dphotos) {
+        for (let i = 0; i < this.dphotos.length; i += 1) {
+          formd.append(this.dphotos[i].name, this.dphotos[i])
+        }
+      }
       if (this.lphoto) {
         formd.append('logo', this.lphoto)
       } else {

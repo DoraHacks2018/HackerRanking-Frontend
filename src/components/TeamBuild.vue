@@ -53,12 +53,12 @@
             <div class="item sm-center">
               <div class="add img circle" style="border-radius: 50%" @click="change($event,1)" v-if="inTeam"></div>
               <div class="add img circle" style="border-radius: 50%" @click="createTeam" v-else></div>
-              <h3 class="text-primary" v-if="inTeam">Invite members</h3>
+              <h3 class="text-primary" v-if="inTeam" @click="toInvite">Invite members</h3>
               <h3 class="text-primary" v-else>Create team</h3>
             </div>
           </div>
         </div>
-        <div class="text-center" v-if="inTeam">
+        <div class="text-center" v-if="inTeam && isComplete">
           <button class="btn btn-primary btn-lg">Team Complete</button>
         </div>
 
@@ -149,6 +149,7 @@ export default {
         // {url:'images/6.png',name:'Qiu Wang',intro:`Designer`,active:true}
 
       ],
+      isComplete: false,
       role: {
         tab: [
           {id: 0, title: 'Full Stack'},
@@ -186,6 +187,9 @@ export default {
     })
   },
   methods: {
+    toInvite () {
+      this.$router.push('/hackathon/participants')
+    },
     change (event) {
       this.$refs.lgLayer.show = true;
 

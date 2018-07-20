@@ -50,7 +50,7 @@
           <div class="lists-title text-primary">{{t.name}}</div>
           <div class="item sm-center" v-for="v in t.members">
             <!--<div class="img" :class="{active:v.active}"><img :src=v.url alt=""></div>-->
-            <div class="img"><img :src=v.avatar alt=""></div><h3>{{v.username}}</h3>
+            <div class="img"><img :src=v.avatar alt=""></div><h3>{{v.name}}</h3>
             <p class="sname text-center">{{v.role}}</p>
           </div>
           <div class="item sm-center">
@@ -77,8 +77,8 @@
   </footer>
   <m-modal ref="layer">
       <div slot="modal-header">
-        <h4 class="title">Are you sure to send this invitation to <span class="black">{{teams[toTeam].name}}</span> ?</h4>
-        <h5 class="sub-title">Invitation Card</h5>
+        <h4 class="title">Are you sure to send this application to <span class="black">{{teams[toTeam].name}}</span> ?</h4>
+        <h5 class="sub-title">Application Card</h5>
       </div>
       <div slot="modal-content">
         <form action="">
@@ -138,12 +138,13 @@ export default {
   },
   methods:{
     ok(){
+      console.log('send ', this.u_id, this.guid, this.curTxt)
 			this.$socket.emit('add_group', {'from_id':this.u_id,'to_id':this.guid,msg:this.curTxt,'isinvitation':0})
 			this.$refs.layer.show = false
 		},
     change(event, index){
       this.toTeam = index
-      this.guid=this.teams[index].id
+      this.guid=this.teams[index].members[0].uid
       this.$refs.layer.show = true
 		},
     cancel(){
