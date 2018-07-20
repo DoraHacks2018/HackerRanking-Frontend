@@ -63,6 +63,7 @@
 
         <div class="text-center">
           <button class="btn btn-primary btn-lg">Team Comeplete</button>
+          <button class="btn btn-primary btn-lg" @click="exit()">Exit Team</button>
         </div>
 
       </div>
@@ -78,56 +79,7 @@
       </div>
     </footer>
 
-    <lg-modal ref = "lgLayer" modal-title="Send Invitation">
-      <div slot="modal-content">
-        <div class="search" style="width: 100%;margin: 0">
-          <form action="">
-            <input type="text" class="key">
-            <button type="submit" class="sub"></button>
-          </form>
-        </div>
-        <div class="tab">
-          <ul>
-            <li v-for="value,index in role.tab"
-                :class="{'active': index == role.n}"
-                @mouseover="choose(index)"
-            >{{value.title}}</li>
-          </ul>
-        </div>
-        <div class="judges three webkitscroll">
-          <div class="lists clearfix" id="lists">
-            <div class="item text-center" v-for="v,i in role.filterData">
-              <div class="img"><img :src="require('@/'+v.url)" alt=""></div>
-              <h3>{{v.name}}</h3>
-              <p class="intro" style="text-align: left;">{{v.intro}}
-              </p>
-              <button class="btn btn-primary" @click="invite()">Add</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </lg-modal>
-    <m-modal ref="layer">
-      <div slot="modal-header">
-        <h4 class="title">Are you sure to send this invitation to <span class="black">Anna Levine</span> ?</h4>
-        <h5 class="sub-title">Invitation Card</h5>
-      </div>
-      <div slot="modal-content">
-        <form action="">
-          <div class="area">
-            <textarea name="" rows="6" placeholder="eg: I’m glad to introduce our project to you...." @input="input($event)" autofocus="autofocus"></textarea>
-            <div class="count">
-              <span class="cur" :class="{red:curTxtCount>maxTxtCount}">{{curTxtCount}}</span> /
-              <span class="all">{{maxTxtCount}}</span>
-            </div>
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-primary" @click="ok">Confirm</button>
-            <button type="button" class="btn btn-cancel" @click="cancel">Cancel</button>
-          </div>
-        </form>
-      </div>
-    </m-modal>
+
   </div>
 </template>
 
@@ -147,6 +99,7 @@ export default {
       curTxtCount:0,
       inTeam: false,
       isLeader: false,
+      u_id : parseInt(window.cookieStorage.getItem('id')),
       judges: [
         // {url:'images/6.png',name:'Qiu Wang',intro:`Designer`,active:true}
 
@@ -214,6 +167,10 @@ export default {
     entername(event){
       // console.log(event.target.innerHTML)
       this.teamName=event.target.innerHTML
+    },
+    exit(){
+        	this.$socket.emit('exit_group', {'from_id':this.u_id})
+
     }
 
   }

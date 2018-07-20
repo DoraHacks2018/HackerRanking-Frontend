@@ -70,10 +70,10 @@
 						<p>{{v.msg}}</p>
 					</div>
 				</div>
-				<div class="send clearfix">
+				<!-- <div class="send clearfix">
 					<input type="text" v-model="newsend">
 					<button class="btn btn-cancel" @click="send(0)">Send</button>
-				</div>
+				</div> -->
 			</div>
 			<!-- 群组消息-->
 			<div class="sublayer layer3" v-show="layer3">
@@ -107,8 +107,8 @@
 						<h5 class="apply">Application</h5>
 						<p>{{this.talk_t.txt}}</p>
 						<div class="answerapply clearfix">
-							<button class="btn btn-cancel" @click="group_ok">Accept</button>
-							<button class="btn btn-cancel">Refuse</button>
+							<button class="btn btn-cancel" @click="group_ok(talk_t)">Accept</button>
+							<button class="btn btn-cancel" @click="group_no(talk_t)">Refuse</button>
 						</div>
 					</div>
 				</div>
@@ -162,12 +162,12 @@ export default {
         slide:false
       },
 			talktab:{
-				item:['Unread','Hacker','Group'],
+				item:['Unread','Hacker'],//,'Group'
 				n:0
 			},
 			talkList:[
 				// {url:'images/6.png',name:'4',id:4,txt:`I’m glad to join your team`,time:'2016/06/16',readstate:0,isgroup:0,apply:1},
-				{url:'images/6.png',name:'3',id:this.u_id,txt:``,time:'2016/06/16',readstate:0,isgroup:1,apply:0},
+				// {url:'images/6.png',name:'3',id:this.u_id,txt:``,time:'2016/06/16',readstate:0,isgroup:1,apply:0},
 				// {url:'images/8.png',name:'5',id:5,txt:`I’m glad to join your team`,time:'2016/06/16',readstate:0,isgroup:0,apply:0},
 				// {url:'images/9.png',name:'6',id:'3607614',txt:`I’m glad to join your team`,time:'2016/06/16',readstate:0,isgroup:0,apply:0},
 				// {url:'images/10.png',name:'7',id:'8137853',txt:`I’m glad to join your team`,time:'2016/06/16',readstate:0,isgroup:0,apply:0},
@@ -207,13 +207,34 @@ export default {
 			console.log('socket connected')
 			this.$socket.emit('connect_event', {'user_id':this.u_id})
 		},
+    init_msg:function(objs){
+			console.log(objs)
+      this.talkList=[]
+      this.msgConent=[]
 
+			for(var i=0 ;i<objs['msl'].length;i++ ){
+          var obj = objs['msl'][i]
+
+          obj['man'] = 'other'
+          if(obj['from_id']==this.u_id){
+            obj['man'] = 'self'
+          }
+          obj['read'] = 0
+          // this.msgConent.push(obj,)
+      }
+
+
+      for(var i=0 ;i<objs['msl2'].length;i++ ){
+          var obj = objs['msl2'][i]['msg']
+          obj['tid'] = objs['msl2'][i]['tid']
+          // this.talkList.push(obj,)
+
+      }
+
+		},
     get_msg: function(obj){
 
       console.log(obj)
-
-
-
      		// obj['avatar'] = 'images/7.png'
 				obj['man'] = 'other'
 				obj['read'] = 1
@@ -227,8 +248,6 @@ export default {
 						temp_talk[0]['txt'] = obj['msg']
 						temp_talk[0]['time'] = obj['time']
 						temp_talk[0]['readstate'] = 0
-
-
 			}else{
 					var result = {}
 					result['url'] = obj['avatar']
@@ -239,12 +258,11 @@ export default {
           result['readstate'] = 0
           result['apply'] = 0
           result['isgroup'] = obj['isgroup']
-
 					this.talkList.push(result,)
 
+          this.$socket.emit('talk_sync', {'userid':this.u_id,'result':result})
+
 			}
-
-
 
 
 			this.msgConent.push(obj,)
@@ -253,18 +271,12 @@ export default {
 			}
 
 		},
-
 		get_join:function(obj){
 
 					//  this.$refs.layer.show = true
 	 				console.log(obj)
 					this.talkList.push(obj)
-		},
-		add_confirmation:function(obj){
-					this.talkList.push(obj)
-					this.msgConent.push(obj,)
-	 				console.log(obj)
-					// this.talkList.push(obj)
+          this.$socket.emit('talk_sync', {'userid':this.u_id,'result':obj})
 		}
   },
   created () {
@@ -279,9 +291,7 @@ export default {
   },
   methods: {
     ok(){
-
 			console.log(this.s_uid)
-
 			this.$socket.emit('add_group', {'from_id':this.uid,'to_id':this.s_uid,'isinvitation':0})
 
 		},
@@ -405,28 +415,35 @@ export default {
 			this.to_u_id = value.id
 			this.img_url = value.url
 			this.filtermsgConent = copylist(this.msgConent).filter(item=>(item.to_id==value.id || item.from_id==value.id))
-
+xc
 		},
 		back(){
 			this.layer1=true
 			this.layer2=this.layer3=this.layer4=false
 		},
 		send(isgroup){
-       showNotify('aaa','asdsda')
+      //showNotify('aaa','asdsda')
 			if(!this.newsend) return false
-			this.filtermsgConent.push({avatar:'images/7.png',msg:this.newsend,man:'self',read:0,from_id:this.u_id,to_id:this.to_u_id,isgroup:0},)
-			this.msgConent.push({avatar:'images/7.png',msg:this.newsend,man:'self',read:0,from_id:this.u_id,to_id:this.to_u_id,isgroup:0},)
-        // obj['avatar']
-        // 	result['name'] = obj['name']
-
+			this.filtermsgConent.push({avatar:'images/6.png',msg:this.newsend,man:'self',read:0,from_id:this.u_id,to_id:this.to_u_id,isgroup:0},)
+			this.msgConent.push({avatar:'images/6.png',msg:this.newsend,man:'self',read:0,from_id:this.u_id,to_id:this.to_u_id,isgroup:0},)
+      // obj['avatar']
+      // result['name'] = obj['name']
+      //
 			this.$socket.emit('send_message', {'msg':this.newsend,from_id:this.u_id,to_id:this.to_u_id,isgroup:isgroup});
 
 		},
-		group_ok(){
+		group_ok(talk_t){
+      this.layer1=true
+			this.layer2=this.layer3=this.layer4=false
+      this.talkList.splice(this.talkList.filter(item=>item.id=talk_t.id).index,1);
+			this.$socket.emit('add_group_judge', {from_id:this.u_id,to_id:this.to_u_id,isinvitation:talk_t.isinvitation,isNO:1});
 
-				this.$socket.emit('add_group_judge', {from_id:this.u_id,to_id:this.to_u_id,'isinvitation':1});
-
-		}
+		},
+    group_no(talk_t){
+     this.layer1=true
+			this.layer2=this.layer3=this.layer4=false
+      this.$socket.emit('add_group_judge', {from_id:this.u_id,to_id:this.to_u_id,isNO:0});
+    }
   }
 }
 function copylist(obj){

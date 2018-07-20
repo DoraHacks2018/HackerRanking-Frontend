@@ -57,11 +57,12 @@
         <div class="main">
           <div class="lists clearfix" id="lists">
             <div class="item sm-center" v-for="v in judges">
-              <div class="img"><img :src="require('@/'+v.url)" alt=""></div>
+              <div class="img"><img :src="v.url" alt=""></div>
+              <!-- <div class="img"><img :src="require('@/'+v.url)" alt=""></div> -->
               <h3>{{v.name}}</h3>
               <p class="intro">{{v.intro}}
               </p>
-              <button class="btn btn-primary" @click="invite(v.uid)">Invite</button>
+              <button class="btn btn-primary" @click="invite(v.uid)" v-if="v.teamId==0">Invite</button>
             </div>
           </div>
         </div>
@@ -123,7 +124,7 @@ export default {
       uid : parseInt(window.cookieStorage.getItem('id')),
       socket:null,
       judges:[
-        {url:'images/6.png',name:'Qiu Wang',intro:`TI will try my best to win this competition! No one is going to stop me from making it.`,uid:9190260},
+        // {url:'images/6.png',name:'Qiu Wang',intro:`TI will try my best to win this competition! No one is going to stop me from making it.`,uid:9190260},
         // {url:'images/7.png',name:'Sijie Chen',intro:`I will show you what the best programmer is like.`},
         // {url:'images/8.png',name:'Anna Levine',intro:`Girls are crazy creatures cuz once they find a way to do a program, then no one can prevent them winning. `},
         // {url:'images/9.png',name:'Chen Li',intro:`I will show you what the best programmer is like.`},
@@ -154,8 +155,7 @@ export default {
 
       console.log(this.s_uid)
       this.$socket.emit('add_group', {'from_id':this.uid,'to_id':this.s_uid,msg:this.curTxt,'isinvitation':1})
-
-      // this.$refs.layer.show = false
+      this.$refs.layer.show = false
     },
     invite(s_uid){
       this.$refs.layer.show = true
