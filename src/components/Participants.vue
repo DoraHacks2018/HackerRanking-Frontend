@@ -33,23 +33,8 @@
     <div class="lrlayout clearfix">
       <div class="nav">
         <div class="list-group clearfix">
-          <a class="item" :class="{active: act[0]}" @click="getRole(0)" >
-            全栈
-          </a>
-          <a class="item" :class="{active: act[1]}" @click="getRole(1)">
-            前端
-          </a>
-          <a class="item" :class="{active: act[2]}" @click="getRole(2)">
-            后端
-          </a>
-          <a class="item" :class="{active: act[3]}" @click="getRole(3)">
-            产品设计
-          </a>
-          <a class="item" :class="{active: act[4]}" @click="getRole(4)">
-            UI
-          </a>
-          <a class="item" :class="{active: act[5]}" @click="getRole(5)">
-            其他
+          <a class="item" v-for="value,index in roleCN" :class="{active: act[index]}" @click="getRole(index)" >
+            {{value}}
           </a>
         </div>
       </div>
@@ -118,6 +103,7 @@ export default {
       player: [],
       act:[false,false,false,false,false,false],
       roles:['Full Stack', 'Frontend', 'Backend', 'Product', 'UI', 'Others'],
+      roleCN: ['全栈', '前端', '后端', '产品经理', 'UI', '其他'],
       myid: 0,
       s_uid : 0,
       uid : parseInt(window.cookieStorage.getItem('id')),

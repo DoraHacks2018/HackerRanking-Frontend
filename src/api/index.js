@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const url = 'http://ranking.dorahacks.com/api'
+// const url = 'https://ranking.dorahacks.com/api'
+// const url = 'http://47.254.41.35:7050'
+const url = 'http://39.104.16.22:8080'
 
 export default {
   login (username, password) {
