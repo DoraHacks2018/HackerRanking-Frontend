@@ -348,9 +348,7 @@
 }
 .judges .item{
 	padding: .1rem;
-
 	position: relative;
-
 }
 .judges .item .img{position: relative;}
 .judges .item .img.active:after{
@@ -1683,6 +1681,7 @@ label.label{
 	.lrlayout .judges .item{
 		padding: 30px 0;
 		text-align: center;
+    height: 350px;
 	}
 	.judges.four .item{
 		width: 25%;
@@ -1815,14 +1814,12 @@ label.label{
 	.lrlayout .judges .item p{
 		max-width: 192px;
 		margin: auto;
-
 	}
 	.judges .item p.intro{
 		font-size: 14px;
 		color:#939999;
 		line-height: 1.5;
 		margin: 20px auto 0;
-		/*height: 200px;*/
 		overflow: hidden;
 	}
 	.judges .item p.sname{

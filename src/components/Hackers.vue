@@ -95,7 +95,8 @@ export default {
       hackers:[
         {rank:1,avatar:'images/pig.png',id:'3096890688',name:'Peggi Whistle',follower:'722',date:'2018-06-20',time:'20:16:40',t1:'Turechain',c1:'999999',p1:'999999999',d1:'99999999',t2:'Wanchain',c2:'88600',p2:'632068',d2:'16000'},
       ],
-      total_data: null
+      total_data: null,
+      redirect_uri: 'http://ranking.dorahacks.com/',
     }
   },
   created () {
@@ -143,7 +144,6 @@ export default {
             } else {
               h = {rank:tmp.rank,avatar:tmp.author_avatar,id:tmp.id,name:tmp.author_login,gift:tmp.gift,follower:'0',t1:'-',c1:'-',p1:'-',d1:'-',t2:'-',c2:'-',p2:'-',d2:'-'}
             }
-            console.log(h)
             this.hackers.push(h)
           }
         }

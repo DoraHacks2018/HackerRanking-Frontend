@@ -60,35 +60,35 @@
 
             <div class="input-group clearfix">
               <label for="demolink" class="label">
-                <input type="checkbox" class="magic magic-check" id="m1" v-model="link" @change="setLink">
+                <!--<input type="checkbox" class="magic magic-check" id="m1" v-model="link" @change="setLink">-->
                 <label for="m1">Demo link</label>
 
               </label>
-              <div class="form-info">
+              <div class="form-info" >
                 <input type="text" id="demolink" v-model="demo">
               </div>
             </div>
 
-            <div class="input-group clearfix">
-              <label for="demodesign" class="label">
-                <input type="checkbox" class="magic magic-check" id="m2" v-model="photo" @change="setPhoto">
-                <label for="m2">Demo design</label>
+            <!--<div class="input-group clearfix">-->
+              <!--<label for="demodesign" class="label">-->
+                <!--<input type="checkbox" class="magic magic-check" id="m2" v-model="photo" @change="setPhoto">-->
+                <!--<label for="m2">Demo design</label>-->
 
-              </label>
-              <div class="form-info">
-                <ul class="design-imgs clearfix">
-                  <li v-for="v,i in designs">
-                    <img :src="v" alt="">
-                    <div class="delete"><strong @click="del(i)">Delete</strong></i></div>
-                  </li>
-                  <li>
-                    <div class="add add-sqare">
-                      <input type="file" @change="change($event,'design')">
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
+              <!--</label>-->
+              <!--<div class="form-info" v-if="photo">-->
+                <!--<ul class="design-imgs clearfix">-->
+                  <!--<li v-for="v,i in designs">-->
+                    <!--<img :src="v" alt="">-->
+                    <!--<div class="delete"><strong @click="del(i)">Delete</strong></i></div>-->
+                  <!--</li>-->
+                  <!--<li>-->
+                    <!--<div class="add add-sqare">-->
+                      <!--<input type="file" @change="change($event,'design')">-->
+                    <!--</div>-->
+                  <!--</li>-->
+                <!--</ul>-->
+              <!--</div>-->
+            <!--</div>-->
             <div class="input-group clearfix">
               <label for="logo" class="label">
                 Project Logo
@@ -102,7 +102,7 @@
             </div>
 
             <div class="input-group">
-              <button type="submit" class="btn-primary" @click="submit">Submit And Update</button>
+              <button type="submit" class="btn-primary" :disabled="!inTeam" @click="submit">Submit And Update</button>
             </div>
           </form>
         </div>
@@ -139,15 +139,21 @@ export default {
       logo:'',
       designs:[],
       photo: false,
-      link: false,
+      link: true,
       name: '',
       git: '',
       intro: '',
       demo: '',
       dphotos: [],
-      lphoto: null
+      lphoto: null,
+      inTeam: false,
     }
-
+  },
+  created () {
+    this.inTeam = (parseInt(window.cookieStorage.getItem('teamId')) !== 0)
+    if (!this.inTeam) {
+      alert('先有队伍才能上传项目！')
+    }
   },
   methods:{
     input(event,str){
@@ -191,7 +197,8 @@ export default {
       }
     },
     submit () {
-      const formd = new FormData()
+      const token = window.cookieStorage.getItem('token')
+      let formd = new FormData()
       if (this.dphotos) {
         for (let i = 0; i < this.dphotos.length; i += 1) {
           formd.append(this.dphotos[i].name, this.dphotos[i])
@@ -206,8 +213,9 @@ export default {
       formd.append('name', this.name)
       formd.append('git', this.git)
       formd.append('desc', this.intro)
+      console.log(this.demo)
       formd.append('demo', this.demo)
-      api.upload_project(formd).then((res) => {
+      api.upload_project(formd, token).then((res) => {
         const d = res.data
         if (d.errcode) {
           alert(d.errmsg)

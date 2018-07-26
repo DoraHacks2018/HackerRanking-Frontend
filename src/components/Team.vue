@@ -53,11 +53,12 @@
             <div class="img"><img :src=v.avatar alt=""></div><h3>{{v.name}}</h3>
             <p class="sname text-center">{{v.role}}</p>
           </div>
-          <div class="item sm-center">
-            <div class="add img circle" style="border-radius: 50%" @click="change($event,index)">
-            </div>
-            <h3 class="text-primary">Join The Team</h3>
-          </div>
+          <!--<div class="item sm-center" v-if="!inTeam">-->
+            <!--&lt;!&ndash;<div class="add img circle" style="border-radius: 50%" @click="change($event,index)">&ndash;&gt;-->
+              <!--<div class="add img circle" style="border-radius: 50%" @click="joinTeam(t.id)">-->
+              <!--</div>-->
+            <!--<h3 class="text-primary">Join The Team</h3>-->
+          <!--</div>-->
         </div>
       </div>
 
@@ -75,27 +76,27 @@
       </ul>
     </div>
   </footer>
-  <m-modal ref="layer">
-      <div slot="modal-header">
-        <h4 class="title">Are you sure to send this application to <span class="black">{{teams[toTeam].name}}</span> ?</h4>
-        <h5 class="sub-title">Application Card</h5>
-      </div>
-      <div slot="modal-content">
-        <form action="">
-          <div class="area">
-            <textarea name="" placeholder="eg: I’m glad to introduce our project to you...." @input="input($event)" rows="5" autofocus="autofocus"></textarea>
-            <div class="count">
-              <span class="cur" :class="{red:curTxtCount>maxTxtCount}">{{curTxtCount}}</span> /
-              <span class="all">{{maxTxtCount}}</span>
-            </div>
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-primary" @click="ok">Confirm</button>
-            <button type="button" class="btn btn-cancel" @click="cancel">Cancel</button>
-          </div>
-        </form>
-      </div>
-    </m-modal>
+  <!--<m-modal ref="layer">-->
+      <!--<div slot="modal-header">-->
+        <!--<h4 class="title">Are you sure to send this application to <span class="black">{{teams[toTeam].name}}</span> ?</h4>-->
+        <!--<h5 class="sub-title">Application Card</h5>-->
+      <!--</div>-->
+      <!--<div slot="modal-content">-->
+        <!--<form action="">-->
+          <!--<div class="area">-->
+            <!--<textarea name="" placeholder="eg: I’m glad to introduce our project to you...." @input="input($event)" rows="5" autofocus="autofocus"></textarea>-->
+            <!--<div class="count">-->
+              <!--<span class="cur" :class="{red:curTxtCount>maxTxtCount}">{{curTxtCount}}</span> /-->
+              <!--<span class="all">{{maxTxtCount}}</span>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="text-center">-->
+            <!--<button type="submit" class="btn btn-primary" @click="ok">Confirm</button>-->
+            <!--<button type="button" class="btn btn-cancel" @click="cancel">Cancel</button>-->
+          <!--</div>-->
+        <!--</form>-->
+      <!--</div>-->
+    <!--</m-modal>-->
 
 
 </div>
@@ -123,6 +124,8 @@ export default {
 			to_u_id : -1,
       guid:-1,
 			talk_t:{},
+      inTeam: false,
+      isLeader: false,
     }
   },
   created() {
@@ -132,9 +135,12 @@ export default {
         alert(d.errmsg)
       } else {
         this.teams = d
-        console.log(this.teams)
+        // console.log(this.teams)
       }
     })
+    if (parseInt(window.cookieStorage.getItem('teamId')) !== 0) {
+      this.inTeam = true
+    }
   },
   methods:{
     ok(){
@@ -142,14 +148,14 @@ export default {
 			this.$socket.emit('add_group', {'from_id':this.u_id,'to_id':this.guid,msg:this.curTxt,'isinvitation':0})
 			this.$refs.layer.show = false
 		},
-    change(event, index){
-      this.toTeam = index
-      this.guid=this.teams[index].members[0].uid
-      this.$refs.layer.show = true
-		},
-    cancel(){
-      this.$refs.layer.show = false
-    },
+    // change(event, index){
+    //   this.toTeam = index
+    //   this.guid=this.teams[index].members[0].uid
+    //   this.$refs.layer.show = true
+		// },
+    // cancel(){
+    //   this.$refs.layer.show = false
+    // },
     input(event){
       this.curTxt = event.target.value
       this.curTxtCount = event.target.textLength

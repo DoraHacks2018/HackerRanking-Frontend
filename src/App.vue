@@ -28,91 +28,91 @@
     <news-modal ref="newsLayer" :news="news"></news-modal>
     <login-modal ref="logLayer" @update="update"></login-modal>
 
-<div class="talk-box" >
-	<div class="talkbtn" @click="talkShow = !talkShow" :class="{close:talkShow}"></div>
-	<div class="talk-layer" v-show="talkShow" >
-		<!-- 消息列表  -->
-		<div class="sublayer layer1" v-show="layer1">
+<!--<div class="talk-box" >-->
+	<!--<div class="talkbtn" @click="talkShow = !talkShow" :class="{close:talkShow}"></div>-->
+	<!--<div class="talk-layer" v-show="talkShow" >-->
+		<!--&lt;!&ndash; 消息列表  &ndash;&gt;-->
+		<!--<div class="sublayer layer1" v-show="layer1">-->
 
-			<ul class="flex talk-header">
-				<li class="item" :class="{active:talktab.n==i}" v-for="v,i in talktab.item">
-					<a href="javascript:;" @click.stop="chooseTalk(v,i)">{{v}}</a>
-				</li>
-			</ul>
+			<!--<ul class="flex talk-header">-->
+				<!--<li class="item" :class="{active:talktab.n==i}" v-for="v,i in talktab.item">-->
+					<!--<a href="javascript:;" @click.stop="chooseTalk(v,i)">{{v}}</a>-->
+				<!--</li>-->
+			<!--</ul>-->
 
-			<div class="talk-list webkitscroll">
-				<div class="item card clearfix" v-for="v,i in filterTalkList" @click.stop="showMessage(v,i,v.pindex)">
-					<img :src=v.avatar alt="" class="avatar">
-					<div class="center">
-						<h2 class="name">{{v.name}}</h2>
-						<p>{{v.txt}}</p>
-					</div>
-					<div class="time">
-						<time>{{v.time}}</time>
-						<p class="readstate" :class="{read:v.readstate}">{{v.readstate?'Read':'Unread'}}</p>
-					</div>
-				</div>
-			</div>
-		</div>
+			<!--<div class="talk-list webkitscroll">-->
+				<!--<div class="item card clearfix" v-for="v,i in filterTalkList" @click.stop="showMessage(v,i,v.pindex)">-->
+					<!--<img :src=v.avatar alt="" class="avatar">-->
+					<!--<div class="center">-->
+						<!--<h2 class="name">{{v.name}}</h2>-->
+						<!--<p>{{v.txt}}</p>-->
+					<!--</div>-->
+					<!--<div class="time">-->
+						<!--<time>{{v.time}}</time>-->
+						<!--<p class="readstate" :class="{read:v.readstate}">{{v.readstate?'Read':'Unread'}}</p>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
 
-		<!-- 私人消息-->
-		<div class="sublayer layer2" v-show="layer2">
-			<div class="talk-header">
-				<span class="back" @click="back"></span>
-				<h2>Qui Wang</h2>
-				<a href="" class="user"></a>
-			</div>
-			<div class="msg-list webkitscroll">
-				<div class="item clearfix" :class="{other:v.man=='other',self:v.man=='self',read:v.read}"  v-for="v,i in filtermsgConent">
-					<img :src=v.avatar alt="">
-					<p>{{v.msg}}</p>
-				</div>
-			</div>
-			<!-- <div class="send clearfix">
-				<input type="text" v-model="newsend">
-				<button class="btn btn-cancel" @click="send(0)">Send</button>
-			</div> -->
-		</div>
-		<!-- 群组消息-->
-		<div class="sublayer layer3" v-show="layer3">
-			<div class="talk-header">
-				<span class="back" @click="back"></span>
-				<h2>Go for Sunshine</h2>
-				<a href="" class="user group"></a>
-			</div>
-			<div class="msg-list webkitscroll">
-				<div class="item clearfix ingroup" :class="{other:v.man=='other',self:v.man=='self'}" v-for="v,i in filtermsgConent">
-					<img :src=v.avatar alt="">
-					<p>{{v.msg}}</p>
-				</div>
-			</div>
-			<div class="send clearfix">
-				<input type="text" v-model="newsend">
-				<button class="btn btn-cancel" @click="send(1)">Send</button>
-			</div>
-		</div>
-		<!-- 加群申请-->
-		<div class="sublayer layer4" v-show="layer4">
-			<div class="talk-header">
-				<span class="back" @click="back"></span>
-				<h2>{{this.talk_t.name}}</h2>
-				<a href="" class="user"></a>
-			</div>
-			<div class="msg-list webkitscroll">
-				<div class="item clearfix other">
-					<img :src="require('@/images/10.png')" alt="">
+		<!--&lt;!&ndash; 私人消息&ndash;&gt;-->
+		<!--<div class="sublayer layer2" v-show="layer2">-->
+			<!--<div class="talk-header">-->
+				<!--<span class="back" @click="back"></span>-->
+				<!--<h2>{{talkName}}</h2>-->
+				<!--<a href="" class="user"></a>-->
+			<!--</div>-->
+			<!--<div class="msg-list webkitscroll">-->
+				<!--<div class="item clearfix" :class="{other:v.man=='other',self:v.man=='self',read:v.read}"  v-for="v,i in filtermsgConent">-->
+					<!--<img :src=v.avatar alt="">-->
+					<!--<p>{{v.msg}}</p>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--&lt;!&ndash; <div class="send clearfix">-->
+				<!--<input type="text" v-model="newsend">-->
+				<!--<button class="btn btn-cancel" @click="send(0)">Send</button>-->
+			<!--</div> &ndash;&gt;-->
+		<!--</div>-->
+		<!--&lt;!&ndash; 群组消息&ndash;&gt;-->
+		<!--<div class="sublayer layer3" v-show="layer3">-->
+			<!--<div class="talk-header">-->
+				<!--<span class="back" @click="back"></span>-->
+				<!--<h2>Go for Sunshine</h2>-->
+				<!--<a href="" class="user group"></a>-->
+			<!--</div>-->
+			<!--<div class="msg-list webkitscroll">-->
+				<!--<div class="item clearfix ingroup" :class="{other:v.man=='other',self:v.man=='self'}" v-for="v,i in filtermsgConent">-->
+					<!--<img :src=v.avatar alt="">-->
+					<!--<p>{{v.msg}}</p>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="send clearfix">-->
+				<!--<input type="text" v-model="newsend">-->
+				<!--<button class="btn btn-cancel" @click="send(1)">Send</button>-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--&lt;!&ndash; 加群申请&ndash;&gt;-->
+		<!--<div class="sublayer layer4" v-show="layer4">-->
+			<!--<div class="talk-header">-->
+				<!--<span class="back" @click="back"></span>-->
+				<!--<h2>{{this.talk_t.name}}</h2>-->
+				<!--<a href="" class="user"></a>-->
+			<!--</div>-->
+			<!--<div class="msg-list webkitscroll">-->
+				<!--<div class="item clearfix other">-->
+					<!--<img :src="require('@/images/10.png')" alt="">-->
 
-					<h5 class="apply">Application</h5>
-					<p>{{this.talk_t.txt}}</p>
-					<div class="answerapply clearfix">
-						<button class="btn btn-cancel" @click="group_ok(talk_t)">Accept</button>
-						<button class="btn btn-cancel" @click="group_no(talk_t)">Refuse</button>
-					</div>
-				</div>
-			</div>
-		</div>
-  </div>
-</div>
+					<!--<h5 class="apply">Application</h5>-->
+					<!--<p>{{this.talk_t.txt}}</p>-->
+					<!--<div class="answerapply clearfix">-->
+						<!--<button class="btn btn-cancel" @click="group_ok(talk_t)">Accept</button>-->
+						<!--<button class="btn btn-cancel" @click="group_no(talk_t)">Refuse</button>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 
 </div>
 
@@ -140,6 +140,7 @@ export default {
 		  layer4:false, //加群申请
 			newsend:'',
 			img_url:'',
+      talkName: '',
 			u_id : parseInt(window.cookieStorage.getItem('id')),
 			to_u_id : -1,
 			talk_t:{},
@@ -160,12 +161,12 @@ export default {
         slide:false
       },
 			talktab:{
-				item:['Unread','Hacker'],//,'Group'
+				item:['Unread','Talk'],//,'Group'
 				n:0
 			},
 			talkList:[
-				// {url:'images/6.png',name:'4',id:4,txt:`I’m glad to join your team`,time:'2016/06/16',readstate:0,isgroup:0,apply:1},
-				// {url:'images/6.png',name:'3',id:this.u_id,txt:``,time:'2016/06/16',readstate:0,isgroup:1,apply:0},
+				// {avatar:'images/6.png',name:'4',id:4,txt:`I’m glad to join your team`,time:'2016/06/16',readstate:0,isgroup:0,apply:1},
+				// {avatar:'images/6.png',name:'3',id:this.u_id,txt:``,time:'2016/06/16',readstate:0,isgroup:1,apply:0},
       ],
       filterTalkList:[
 			],
@@ -176,112 +177,110 @@ export default {
 			]
     }
   },
-  watch:{
-		talkList:{
-			handler(){
-				if(this.talktab.n==0){
-					this.filterTalkList = copylist(this.talkList).filter(item=>!item.readstate)
-				}
-				if(this.talktab.n==1){
-					this.filterTalkList = copylist(this.talkList)
-				}
-				if(this.talktab.n==2){
-					this.filterTalkList =  copylist(this.talkList).filter(item=>item.isgroup)
-				}
-
-			},
-			deep:true
-		}
-	},
-  sockets:{
-    connect: function(){
-			console.log('socket connected')
-			this.$socket.emit('connect_event', {'user_id':this.u_id})
-		},
-    init_msg:function(objs){
-      console.log(objs)
-      this.talkList=[]
-      this.msgConent=[]
-
-      for(var i=0 ;i<objs.length;i++ ){
-        var obj = objs[i]
-
-        obj['man'] = 'other'
-        if(obj['from_id']==this.u_id){
-          obj['man'] = 'self'
-        }
-        obj['read'] = 0
-
-        var temp_talk = this.talkList.filter(item=>(item.id==obj.id & item.apply==0))
-        if( temp_talk.length >0){
-          temp_talk[0]['txt'] = obj['txt']
-          temp_talk[0]['time'] = obj['time']
-          temp_talk[0]['readstate'] = 0
-        }else{
-          var result = {}
-          result['url'] = obj['url']
-          result['name'] = obj['name']
-          result['id'] = obj['id']
-          result['txt'] = obj['msg']
-          result['time'] = obj['time']
-          result['readstate'] = 0
-          result['apply'] = 0
-          result['isgroup'] = obj['isgroup']
-          this.talkList.push(result,)
-
-          // this.$socket.emit('talk_sync', {'userid':this.u_id,'result':result})
-        }
-        this.msgConent.push(obj,)
-      }
-
-		},
-    get_msg: function(obj){
-
-      console.log(obj)
-     		// obj['avatar'] = 'images/7.png'
-				obj['man'] = 'other'
-				obj['read'] = 1
-
-			var temp_talk = this.talkList.filter(item=>(item.id==obj.id & item.apply==0))
-
-			if( temp_talk.length >0){
-
-				// {url:'images/6.png',name:'3',id:this.u_id,txt:``,time:'2016/06/16',readstate:0,isgroup:1,apply:0}
-
-						temp_talk[0]['txt'] = obj['msg']
-						temp_talk[0]['time'] = obj['time']
-						temp_talk[0]['readstate'] = 0
-			}else{
-					var result = {}
-					result['url'] = obj['avatar']
-					result['name'] = obj['name']
-					result['id'] = obj['id']
-					result['txt'] = obj['msg']
-					result['time'] = obj['time']
-          result['readstate'] = 0
-          result['apply'] = 0
-          result['isgroup'] = obj['isgroup']
-					this.talkList.push(result,)
-
-          // this.$socket.emit('talk_sync', {'userid':this.u_id,'result':result})
-
-			}
-
-
-			this.msgConent.push(obj,)
-			if(this.to_u_id == obj['id']){
-				this.filtermsgConent.push(obj,)
-			}
-
-		},
-		get_join:function(obj){
-
-					//  this.$refs.layer.show = true
-	 				console.log(obj)
-					this.talkList.push(obj)
-          // this.$socket.emit('talk_sync', {'userid':this.u_id,'result':obj})
-		}
-  },
+  // watch:{
+	// 	talkList:{
+	// 		handler(){
+	// 			if(this.talktab.n==0){
+	// 				this.filterTalkList = this.copylist(this.talkList).filter(item=>!item.readstate)
+	// 			}
+	// 			if(this.talktab.n==1){
+	// 				this.filterTalkList = this.copylist(this.talkList)
+	// 			}
+	// 			if(this.talktab.n==2){
+	// 				this.filterTalkList =  this.copylist(this.talkList).filter(item=>item.isgroup)
+	// 			}
+	// 		},
+	// 		deep:true
+	// 	}
+	// },
+  // sockets:{
+  //   connect: function(){
+	// 		console.log('socket connected')
+	// 		this.$socket.emit('connect_event', {'user_id':this.u_id})
+	// 	},
+  //   init_msg:function(objs){
+  //     console.log(objs)
+  //     this.talkList=[]
+  //     this.msgConent=[]
+  //
+  //     for(var i=0 ;i<objs.length;i++ ){
+  //       var obj = objs[i]
+  //
+  //       obj['man'] = 'other'
+  //       if(obj['from_id']==this.u_id){
+  //         obj['man'] = 'self'
+  //       }
+  //       obj['read'] = 0
+  //
+  //       var temp_talk = this.talkList.filter(item=>(item.id==obj.id & item.apply==0))
+  //       if( temp_talk.length >0){
+  //         temp_talk[0]['txt'] = obj['txt']
+  //         temp_talk[0]['time'] = obj['time']
+  //         temp_talk[0]['readstate'] = 0
+  //       }else{
+  //         var result = {}
+  //         result['avatar'] = obj['avatar']
+  //         result['name'] = obj['name']
+  //         result['id'] = obj['id']
+  //         result['txt'] = obj['msg']
+  //         result['time'] = obj['time']
+  //         result['readstate'] = 0
+  //         result['apply'] = 0
+  //         result['isgroup'] = obj['isgroup']
+  //         this.talkList.push(result,)
+  //
+  //         // this.$socket.emit('talk_sync', {'userid':this.u_id,'result':result})
+  //       }
+  //       this.msgConent.push(obj,)
+  //     }
+  //
+	// 	},
+  //   get_msg: function(obj){
+  //
+  //     console.log(obj)
+  //    		// obj['avatar'] = 'images/7.png'
+	// 			obj['man'] = 'other'
+	// 			obj['read'] = 1
+  //
+	// 		var temp_talk = this.talkList.filter(item=>(item.id==obj.id & item.apply==0))
+  //
+	// 		if( temp_talk.length > 0){
+  //
+	// 			// {url:'images/6.png',name:'3',id:this.u_id,txt:``,time:'2016/06/16',readstate:0,isgroup:1,apply:0}
+  //
+	// 					temp_talk[0]['txt'] = obj['msg']
+	// 					temp_talk[0]['time'] = obj['time']
+	// 					temp_talk[0]['readstate'] = 0
+	// 		}else{
+	// 				var result = {}
+	// 				result['avatar'] = obj['avatar']
+	// 				result['name'] = obj['name']
+	// 				result['id'] = obj['id']
+	// 				result['txt'] = obj['msg']
+	// 				result['time'] = obj['time']
+  //         result['readstate'] = 0
+  //         result['apply'] = 0
+  //         result['isgroup'] = obj['isgroup']
+	// 				this.talkList.push(result,)
+  //
+  //         // this.$socket.emit('talk_sync', {'userid':this.u_id,'result':result})
+  //
+	// 		}
+  //
+	// 		this.msgConent.push(obj,)
+	// 		if(this.to_u_id == obj['id']){
+	// 			this.filtermsgConent.push(obj,)
+	// 		}
+  //
+	// 	},
+	// 	get_join:function(obj){
+  //
+	// 				//  this.$refs.layer.show = true
+	//  				console.log(obj)
+	// 				this.talkList.push(obj)
+  //         // this.$socket.emit('talk_sync', {'userid':this.u_id,'result':obj})
+	// 	}
+  // },
   created () {
     if (window.cookieStorage.getItem('token')) {
       this.user = {
@@ -290,26 +289,26 @@ export default {
         avatar: window.cookieStorage.getItem('id')
       }
     }
-    this.notify(this.user.id)
+    // this.notify(this.user.id)
     this.filterTalkList = this.copylist(this.talkList).filter(item=>!item.readstate)
   },
-  watch:{
-    talkList:{
-      handler(){
-        if(this.talktab.n==0){
-          this.filterTalkList = this.copylist(this.talkList).filter(item=>!item.readstate)
-        }
-        if(this.talktab.n==1){
-          this.filterTalkList = this.copylist(this.talkList)
-        }
-        if(this.talktab.n==2){
-          this.filterTalkList =  this.copylist(this.talkList).filter(item=>item.isgroup)
-        }
-
-      },
-      deep:true
-    }
-  },
+  // watch:{
+  //   talkList:{
+  //     handler(){
+  //       if(this.talktab.n==0){
+  //         this.filterTalkList = this.copylist(this.talkList).filter(item=>!item.readstate)
+  //       }
+  //       if(this.talktab.n==1){
+  //         this.filterTalkList = this.copylist(this.talkList)
+  //       }
+  //       if(this.talktab.n==2){
+  //         this.filterTalkList =  this.copylist(this.talkList).filter(item=>item.isgroup)
+  //       }
+  //
+  //     },
+  //     deep:true
+  //   }
+  // },
   methods: {
     navigator (page) {
       this.isPage[page] = true
@@ -408,6 +407,8 @@ export default {
         window.cookieStorage.setItem('id', data.user_info.id, {expires: d})
         window.cookieStorage.setItem('avatar', data.user_info.avatar, {expires: d})
         window.cookieStorage.setItem('role', data.user_info.role, {expires: d})
+        window.cookieStorage.setItem('teamId', data.user_info.cteam_id, {expires: d})
+
         // this.notify(this.user.id)
       } else {
         this.$router.push('/')
@@ -417,6 +418,7 @@ export default {
         window.cookieStorage.setItem('id', 'anyValue', {expires: d})
         window.cookieStorage.setItem('avatar', 'anyValue', {expires: d})
         window.cookieStorage.setItem('role', 'anyValue', {expires: d})
+        window.cookieStorage.setItem('teamId', 'anyValue', {expires: d})
         this.notifications = []
       }
     },
@@ -451,7 +453,8 @@ export default {
 			}
 			this.talk_t = value
 			this.to_u_id = value.id
-			this.img_url = value.url
+			this.img_url = value.avatar
+      this.talkName = value.name
 			this.filtermsgConent = this.copylist(this.msgConent).filter(item=> item.from_id==value.id)
 		},
 		back(){
@@ -491,49 +494,6 @@ export default {
     }
   }
 }
-function showNotify(title,msg){
-                var Notification = window.Notification || window.mozNotification || window.webkitNotification;
-                console.log(Notification.permission);
-                if(Notification){
-                    Notification.requestPermission(function(status){
-                        if(status != "granted"){
-                            return;
-                        }else{
-                            var tag = "sds"+Math.random();
-                            Notification.body=msg;
-                            //notifyObj属于Notification构造方法的实例对象
-                            var notifyObj = new Notification(
-                                title,
-                                {
-                                    dir:'auto',
-                                    lang:'zh-CN',
-                                    tag:tag,//实例化的notification的id
-                                    icon:'images/img/u02.png',	//icon的值显示通知图片的URL
-                                    body:msg
-                                }
-                            );
-                            notifyObj.onclick=function(){
-                                //如果通知消息被点击,通知窗口将被激活
-                                window.focus();
-                                alert(11)
-                            },
-                            notifyObj.onerror = function () {
-                                console.log("HTML5桌面消息出错！！！");
-                            };
-                            notifyObj.onshow = function () {
-                                setTimeout(function(){
-                                    notifyObj.close();
-                                },2000)
-                            };
-                            notifyObj.onclose = function () {
-                                console.log("HTML5桌面消息关闭！");
-                            };
-                        }
-                    });
-                }else{
-                    console.log("您的浏览器不支持桌面消息!");
-                }
-            }
 
 </script>
 

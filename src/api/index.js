@@ -133,10 +133,10 @@ export default {
       }
     })
   },
-  upload_project (formData) {
+  upload_project (formData, token) {
     return axios.post(`${url}/user/up-project`, formData, {
       headers: {
-        'X-Auth-Token': window.cookieStorage.getItem('token')
+        'X-Auth-Token': token
       }
     })
   },
@@ -206,12 +206,55 @@ export default {
     })
   },
   hacker_view (name, cid) {
-    return axios.post(`${url}/team/manage`, { code: code },
+    return axios.post(`${url}/hacker/someone`, { name: name, cid: cid },
       {
         headers: {
           'content-type': 'application/json',
           'X-Auth-Token': window.cookieStorage.getItem('token')
         }
       })
+  },
+  fetch_projects (page) {
+    return axios.post(`${url}/rank/project`, { page: page, per_page: 10 },
+      { headers: { 'content-type': 'application/json' } })
+  },
+  vote (from, to, token) {
+    return axios.post(`${url}/user/vote`, { from_tid: from, to_tid: to },
+      {
+        headers: {
+          'content-type': 'application/json',
+          'X-Auth-Token': token
+        }
+      })
+  },
+  leave_team (token) {
+    return axios.post(`${url}/user/team-leave`, null, {
+      headers: {
+        'X-Auth-Token': token
+      }
+    })
+  },
+  disband_team (token) {
+    return axios.delete(`${url}/user/team-manage`, {
+      headers: {
+        'X-Auth-Token': token
+      }
+    })
+  },
+  add_member (to, token) {
+    return axios.post(`${url}/user/team-add-member`, { member_id: to },
+      {
+        headers: {
+          'content-type': 'application/json',
+          'X-Auth-Token': token
+        }
+      })
+  },
+  complete_team (token) {
+    return axios.put(`${url}/user/team-manage`, null, {
+      headers: {
+        'X-Auth-Token': token
+      }
+    })
   }
 }

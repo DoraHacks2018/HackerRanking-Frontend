@@ -47,9 +47,9 @@
                 </div>
               </div>
               <div class="input-group clearfix">
-                <label for="address" class="label">发放奖金ETH钱包地址</label>
+                <label for="address" class="label">发放奖金BCH钱包地址</label>
                 <div class="form-info">
-                  <input type="text" id="address" v-model="eth">
+                  <input type="text" id="address" v-model="bch">
                 </div>
               </div>
               <div class="input-group clearfix">
@@ -107,7 +107,7 @@ export default {
       city: '',
       role: '',
       org: '',
-      eth: '',
+      bch: '',
       sloagn: '',
       rolecontent: [
         'Full Stack',
@@ -116,8 +116,12 @@ export default {
         'Product',
         'UI',
         'Others'
-      ]
+      ],
+      token: null
     }
+  },
+  created () {
+    this.token = window.cookieStorage.getItem('token')
   },
   methods:{
     input(event){
@@ -160,10 +164,9 @@ export default {
       formd.append('name', this.name)
       formd.append('city', this.city)
       formd.append('org', this.org)
-      formd.append('eth', this.eth)
+      formd.append('bch', this.bch)
       formd.append('slogan', this.slogan)
-      const token = window.cookieStorage.getItem('token')
-      api.upload_info(formd, token).then((res) => {
+      api.upload_info(formd, this.token).then((res) => {
         const d = res.data
         if (d.errcode) {
           if (d.errmsg) {

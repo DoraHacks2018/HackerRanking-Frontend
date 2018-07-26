@@ -47,7 +47,7 @@ export default {
       cryptoName: '',
       passwd: '',
       email: '',
-      redirect_uri: 'https://ranking.dorahacks.com/',
+      redirect_uri: 'http://ranking.dorahacks.com/',
       prompt: '3-20位以字母开头、可带数字、“_”、“.”'
     }
   },

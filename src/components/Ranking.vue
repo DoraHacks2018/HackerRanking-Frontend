@@ -34,32 +34,34 @@
       <div class="item relative" :class="{
 		one:i==0,two:i==1,three:i==2
 	}" v-for="v,i in list">
-        <div class="prize sideinfo pull-left">
-          <h4 class="dollor">{{v.dollor}}</h4>
-          <div class="hcount">
+        <div class="prize sideinfo pull-left" >
+          <h4 class="dollor" v-if="end">{{v.team.bonus}}</h4>
+          <div class="hcount" v-if="end">
             <div class="hackers">
-              <h4>{{v.hackers}}</h4>
+              <h4>{{v.team.ballot}}</h4>
               Hackers
             </div>
             <div class="judges">
-              <h4>{{v.judges}}</h4>
+              <h4>{{v.team.judges}}</h4>
               Judges
             </div>
           </div>
-          <button class="btn btn-primary" :disabled="!v.limit" @click="handle(v,i)">{{v.prize?'Recive Prize':'VOTE'}}</button>
+          <button v-if="!end" class="btn btn-primary" :disabled="!inTeam" @click="vote(v.team.id)">VOTE</button>
+          <button v-if="inTeam && end" class="btn btn-primary" :disabled="!v.received" @click="receive">Receive Prize</button>
+
         </div>
         <div class="info clearfix pull-right">
-          <img :src="require('@/'+v.url)" alt="">
+          <img :src=v.logo alt="">
           <div class="txt">
-            <h2>{{v.title}}</h2>
-            <h3>By Team <span class="text-primary">{{v.team}}</span></h3>
-            <p class="webkitscroll">{{v.txt}}</p>
+            <h2>{{v.name}}</h2>
+            <h3>By Team <span class="text-primary">{{v.team.name}}</span></h3>
+            <p class="webkitscroll">{{v.description}}</p>
           </div>
           <div class="href">
-            <a href="" class="primary-hover">Demo</a>
-            <a href="" class="primary-hover">Github</a>
+            <a :href=v.demo class="primary-hover">Demo</a>
+            <a :href=v.git class="primary-hover">Github</a>
           </div>
-          <div class="tag">{{i+1}}</div>
+          <div class="tag" v-if="end">{{i+1}}</div>
         </div>
       </div>
     </div>
@@ -67,12 +69,9 @@
     <div class="wrap">
       <ul class="pagination clearfix">
         <li class="disabled"><a href="" class="fa fa-chevron-left"></a></li>
-        <li class="active"><a href="">1</a></li>
+        <li :class="{active: act[0]}" @click="getPage(1)">1</li>
         <!-- <li class="ellip"><a></a></li> -->
-        <li><a href="">2</a></li>
-        <li><a href="">3</a></li>
-        <li><a href="">4</a></li>
-        <li><a href="">5</a></li>
+        <li :class="{active: act[1]}" @click="getPage(2)" v-if="pageData.total > 10">2</li>
         <!-- <li class="ellip"><a></a></li> -->
         <li><a href="" class="fa fa-chevron-right"></a></li>
       </ul>
@@ -92,69 +91,67 @@
 </template>
 
 <script>
+import api from '@/api'
+
 export default {
   name: 'Ranking',
   data () {
     return {
       menuShow: false,
-      list: [
-        // {
-        //   prize: false,
-        //   limit: true,
-        //   dollor: 100000,
-        //   hackers: 313,
-        //   judges: 43,
-        //   url: 'images/cat.png',
-        //   title: 'Looking for Best Designers',
-        //   team: 'Hacking to The Gate',
-        //   txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. The drop in scores marks the`
-        // },
-        // {
-        //   prize: true,
-        //   limit: true,
-        //   dollor: 800000,
-        //   hackers: 313,
-        //   judges: 43,
-        //   url: 'images/cat.png',
-        //   title: 'Looking for Best Designers',
-        //   team: 'Hacking to The Gate',
-        //   txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools.`
-        // },
-        // {
-        //   prize: true,
-        //   limit: false,
-        //   dollor: 600000,
-        //   hackers: 313,
-        //   judges: 43,
-        //   url: 'images/cat.png',
-        //   title: 'Looking for Best Designers',
-        //   team: 'Hacking to The Gate',
-        //   txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools. `
-        // },
-        // {
-        //   prize: false,
-        //   limit: true,
-        //   dollor: 460000,
-        //   hackers: 313,
-        //   judges: 43,
-        //   url: 'images/cat.png',
-        //   title: 'Looking for Best Designers',
-        //   team: 'Hacking to The Gate',
-        //   txt: `The drop in scores marks the end of a trend – known as the Flynn effect – which has seen average IQs rise for the past 60 to 70 years by roughly three points a decade. Scientists have described the results as 'impressive' but 'pretty worrying according to the Times. The decline is to do with a difference in the way languages and maths are taught in schools.`
-        // }
-      ]
+      end: false,
+      list: [],
+      pageData: null,
+      act: [true, false],
+      inTeam: false,
+      teamID: 0,
     }
   },
 
   computed:{
 
   },
+  created () {
+    this.teamID = parseInt(window.cookieStorage.getItem('teamId'))
+    this.inTeam = (this.teamID !== 0)
+    api.fetch_projects(1).then((res) => {
+      const d = res.data
+      if (d.errcode) {
+        alert(d.errmsg)
+      } else {
+        this.pageData = d
+        this.list = d.items
+      }
+    })
+  },
   updated () {
 
   },
-  methods:{
-    handle(v,i){
-      console.log(v,i)
+  methods: {
+    vote (to) {
+      const token = window.cookieStorage.getItem('token')
+      api.vote(this.teamID, to, token).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          alert('You have voted successfully.')
+        }
+      })
+    },
+    receive () {
+    },
+    getPage (i) {
+      this.act[i] = true
+      this.act[1-i] = false
+      api.fetch_projects(i).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          this.pageData = d
+          this.list = d.items
+        }
+      })
     }
   }
 }

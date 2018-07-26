@@ -40,6 +40,8 @@
       <button class="btn btn-cancel" @click="logout">Logout</button>
       </div>
       <div class="sideadress">
+        <h5>BCH Wallet Adress</h5>
+        <h6>{{user.bch}}</h6>
         <h5>ETH Wallet Adress</h5>
         <h6>{{user.eth}}</h6>
         <h5>Gift Wallet Adress</h5>
@@ -125,6 +127,7 @@ export default {
         followers: 0,
         following: 0,
         address: '',
+        bch: 'NOT SAVE',
         eth: 'NOT SAVE',
         gift_addr: 'NOT SAVE',
         mail: 'NOT SAVE',
@@ -153,6 +156,7 @@ export default {
         this.user.url = d.avatar
         this.user.name = d.username
         this.user.eth = d.eth
+        this.user.bch = d.bch
         this.user.gift_addr = d.gift
         this.user.gift = d.owned_dust
         this.user.mail = d.email

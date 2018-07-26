@@ -114,20 +114,20 @@ export default {
     }
   },
   created(){
-    document.addEventListener('click', (e) => {
-      this.$refs.newsLayer.show = false;
-    })
+    // document.addEventListener('click', (e) => {
+    //   this.$refs.newsLayer.show = false;
+    // })
     this.calendars.filterData = this.calendars.items;
-    this.hasNew = this.ifnew(this.news.list,'unread')
+    // this.hasNew = this.ifnew(this.news.list,'unread')
   },
-  watch:{
-    news:{
-      handler(){
-        this.hasNew = this.ifnew(this.news.list,'unread')
-      },
-      deep:true
-    }
-  },
+  // watch:{
+  //   news:{
+  //     handler(){
+  //       // this.hasNew = this.ifnew(this.news.list,'unread')
+  //     },
+  //     deep:true
+  //   }
+  // },
   methods: {
     choose(index) {
       this.calendars.n = index

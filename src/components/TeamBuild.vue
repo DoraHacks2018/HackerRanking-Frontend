@@ -21,9 +21,9 @@
         </div>
       </div>
 
-      <div class="text-right clearfix" v-if="inTeam" @click="exit">
-        <a v-if="isLeader" class="btn btn-cancel dismiss">Disband The Team</a>
-        <a v-else class="btn btn-cancel dismiss">Leave The Team</a>
+      <div class="text-right clearfix" v-if="inTeam" >
+        <a v-if="isLeader" class="btn btn-cancel dismiss" @click="disbandTeam">Disband The Team</a>
+        <a v-else class="btn btn-cancel dismiss" @click="leaveTeam">Leave The Team</a>
       </div>
     </div>
 
@@ -46,20 +46,20 @@
           <div class="lists clearfix">                <!-- 6.24-1 -->
             <div class="lists-title text-primary" contenteditable="true" @blur="entername($event)">{{teamName}}</div>
             <div class="item sm-center" v-for="v,i in judges">
-              <div class="img" :class="{active:v.active}"><img :src=v.url alt=""></div>
+              <div class="img"><img :src=v.avatar alt=""></div>
               <h3>{{v.name}}</h3>
-              <p class="sname text-center">{{v.intro}}</p>
+              <p class="sname text-center">{{v.role}}</p>
             </div>
-            <div class="item sm-center">
+            <div class="item sm-center" v-if="!isComplete" @click="toInvite">
               <div class="add img circle" style="border-radius: 50%" @click="change($event,1)" v-if="inTeam"></div>
               <div class="add img circle" style="border-radius: 50%" @click="createTeam" v-else></div>
-              <h3 class="text-primary" v-if="inTeam" @click="toInvite">Invite members</h3>
+              <h3 class="text-primary" v-if="inTeam">Invite members</h3>
               <h3 class="text-primary" v-else>Create team</h3>
             </div>
           </div>
         </div>
-        <div class="text-center" v-if="inTeam && isComplete">
-          <button class="btn btn-primary btn-lg">Team Complete</button>
+        <div class="text-center" v-if="inTeam && !isComplete">
+          <button class="btn btn-primary btn-lg" @click="completeTeam">Team Complete</button>
         </div>
 
       </div>
@@ -144,12 +144,13 @@ export default {
       curTxtCount:0,
       inTeam: false,
       isLeader: false,
+      isComplete: false,
       u_id : parseInt(window.cookieStorage.getItem('id')),
       judges: [
         // {url:'images/6.png',name:'Qiu Wang',intro:`Designer`,active:true}
 
       ],
-      isComplete: false,
+      token: '',
       role: {
         tab: [
           {id: 0, title: 'Full Stack'},
@@ -175,7 +176,8 @@ export default {
   },
   created () {
     this.role.filterData = this.role.items.filter(item => item.pid==this.role.n)
-    api.check_team.then((res) => {
+    this.token = window.cookieStorage.getItem('token')
+    api.check_team().then((res) => {
       const d = res.data
       if (d.errcode) {
         console.log('check team error')
@@ -184,6 +186,9 @@ export default {
       }
       this.inTeam = d.inTeam
       this.isLeader = d.isLeader
+      this.teamName = d.team_info.name
+      this.judges = d.team_member
+      this.isComplete = d.team_info.is_completed
     })
   },
   methods: {
@@ -236,9 +241,9 @@ export default {
           this.inTeam = true
           this.isLeader = true
           this.judges.push({
-            url: window.cookieStorage.getItem('avatar'),
+            avatar: window.cookieStorage.getItem('avatar'),
             name: window.cookieStorage.getItem('name'),
-            intro: window.cookieStorage.getItem('role'),
+            role: window.cookieStorage.getItem('role'),
             active: false
           })
           alert('You are the team leader now!')
@@ -247,7 +252,39 @@ export default {
     },
     exit(){
       this.$socket.emit('exit_group', {'from_id':this.u_id})
-
+    },
+    leaveTeam () {
+      api.leave_team(this.token).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          alert('You have leaved your team!')
+        }
+      })
+    },
+    disbandTeam () {
+      api.disband_team(this.token).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          this.inTeam = false
+          this.judges = []
+          alert('You have disbanded your team!')
+        }
+      })
+    },
+    completeTeam () {
+      api.complete_team(this.token).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          this.isComplete = true
+          alert('Complete!')
+        }
+      })
     }
   }
 }

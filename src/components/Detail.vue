@@ -62,14 +62,6 @@
               </p>
             </div>
           </div>
-          <div class="lists clearfix">
-            <div class="item" v-for="v,i in judges3">
-              <div class="img"><img :src="require('@/'+v.url)" alt=""></div>
-              <h3>{{v.name}}</h3>
-              <p class="intro">{{v.intro}}
-              </p>
-            </div>
-          </div>
 
         </div>
       </div>

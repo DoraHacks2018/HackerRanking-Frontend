@@ -51,7 +51,7 @@
             <div class="lists-title text-primary">{{t.name}}</div>
             <div class="item" v-for="v in t.members">
               <div class="img"><img :src=v.url alt=""></div>
-              <h3>{{v.username}}</h3>
+              <h3>{{v.name}}</h3>
               <p class="sname text-center">{{v.role}}</p>
             </div>
           </div>

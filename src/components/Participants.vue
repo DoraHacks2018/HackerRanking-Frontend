@@ -59,9 +59,8 @@
             <div class="item sm-center" v-for="v in judges">
               <div class="img"><img :src=v.url alt=""></div>
               <h3>{{v.name}}</h3>
-              <p class="intro">{{v.intro}}
-              </p>
-              <button class="btn btn-primary" @click="invite(v.name, v.uid)" v-if="v.team_id===0 && v.uid!==myid">Invite</button>
+              <p class="intro">{{v.intro}}</p>
+              <button class="btn btn-primary" @click="invite(v.name, v.uid)" :disabled="v.team_id!==0 || v.uid===myid">Invite</button>
             </div>
           </div>
         </div>
@@ -156,8 +155,18 @@ export default {
     },
     invite(uname, s_uid){
       this.toHacker = uname
-      this.$refs.layer.show = true
+      const token = window.cookieStorage.getItem('token')
+      // this.$refs.layer.show = true
       this.s_uid= s_uid
+      api.add_member(this.s_uid, token).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          console.log(d)
+          alert('Add member successfully.')
+        }
+      })
     },
     cancel(){
       this.$refs.layer.show = false

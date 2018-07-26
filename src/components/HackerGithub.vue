@@ -2,7 +2,7 @@
 <div>	<div class="hackertop">
   <div class="wrap clearfix">
     <div class="sideuser">
-      <img :src="user.url" alt="">
+      <img :src=user.url alt="">
       <h2>{{user.name}}</h2>
     </div>
     <div class="sideinfo">
@@ -61,10 +61,6 @@
       <li><a href="" class="fa fa-chevron-left"></a></li>
       <li class="active"><a href="">1</a></li>
       <!-- <li class="ellip"><a></a></li> -->
-      <li><a href="">2</a></li>
-      <li><a href="">3</a></li>
-      <li><a href="">4</a></li>
-      <li><a href="">5</a></li>
       <!-- <li class="ellip"><a></a></li> -->
       <li><a href="" class="fa fa-chevron-right"></a></li>
     </ul>
@@ -110,6 +106,7 @@ export default {
         if (d.errcode) {
           alert(d.errmsg)
         } else {
+          console.log(d)
           this.user.url = d.author_avatar
           this.name = d.author_login
           this.items = d.commit_info
