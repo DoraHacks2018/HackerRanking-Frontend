@@ -286,7 +286,7 @@ export default {
       this.user = {
         name: window.cookieStorage.getItem('name'),
         id: window.cookieStorage.getItem('id'),
-        avatar: window.cookieStorage.getItem('id')
+        avatar: window.cookieStorage.getItem('avatar')
       }
     }
     // this.notify(this.user.id)
