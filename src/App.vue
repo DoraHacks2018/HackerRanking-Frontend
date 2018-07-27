@@ -281,12 +281,13 @@ export default {
   //         // this.$socket.emit('talk_sync', {'userid':this.u_id,'result':obj})
 	// 	}
   // },
+
   created () {
     if (window.cookieStorage.getItem('token')) {
       this.user = {
         name: window.cookieStorage.getItem('name'),
         id: window.cookieStorage.getItem('id'),
-        avatar: window.cookieStorage.getItem('id')
+        avatar: window.cookieStorage.getItem('avatar')
       }
     }
     // this.notify(this.user.id)
@@ -402,6 +403,7 @@ export default {
           avatar: data.user_info.avatar,
           role: data.user_info.role
         }
+
         window.cookieStorage.setItem('token', data.auth_token, {expires: d})
         window.cookieStorage.setItem('name', data.user_info.username, {expires: d})
         window.cookieStorage.setItem('id', data.user_info.id, {expires: d})
@@ -421,6 +423,7 @@ export default {
         window.cookieStorage.setItem('teamId', 'anyValue', {expires: d})
         this.notifications = []
       }
+      this.isPage= [false,false,false]
     },
     chooseTalk(value,index){
 			// console.log(index,tab)
