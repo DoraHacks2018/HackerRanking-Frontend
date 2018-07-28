@@ -19,6 +19,8 @@ import Hackers from '@/components/Hackers'
 import ProfileEdit from '@/components/ProfileEdit'
 import HackerGithub from '@/components/HackerGithub'
 import Blockchain from '@/components/Blockchain'
+import ResetPassword from '@/components/ResetPassword'
+
 
 Vue.use(Router)
 
@@ -118,6 +120,11 @@ export default new Router({
       path: '/projects',
       name: 'Project',
       component: Ranking
+    },
+    {
+      path: '/resetpassword',
+      name: 'ResetPassword',
+      component: ResetPassword
     }
   ]
 })
