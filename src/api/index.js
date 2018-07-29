@@ -20,6 +20,16 @@ export default {
         'X-Auth-Token': window.cookieStorage.getItem('token') }
     })
   },
+  register (username, email, password,invitation_code) {
+  return axios.post(`${url}/register`, {
+    username,
+    password,
+    email,
+    invitation_code
+  }, {
+    headers: { 'content-type': 'application/json' }
+  })
+},
   resetpassword (email) {
     return axios.post(`${url}/resetpassword`, {
       email
@@ -264,5 +274,6 @@ export default {
         'X-Auth-Token': token
       }
     })
+
   }
 }

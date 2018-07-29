@@ -22,6 +22,7 @@
           <input type="text" placeholder="Enter A Crypto Name" v-model="cryptoName">
           <input type="text" placeholder="Enter Email Adress" v-model="email">
           <input type="text" placeholder="Enter Password" v-model="passwd">
+          <input type="text" placeholder="Enter invitation_code" v-model="invitation_code">
           <div class="log-btns">
             <button class="btn btn-cancel" @click="register">Sign Up with Email</button>
             <div class="or">or</div>
@@ -55,6 +56,7 @@ export default {
       n:0,
       cryptoName: '',
       passwd: '',
+      invitation_code:this.$route.query.invitation_code,
       email: '',
       redirect_uri: 'http://ranking.dorahacks.com/',
       prompt: '3-20位以字母开头、可带数字、“_”、“.”'
@@ -67,6 +69,7 @@ export default {
       const redirect = this.redirect_uri
       this.oauthPopup = new OAuthPopup(url, provider, popupOptions)
       this.oauthPopup.open(redirect, false).then((res) => {
+
         api.login_auth(res.code).then((response) => {
           const dd = response.data
           if (dd.errcode) {
@@ -84,6 +87,7 @@ export default {
       const redirect = this.redirect_uri
       this.oauthPopup = new OAuthPopup(url, provider, popupOptions)
       this.oauthPopup.open(redirect, false).then((res) => {
+
         api.register_auth_git(res.code).then((response) => {
           const dd = response.data
           if (dd.errcode) {
@@ -111,7 +115,9 @@ export default {
         alert('CryptoName只允许3-20个以字母开头、可带数字、“_”、“.”的字串')
         return
       }
-      api.register(this.cryptoName, this.email, this.passwd).then((res) => {
+
+
+      api.register(this.cryptoName, this.email, this.passwd,this.invitation_code).then((res) => {
         const d = res.data
         if (d.errcode) {
           alert(d.errmsg)
