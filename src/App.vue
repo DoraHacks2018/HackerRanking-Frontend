@@ -11,6 +11,7 @@
           </span></router-link>
         </div>
         <ul class="header-nav" :class="{show:menuShow}">
+          <!--<li class="item" :class="{active: isPage[3]}" @click="toPlan"><a>DEVELOPER INCENTIVE PLAN</a></li>-->
           <li class="item" :class="{active: isPage[0]}" @click="toDetail"><a>HACKATHON</a></li>
           <li class="item" :class="{active: isPage[1]}" @click="toHacker"><a>HACKERS</a></li>
           <!--<li class="item" :class="{active: isPage[2]}" @click="toProjects"><a href="#">PROJECTS</a></li>-->
@@ -146,11 +147,7 @@ export default {
 			talk_t:{},
       user: null,
       git_state: '',
-      isPage: [
-        false,
-        false,
-        false,
-      ],
+      isPage: [false, false, false, false],
       hasNew:true,
       newsShow:false,
       news:{
@@ -339,17 +336,21 @@ export default {
       this.isPage[1] = false
       this.isPage[2] = false
     },
+    toPlan () {
+      this.isPage= [false,false,false, true]
+      this.$router.push('/partner/nkn')
+    },
     toDetail () {
-      this.isPage= [true,false,false]
+      this.isPage= [true,false,false, false]
       this.$router.push('/hackathon/detail')
     },
     toHacker () {
-      this.isPage= [false,true,false]
+      this.isPage= [false,true,false, false]
       this.$router.push('/hackers')
 
     },
     toProjects () {
-      this.isPage= [false,false,true]
+      this.isPage= [false,false,true, false]
       this.$router.push('/hackathon/ranking')
     },
     toProfile () {

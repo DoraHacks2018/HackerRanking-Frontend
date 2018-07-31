@@ -4,27 +4,35 @@
       <ul>
         <li :class="{active:n==i}" v-for="v,i in tab" @click="n=i">{{v}}</li>
       </ul>
-      <div class="logform" v-show="n==1">
-        <form action="">
-          <input type="text" placeholder="CryptoName" v-model="cryptoName">
-          <input type="text" placeholder="Password" v-model="passwd">
-          <div class="log-btns">
-            <button class="btn btn-cancel" @click="sendLogin">Login</button>
-            <div class="or">or</div>
-            <button class="btn btn-primary github" @click="login_auth('github')"><span>Login with Github</span></button>
-          </div>
-        </form>
-      </div>
       <div class="signform" v-show="n==0">
         <form action="">
           <p class="propt">{{prompt}}</p>
           <input type="text" placeholder="Enter A Crypto Name" v-model="cryptoName">
           <input type="text" placeholder="Enter Email Adress" v-model="email">
-          <input type="text" placeholder="Enter Password" v-model="passwd">
+          <input type="password" placeholder="Enter Password" v-model="passwd">
           <div class="log-btns">
             <button class="btn btn-cancel" @click="register">Sign Up with Email</button>
             <div class="or">or</div>
             <button class="btn btn-primary github" @click="login_auth('github')"><span>Login with Github</span></button>
+          </div>
+        </form>
+      </div>
+      <div class="logform" v-show="n==1">
+        <form action="">
+          <input type="text" placeholder="CryptoName" v-model="cryptoName">
+          <input type="password" placeholder="Password" v-model="passwd">
+          <div class="log-btns">
+            <button class="btn btn-cancel" @click="sendLogin">Login</button>
+            <div class="or" @click="n=2" style="cursor: pointer">Forget password?</div>
+            <button class="btn btn-primary github" @click="login_auth('github')"><span>Login with Github</span></button>
+          </div>
+        </form>
+      </div>
+      <div class="resetpassword" v-show="n==2">
+        <form action="">
+          <input type="text" placeholder="Enter Email Adress" v-model="email">
+          <div class="log-btns">
+            <button class="btn btn-cancel" @click="resetpassword">Send email</button>
           </div>
         </form>
       </div>
@@ -52,6 +60,22 @@ export default {
     }
   },
   methods: {
+    toReset () {
+      this.show = false
+      this.$router.push('/resetpasswd')
+    },
+    resetpassword () {
+      if (!this.verifyEmail()) {
+        alert('邮箱输入有误')
+        return
+      }
+      api.resetpassword(this.email).then((res) => {
+        const d = res.data
+        if (d.state == 0) {
+          alert('成功发送邮件！')
+        }
+      })
+    },
     login_auth (provider) {
       const url = 'https://github.com/login/oauth/authorize?client_id=&scope=user'
       const popupOptions = { width: 1020, height: 618 }
@@ -115,6 +139,11 @@ export default {
       var patn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){2,19}$/;
       if (!patn.exec(this.cryptoName)) return false
       return true
+    },
+    verifyEmail() {
+      var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+      if (reg.test(this.email)) return true
+      return false
     }
   }
 }
@@ -127,5 +156,10 @@ export default {
   margin-bottom: 8px;
   margin-top: -20px;
   text-align: right;
+}
+.resetpassword{
+  font-weight:100;
+  color: red;
+  cursor: pointer;
 }
 </style>

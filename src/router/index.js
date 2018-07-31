@@ -15,15 +15,22 @@ import ProfileInvested from '@/components/ProfileInvested'
 import TeamCompleted from '@/components/TeamCompleted'
 import TeamBuild from '@/components/TeamBuild'
 import TrueChain from '@/components/TrueChain'
+import NKN from '@/components/NKN'
 import Hackers from '@/components/Hackers'
 import ProfileEdit from '@/components/ProfileEdit'
 import HackerGithub from '@/components/HackerGithub'
 import Blockchain from '@/components/Blockchain'
+import ResetPassword from '@/components/ResetPassword'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/resetpasswd',
+      name: 'ResetPassword',
+      component: ResetPassword
+    },
     {
       path: '/hackers',
       name: 'Hackers',
@@ -113,6 +120,11 @@ export default new Router({
       path: '/partner/truechain',
       name: 'TrueChain',
       component: TrueChain
+    },
+    {
+      path: '/partner/nkn',
+      name: 'NKN',
+      component: NKN
     },
     {
       path: '/projects',

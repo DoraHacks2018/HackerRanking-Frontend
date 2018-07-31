@@ -23,7 +23,7 @@
             <p><span class="text-primary">{{v.follower}}</span> Followers</p>
             <div class="">
               <a href="" class="btn btn-primary">Follow</a>
-              <a href="" class="btn btn-cancel">Message</a>
+              <!--<a href="" class="btn btn-cancel">Message</a>-->
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@
       <ul class="pagination clearfix">
         <li><a href="" class="fa fa-chevron-left"></a></li>
         <li class="active"><a href="">1</a></li>
-        <li><a @click="fetch_page(2)">2</a></li>
+        <li><a class="" @click="fetch_page(2)">2</a></li>
         <li><a @click="fetch_page(3)">3</a></li>
         <li><a @click="fetch_page(4)">4</a></li>
         <li class="ellip"><a></a></li>
@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     claimId (name) {
-      const url = 'https://github.com/login/oauth/authorize?client_id=ae68a17db805afccb892&scope=user'
+      const url = 'https://github.com/login/oauth/authorize?client_id=&scope=user'
       const popupOptions = { width: 1020, height: 618 }
       const redirect = this.redirect_uri
       this.oauthPopup = new OAuthPopup(url, 'github', popupOptions)

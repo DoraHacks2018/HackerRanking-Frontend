@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 // const url = 'https://ranking.dorahacks.com/api'
-// const url = 'http://47.254.41.35:7050'
-const url = 'http://39.104.16.22:8080'
+const url = 'http://47.254.41.35:7050'
+// const url = 'http://39.104.16.22:8080'
 
 export default {
   login (username, password) {
@@ -221,7 +221,7 @@ export default {
       { headers: { 'content-type': 'application/json' } })
   },
   vote (from, to, token) {
-    return axios.post(`${url}/user/vote`, { from_tid: from, to_tid: to },
+    return axios.post(`${url}/user/team-vote`, { from_tid: from, to_tid: to },
       {
         headers: {
           'content-type': 'application/json',
@@ -258,5 +258,20 @@ export default {
         'X-Auth-Token': token
       }
     })
-  }
+  },
+  resetpassword (email) {
+    return axios.post(`${url}/resetpassword`, {
+      email: email
+    }, {
+      headers: { 'content-type': 'application/json' }
+    })
+  },
+  resetpassword2 (token,passwd) {
+    return axios.post(`${url}/resetPassword2`, {
+      token:token,
+      passwd:passwd
+    }, {
+      headers: { 'content-type': 'application/json' }
+    })
+  },
 }

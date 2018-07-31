@@ -1,13 +1,13 @@
 /*公共部分css，头部，尾部等*/
 @charset "utf-8";
-input[type=text]{outline: none;padding: 0 15px;height: 30px;line-height: 36px}
+input[type=text], input[type=password]{outline: none;padding: 0 15px;height: 30px;line-height: 36px}
 input::-webkit-input-placeholder{color: #b6baba;}
 input::-moz-input-placeholder{color: #b6baba;}
 input::-ms-input-placeholder{color: #b6baba;}
 textarea::-webkit-input-placeholder{color: #b6baba;}
 textarea::-moz-input-placeholder{color: #b6baba;}
 textarea::-ms-input-placeholder{color: #b6baba;}
-input[type=text],textarea{background-color:#fff;outline:none;padding:10px;width: 100%;
+input[type=text], input[type=password], textarea{background-color:#fff;outline:none;padding:10px;width: 100%;
 	font-size: .12rem;color:#939999;border: 1px solid #d0d5d5;border-radius: 4px;resize: none;
 }
 input[type=file]{cursor: pointer;}
@@ -23,9 +23,9 @@ button{border:none;outline: none;cursor: pointer;}
 .flex{display: flex}
 .flex>.item{flex-grow: 1}
 @media (min-width: 768px){
-  input[type=text],textarea{font-size: 14px;resize: vertical;}/*2018.7.20(1)*/
+  input[type=text], input[type=password], textarea{font-size: 14px;resize: vertical;}/*2018.7.20(1)*/
 	.visible-xs{display: none}
-	input[type=text]{height: 36px;}
+	input[type=text], input[type=password] {height: 36px;}
 	textarea{min-height: 122px;}
 	.sm-center{text-align: inherit;}
 	.pcwrap{width: 1032px;margin: 0 auto;padding: 0 15px;}
