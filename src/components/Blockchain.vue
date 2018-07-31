@@ -28,7 +28,7 @@
             </div>
           </div>
           <div class="info">
-            <a class="upload">It's Closed</a>
+            <router-link to="/hackathon/blockchain/bonus"><a class="upload">Bonus Go  <i class="fa fa-arrow-right" aria-hidden="true"></i></a></router-link>
             <div class="cup text-center">
               <p>20 ETH</p>
             </div>

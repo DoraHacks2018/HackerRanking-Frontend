@@ -20,6 +20,7 @@ import Hackers from '@/components/Hackers'
 import ProfileEdit from '@/components/ProfileEdit'
 import HackerGithub from '@/components/HackerGithub'
 import Blockchain from '@/components/Blockchain'
+import BlockchainBonus from '@/components/BlockchainBonus'
 import ResetPassword from '@/components/ResetPassword'
 
 Vue.use(Router)
@@ -55,6 +56,11 @@ export default new Router({
       path: '/hackathon/blockchain',
       name: 'Blockchain',
       component: Blockchain
+    },
+    {
+      path: '/hackathon/blockchain/bonus',
+      name: 'BlockchainBonus',
+      component: BlockchainBonus
     },
     {
       path: '/hackathon/participants',
@@ -130,6 +136,6 @@ export default new Router({
       path: '/projects',
       name: 'Project',
       component: Ranking
-    }
+    },
   ]
 })

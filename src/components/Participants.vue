@@ -52,16 +52,6 @@
       </div>
     </div>
 
-    <footer>
-      <div class="wrap">
-        <ul class="flex">
-          <li><a href="">ABOUT US</a></li>
-          <li>FEEDBACK support@dorahacks.com</li>
-          <li>COOPERATION bd@dorahacks.com</li>
-        </ul>
-      </div>
-    </footer>
-
     <m-modal ref="layer">
       <div slot="modal-header">
         <h4 class="title">Are you sure to send this invitation to <span class="black">{{toHacker}}</span> ?</h4>

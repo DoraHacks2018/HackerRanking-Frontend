@@ -25,7 +25,15 @@
     <transition name="fade">
       <router-view @update="update" @notify="notify" @atPage="atPage" @navigation="navigator"/>
     </transition>
-
+    <footer>
+      <div class="wrap">
+        <ul class="flex">
+          <li><a href="https://www.dorahacks.com">ABOUT US</a></li>
+          <li>FEEDBACK support@dorahacks.com</li>
+          <li>COOPERATION bd@dorahacks.com</li>
+        </ul>
+      </div>
+    </footer>
     <news-modal ref="newsLayer" :news="news"></news-modal>
     <login-modal ref="logLayer" @update="update"></login-modal>
 

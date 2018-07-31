@@ -65,16 +65,6 @@
       </div>
     </div>
 
-    <footer>
-      <div class="wrap">
-        <ul class="flex">
-          <li><a href="">ABOUT US</a></li>
-          <li>FEEDBACK support@dorahacks.com</li>
-          <li>COOPERATION bd@dorahacks.com</li>
-        </ul>
-      </div>
-    </footer>
-
     <!--<lg-modal ref = "lgLayer" modal-title="Send Invitation">-->
       <!--<div slot="modal-content">-->
         <!--<div class="search" style="width: 100%;margin: 0">-->

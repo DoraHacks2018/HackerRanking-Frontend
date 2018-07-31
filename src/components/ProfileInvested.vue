@@ -109,18 +109,6 @@
         <li><a href="" class="fa fa-chevron-right"></a></li>
       </ul>
     </div>
-
-    <footer>
-      <div class="wrap">
-        <ul class="flex">
-          <li><a href="">ABOUT US</a></li>
-          <li>FEEDBACK support@dorahacks.com</li>
-          <li>COOPERATION bd@dorahacks.com</li>
-        </ul>
-      </div>
-    </footer>
-
-
   </div>
 </template>
 
