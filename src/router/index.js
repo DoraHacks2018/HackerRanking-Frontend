@@ -19,6 +19,7 @@ import Hackers from '@/components/Hackers'
 import ProfileEdit from '@/components/ProfileEdit'
 import HackerGithub from '@/components/HackerGithub'
 import Blockchain from '@/components/Blockchain'
+import Plan from '@/components/Plan'
 
 Vue.use(Router)
 
@@ -118,6 +119,11 @@ export default new Router({
       path: '/projects',
       name: 'Project',
       component: Ranking
+    },
+    {
+      path: '/hackathon/plan',
+      name: 'Plan',
+      component: Plan
     }
   ]
 })
