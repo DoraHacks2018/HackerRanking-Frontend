@@ -20,7 +20,10 @@ import ProfileEdit from '@/components/ProfileEdit'
 import HackerGithub from '@/components/HackerGithub'
 import Blockchain from '@/components/Blockchain'
 import Plan from '@/components/Plan'
-
+import NknChain from '@/components/Nknchain'
+import IncentivePlan from '@/components/IncentivePlan'
+import CreateDapp from '@/components/CreateDapp'
+import PlanVoted from '@/components/PlanVoted'
 Vue.use(Router)
 
 export default new Router({
@@ -124,6 +127,26 @@ export default new Router({
       path: '/hackathon/plan',
       name: 'Plan',
       component: Plan
-    }
+    },
+    {
+      path: '/partner/nknchain',
+      name: 'NknChain',
+      component: NknChain
+    },
+    {
+      path: '/partner/incentiveplan',
+      name: 'IncentivePlan',
+      component: IncentivePlan
+    },
+    {
+      path: '/partner/createdapp',
+      name: 'CreateDapp',
+      component: CreateDapp
+    },
+    {
+      path: '/partner/planvoted',
+      name: 'PlanVoted',
+      component: PlanVoted
+    }         
   ]
 })
