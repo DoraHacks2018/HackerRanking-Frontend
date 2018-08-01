@@ -4,7 +4,7 @@
             <div class="plan-top-content">
                 <div class="plan-top-content-left">
                     <img :src="require('@/images/plan/head.jpg')" alt="" />
-                    <div class="button-line" @click="fllow">Fllow</div>
+                    <div class="button-line" @click="follow">Follow</div>
                 </div>
                 <div class="plan-top-content-right">
                         <h1 class="name">{{name}}</h1>
@@ -14,7 +14,7 @@
                         </div>
                         <p class="content-word">{{word}} </p>
 
-                        <div class="li-icon" > 
+                        <div class="li-icon" >
                             <a class="github" href="javascript:void(0)" ><i class="icon-github icon-style"></i>gitHub</a>
                             <a class="course" href="javascript:void(0)" ><i class="icon-lesson icon-style"></i>Online course</a>
                             <a class="like"   href="javascript:void(0)" @click='count'><i class="icon-like icon-style"></i>Like{{'('+likenum+')'}}</a>
@@ -29,17 +29,8 @@
         </div>
 
        <discussion ></discussion>
-        <footer>
-            <div class="wrap">
-                <ul class="flex">
-                <li><a href="">ABOUT US</a></li>
-                <li>FEEDBACK support@dorahacks.com</li>
-                <li>COOPERATION bd@dorahacks.com</li>
-                </ul>
-            </div>
-    </footer>
     </div>
-    
+
 </template>
 
 <script>
@@ -58,7 +49,7 @@ export default {
         }
     },
     methods: {
-        fllow(){
+        follow(){
             console.log('fllow');
         },
         count(){
@@ -68,7 +59,7 @@ export default {
             this.responseWord=' ';
         },
         write(){
-            this.reversionWord=' '; 
+            this.reversionWord=' ';
         }
     }
 }
@@ -77,6 +68,6 @@ export default {
 <style scoped>
 @import url(../css/style-icon.css);
 @import url(../css/plan.css);
- 
+
 </style>
 

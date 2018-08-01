@@ -11,7 +11,7 @@
           </span></router-link>
         </div>
         <ul class="header-nav" :class="{show:menuShow}">
-          <!--<li class="item" :class="{active: isPage[3]}" @click="toPlan"><a>DEVELOPER INCENTIVE PLAN</a></li>-->
+          <li class="item" :class="{active: isPage[3]}" @click="toPlan"><a>DEVELOPER INCENTIVE PLAN</a></li>
           <li class="item" :class="{active: isPage[0]}" @click="toDetail"><a>HACKATHON</a></li>
           <li class="item" :class="{active: isPage[1]}" @click="toHacker"><a>HACKERS</a></li>
           <!--<li class="item" :class="{active: isPage[2]}" @click="toProjects"><a href="#">PROJECTS</a></li>-->
@@ -340,13 +340,11 @@ export default {
       }
     },
     toHome () {
-      this.isPage[0] = false
-      this.isPage[1] = false
-      this.isPage[2] = false
+      this.isPage = [false, false, false]
     },
     toPlan () {
       this.isPage= [false,false,false, true]
-      this.$router.push('/partner/nkn')
+      this.$router.push('/partner/nknchain')
     },
     toDetail () {
       this.isPage= [true,false,false, false]

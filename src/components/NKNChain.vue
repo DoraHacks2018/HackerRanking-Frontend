@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<div class="k-banner">
-			
 		</div>
 
 		<div class="container">
@@ -11,10 +10,10 @@
 						<img :src="require('../images/knk.png')" alt="Knk">
 					</div>
 					<div class="button button-line k-fllow button-radius"
-						:class="{buttonActive:fllowing}" 
-						v-on:click="fllowing = !fllowing">
-						<span v-if="fllowing">fllowing</span>
-						<span v-else>fllow</span>
+						:class="{buttonActive:following}"
+						v-on:click="following = !following">
+						<span v-if="following">following</span>
+						<span v-else>follow</span>
 					</div>
 				</div>
 				<div class="k-content">
@@ -22,10 +21,10 @@
 					<div class="k-info">
 						<a href="https://www.nkn.org" target="_bank">
 						<i class="icon-www"></i>https://www.nkn.org</a>
-						<a href="https://www.nkn.org" target="_bank">
-						<i class="icon-book"></i>https://www.nkn.org
-						
-						</a>						
+						<a href="https://www.nkn.org/doc/NKN_Whitepaper.pdf" target="_bank">
+						<i class="icon-book"></i>White Paper
+
+						</a>
 					</div>
 
 					<div class="k-cont">
@@ -51,16 +50,16 @@
 								<i class="icon-like"></i>
 								like({{heart}})
 							</div>
-							<div class="button button-radius">
-								<i class="icon-share"></i>
-								Share
-							</div>
+							<!--<div class="button button-radius">-->
+								<!--<i class="icon-share"></i>-->
+								<!--Share-->
+							<!--</div>-->
 						</div>
 					</div>
 
 					<div class="k-title-bar">
 						<i class="icon-cup"></i>
-						Dapp incentive plan Reward rules
+						DApp Incentive Plan Reward Rules
 					</div>
 					<div class="k-cont">
 						<p>Marriott Rewards membership and its benefits are offered at the discretion of Marriott. Marriott and its travel partners have the right, without limitation, to change, limit, modify or cancel Program Rules, regulations, rewards, and reward levels at any time, with or without notice, even though such changes may affect the value of points or miles already accumulated, the ability to use accumulated points or miles, or the ability to obtain certain rewards. Marriott and its travel partners may, among other things…</p>
@@ -74,29 +73,18 @@ change or cancel its travel partner rewards. The accumulation of points or miles
 					</div>
 
 					<div class="k-submit">
-						<div class="button button-grey" @click="toCreateDapp">
-							GitHub 核心代码提交
+						<div class="button button-grey" @click="toGithub">
+							GitHub Contributors
 						</div>
-						<div class="button button-grey-line"  @click="toPlan">
-							Dapp incentive plan
-						</div>						
+						<div class="button button-grey-line"  @click="toDappList">
+							DApp Incentive Plan
+						</div>
 					</div>
 				</div>
 			</div>
 
 
 		</div>
-
- 	    <footer>
-		    <div class="wrap">
-		      <ul class="flex">
-		        <li><a href="">ABOUT US</a></li>
-		        <li>FEEDBACK support@dorahacks.com</li>
-		        <li>COOPERATION bd@dorahacks.com</li>
-		      </ul>
-		    </div>
-		  </footer>		
-
 	</div>
 </template>
 <script>
@@ -104,9 +92,9 @@ export default {
   name: 'NknChain',
   data() {
     return {
-      fllowing:false,
- 	  like:false,
- 	  heart:39
+      following:false,
+      like:false,
+      heart:39
     }
   },
   methods: {
@@ -115,12 +103,12 @@ export default {
       this.like = status
       this.heart = status ? this.heart+1 : this.heart-1
     },
-    toCreateDapp(){
-    	this.$router.push('/partner/createdapp')
+    toGithub(){
+      this.$router.push('/partner/nkn/incentiveplan')
     },
-    toPlan(){
-    	this.$router.push('/partner/incentiveplan')
-    }
+    toDappList(){
+    	this.$router.push('/partner/nkn/dapps')
+    },
   }
 }
 </script>
@@ -145,7 +133,7 @@ export default {
 			left:50px;
 			top:50px;
 			text-align:center;
-		
+
 			&-cont{
 				width:130px;
 				height:130px;

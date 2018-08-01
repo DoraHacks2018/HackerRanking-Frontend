@@ -15,7 +15,6 @@ import ProfileInvested from '@/components/ProfileInvested'
 import TeamCompleted from '@/components/TeamCompleted'
 import TeamBuild from '@/components/TeamBuild'
 import TrueChain from '@/components/TrueChain'
-import NKN from '@/components/NKN'
 import Hackers from '@/components/Hackers'
 import ProfileEdit from '@/components/ProfileEdit'
 import HackerGithub from '@/components/HackerGithub'
@@ -24,10 +23,11 @@ import BlockchainBonus from '@/components/BlockchainBonus'
 import ResetPassword from '@/components/ResetPassword'
 
 import Plan from '@/components/Plan'
-import NknChain from '@/components/NknChain'
+import NKNChain from '@/components/NKNChain'
 import IncentivePlan from '@/components/IncentivePlan'
 import CreateDapp from '@/components/CreateDapp'
-import PlanVoted from '@/components/PlanVoted'
+import NKNDAppList from '@/components/NKNDAppList'
+import NKNMyDApp from '@/components/NKNMyDApp'
 
 Vue.use(Router)
 
@@ -135,11 +135,6 @@ export default new Router({
       component: TrueChain
     },
     {
-      path: '/partner/nkn',
-      name: 'NKN',
-      component: NKN
-    },
-    {
       path: '/projects',
       name: 'Project',
       component: Ranking
@@ -151,23 +146,28 @@ export default new Router({
     },
     {
       path: '/partner/nknchain',
-      name: 'NknChain',
-      component: NknChain
+      name: 'NKNChain',
+      component: NKNChain
     },
     {
-      path: '/partner/incentiveplan',
+      path: '/partner/nkn/incentiveplan',
       name: 'IncentivePlan',
       component: IncentivePlan
     },
     {
-      path: '/partner/createdapp',
+      path: '/partner/nkn/createdapp',
       name: 'CreateDapp',
       component: CreateDapp
     },
     {
-      path: '/partner/planvoted',
-      name: 'PlanVoted',
-      component: PlanVoted
-    }
+      path: '/partner/nkn/dapps',
+      name: 'NKNDAppList',
+      component: NKNDAppList
+    },
+    {
+      path: '/partner/nkn/my-dapp',
+      name: 'NKNMyDApp',
+      component: NKNMyDApp
+    },
   ]
 })

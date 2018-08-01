@@ -5,8 +5,8 @@
 				<h2 class="page-title">
 					Create New Dapp
 				</h2>
-				
-			</div>			
+
+			</div>
 			<div class="panel">
 				<div class="f">
 				<form>
@@ -19,52 +19,52 @@
 							</div>
 						</div>
 					</div>
-				
+
 					<div class="f-line">
-						
+
 						<i>Project name</i>
 						<input type="text" />
 					</div>
 					<div class="f-line">
-						
+
 						<i>Github link</i>
 						<input type="text" />
-					</div>					
+					</div>
 
 					<div class="f-line">
-						
+
 						<i>Dapp introduction</i>
 						<textarea></textarea>
 						<div class="f-length">9/92</div>
-					</div>					
-			
+					</div>
+
 					<div class="f-line">
-						<div class="button button-max">Update</div>
-					</div>					
+						<div class="button button-max" @click="upload">Update</div>
+            <div class="button button-max button-line" @click="goBack">Cancel</div>
+          </div>
 				</form>
 				</div>
 			</div>
 		</div>
-		<footer>
-		    <div class="wrap">
-		      <ul class="flex">
-		        <li><a href="">ABOUT US</a></li>
-		        <li>FEEDBACK support@dorahacks.com</li>
-		        <li>COOPERATION bd@dorahacks.com</li>
-		      </ul>
-		    </div>
-	     </footer>		
-	</div>	
+	</div>
 </template>
 <script>
-	export default {
-  		name: 'CreateDapp',
-  		data:function(){
-  			return {
-  				
-  			}
-  		}
-	}
+export default {
+  name: 'CreateDapp',
+  data () {
+    return {
+
+    }
+  },
+  methods: {
+    upload () {
+
+    },
+    goBack () {
+      this.$router.push('/partner/nkn/dapps')
+    }
+  }
+}
 </script>
 <style lang="less">
 .panel{
@@ -81,7 +81,7 @@
 			color:darken(#d0d5d5,4%);
 		}
 		&-upimg{
-		
+
 			.ico{
 				font-size:22px;
 			}
@@ -99,7 +99,7 @@
 			transition:.3s;
 			display:flex;
 			align-items:center;
-			justify-content: center;			
+			justify-content: center;
 			&:hover{
 				background:lighten(#44c4c2,44%);
 				border-color:darken(#44c4c2,2%);
@@ -128,7 +128,7 @@
 				padding:10px 8px;
 			}
 			textarea{
-			
+
 			}
 			input,textarea{
 				border:1px solid #d0d5d5;

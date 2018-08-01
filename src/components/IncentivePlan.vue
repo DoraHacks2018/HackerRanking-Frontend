@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="p-header">
 				<h2 class="p-title">
-					NKH Dapp incentive plan
+					NKN DApp Incentive Plan
 				</h2>
 				<div class="p-header-buttons">
 					<a class="button button-line button-radius"><i class="icon-github"></i>GitHub</a>
@@ -19,7 +19,7 @@
 			<div class="p-rank">
 				<table class="p-table">
 					<tr>
-						<th align="left">Cotributor Rank</th>
+						<th align="left">Contributor Rank</th>
 						<th>Commits</th>
 						<th align="left">GitHub address</th>
 					</tr>
@@ -34,20 +34,11 @@
 						<td align="center">{{item.commits}}</td>
 						<td><a href="{item.address}">{{item.address}}</a></td>
 					</tr>
-				</table>		
+				</table>
 			</div>
 		</div>
-  		<footer>
-		    <div class="wrap">
-		      <ul class="flex">
-		        <li><a href="">ABOUT US</a></li>
-		        <li>FEEDBACK support@dorahacks.com</li>
-		        <li>COOPERATION bd@dorahacks.com</li>
-		      </ul>
-		    </div>
-		  </footer>	
 
-		  </div>		
+		  </div>
 </template>
 <script>
 	export default {
@@ -145,7 +136,7 @@
   						commits:490,
   						rank:8,
   						address:'https://github.com/jonasBrooke'
-  					}, 	 										
+  					},
   				]
   			}
   		}
@@ -164,7 +155,7 @@
 		align-items:center;
 	    justify-content: space-between;
 	    margin:40px 0 20px;
-		
+
 	}
 	&-title{
 		font-size:24px;
@@ -193,7 +184,7 @@
 				color:#727878;
 
 				a{
-					
+
 					color:#666;
 					&:hover{
 						color:#4CC6C5;
