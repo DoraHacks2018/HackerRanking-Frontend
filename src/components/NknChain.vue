@@ -88,14 +88,14 @@ change or cancel its travel partner rewards. The accumulation of points or miles
 		</div>
 
  	    <footer>
-    <div class="wrap">
-      <ul class="flex">
-        <li><a href="">ABOUT US</a></li>
-        <li>FEEDBACK support@dorahacks.com</li>
-        <li>COOPERATION bd@dorahacks.com</li>
-      </ul>
-    </div>
-  </footer>		
+		    <div class="wrap">
+		      <ul class="flex">
+		        <li><a href="">ABOUT US</a></li>
+		        <li>FEEDBACK support@dorahacks.com</li>
+		        <li>COOPERATION bd@dorahacks.com</li>
+		      </ul>
+		    </div>
+		  </footer>		
 
 	</div>
 </template>
@@ -127,8 +127,8 @@ export default {
 
 <style lang="less" scoped>
 	.k{
-		padding:40px;
-		padding-left:210px;
+		padding:50px;
+		padding-left:220px;
 		z-index:2;
 		position: relative;
 		margin-top:-320px;
@@ -142,12 +142,10 @@ export default {
 		&-img{
 			width:130px;
 			position:absolute;
-			left:40px;
-			top:40px;
+			left:50px;
+			top:50px;
 			text-align:center;
-			.button{
-				margin:20px 0;
-			}
+		
 			&-cont{
 				width:130px;
 				height:130px;
@@ -166,7 +164,8 @@ export default {
 			}
 			.button{
 				padding:8px 0;
-				width:130px;
+				margin:20px 20px;
+				display:block;
 			}
 		}
 		&-title{
@@ -221,6 +220,9 @@ export default {
 		}
 		&-submit{
 			margin-top:40px;
+			display:flex;
+			align-item:center;
+			justify-content: space-between;
 			.button{
 				width:48%;
 				padding:10px 0;
