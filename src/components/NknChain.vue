@@ -8,7 +8,7 @@
 			<div class="panel k">
 				<div class="k-img">
 					<div class="k-img-cont">
-						<img :src="require('@/images/knk.png')" alt="Knk">
+						<img :src="require('../images/knk.png')" alt="Knk">
 					</div>
 					<div class="button button-line k-fllow button-radius"
 						:class="{buttonActive:fllowing}" 
