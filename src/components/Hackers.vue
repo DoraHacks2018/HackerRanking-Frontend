@@ -87,6 +87,7 @@ export default {
       ],
       total_data: null,
       redirect_uri: 'http://ranking.dorahacks.com/',
+      client_id: ''
     }
   },
   created () {
@@ -95,21 +96,22 @@ export default {
   },
   methods: {
     claimId (name) {
-      const url = 'https://github.com/login/oauth/authorize?client_id=&scope=user'
-      const popupOptions = { width: 1020, height: 618 }
-      const redirect = this.redirect_uri
-      this.oauthPopup = new OAuthPopup(url, 'github', popupOptions)
-      this.oauthPopup.open(redirect, false).then((res) => {
-        api.claim_auth(res.code, name).then((response) => {
-          const dd = response.data
-          if (dd.errcode) {
-            alert(dd.errmsg)
-            return
-          }
-          this.show = false
-          this.$emit('update', dd)
-        })
-      })
+      const uid = window.cookieStorage.getItem('id')
+      // const url = 'https://github.com/login/oauth/authorize?client_id=&scope=user'
+      // const popupOptions = { width: 1020, height: 618 }
+      // const redirect = this.redirect_uri
+      // this.oauthPopup = new OAuthPopup(url, 'github', popupOptions)
+      // this.oauthPopup.open(redirect, false).then((res) => {
+      //   api.claim_auth(res.code, name).then((response) => {
+      //     const dd = response.data
+      //     if (dd.errcode) {
+      //       alert(dd.errmsg)
+      //       return
+      //     }
+      //     this.show = false
+      //     this.$emit('update', dd)
+      //   })
+      // })
     },
     fetch_page (page) {
       this.hackers = []

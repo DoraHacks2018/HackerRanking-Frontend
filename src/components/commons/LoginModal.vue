@@ -56,7 +56,8 @@ export default {
       passwd: '',
       email: '',
       redirect_uri: 'http://ranking.dorahacks.com/',
-      prompt: '3-20位以字母开头、可带数字、“_”、“.”'
+      prompt: '3-20位以字母开头、可带数字、“_”、“.”',
+      client_id: ''
     }
   },
   methods: {
@@ -77,7 +78,7 @@ export default {
       })
     },
     login_auth (provider) {
-      const url = 'https://github.com/login/oauth/authorize?client_id=&scope=user'
+      const url = 'https://github.com/login/oauth/authorize?client_id='.concat(this.client_id, '&scope=user')
       const popupOptions = { width: 1020, height: 618 }
       const redirect = this.redirect_uri
       this.oauthPopup = new OAuthPopup(url, provider, popupOptions)
@@ -94,7 +95,7 @@ export default {
       })
     },
     register_auth (provider) {
-      const url = 'https://github.com/login/oauth/authorize?client_id=&scope=user'
+      const url = 'https://github.com/login/oauth/authorize?client_id='.concat(this.client_id, '&scope=user')
       const popupOptions = { width: 1020, height: 618 }
       const redirect = this.redirect_uri
       this.oauthPopup = new OAuthPopup(url, provider, popupOptions)
