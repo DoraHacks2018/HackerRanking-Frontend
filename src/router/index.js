@@ -23,6 +23,12 @@ import Blockchain from '@/components/Blockchain'
 import BlockchainBonus from '@/components/BlockchainBonus'
 import ResetPassword from '@/components/ResetPassword'
 
+import Plan from '@/components/Plan'
+import NknChain from '@/components/NknChain'
+import IncentivePlan from '@/components/IncentivePlan'
+import CreateDapp from '@/components/CreateDapp'
+import PlanVoted from '@/components/PlanVoted'
+
 Vue.use(Router)
 
 export default new Router({
@@ -138,5 +144,30 @@ export default new Router({
       name: 'Project',
       component: Ranking
     },
+    {
+      path: '/hackathon/plan',
+      name: 'Plan',
+      component: Plan
+    },
+    {
+      path: '/partner/nknchain',
+      name: 'NknChain',
+      component: NknChain
+    },
+    {
+      path: '/partner/incentiveplan',
+      name: 'IncentivePlan',
+      component: IncentivePlan
+    },
+    {
+      path: '/partner/createdapp',
+      name: 'CreateDapp',
+      component: CreateDapp
+    },
+    {
+      path: '/partner/planvoted',
+      name: 'PlanVoted',
+      component: PlanVoted
+    }
   ]
 })

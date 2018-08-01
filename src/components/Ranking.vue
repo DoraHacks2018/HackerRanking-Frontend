@@ -6,8 +6,6 @@
         <img :src="require('@/images/banner-bch.png')" alt="" style="width: 100%">
       </a>
     </div>
-
-
     <div class="wrap">
       <div class="match">
         <div class="tab">

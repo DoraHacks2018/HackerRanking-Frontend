@@ -17,6 +17,7 @@ import './lib/font-awesome/css/font-awesome.min.css'
 import './utils/jquery-1.11.3.min'
 import './utils/divscroll'
 import './utils/hackers'
+import './css/common.less'
 
 
 // Vue.use(VueSocketio, 'https://ranking.dorahacks.com/talk/websocket/user_refresh')

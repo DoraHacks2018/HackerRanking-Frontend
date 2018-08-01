@@ -1,0 +1,167 @@
+ /*common commonStyle by zhangyanping*/
+
+ @blue: #4CC6C5;
+ @grey: #798A8A;
+ @red: #DF4848;
+ * {
+   box-sizing: border-box;
+ }
+
+ body {
+   color: #444;
+   font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+ }
+
+ .in() {
+   display: inline-block;
+ }
+
+ .container {
+   width: 1000px;
+   margin: 0 auto;
+ }
+
+ .panel {
+   border-radius: 6px;
+   background: #fff;
+   position: relative;
+   border: 1px solid #DFE1E4;
+ }
+
+ .k-banner {
+   background: url(../images/nknbanner.jpg) no-repeat center;
+   background-size: cover;
+ }
+
+ @keyframes fade {
+   form {
+     opacity: 0;
+   }
+   to {
+     opacity: 1;
+   }
+ }
+
+ .fade-enter-active,
+ .fade-leave-active {
+   transition: opacity .5s;
+ }
+
+ .fade-enter,
+ .fade-leave-to
+ /* .fade-leave-active below version 2.1.8 */
+
+ {
+   opacity: 0;
+ }
+.page{
+  &-header{
+    padding:40px 0;
+  }
+  &-title{
+    font-size:20px;
+  }
+}
+ .button {
+   .in();
+   outline:none;
+   background: @blue;
+   color: #fff;
+   padding: 6px 20px;
+   border-radius: 2px;
+   transition: .4s;
+   cursor: pointer;
+  	border:1px solid darken(@blue,2%);
+    vertical-align: middle;
+	font-size:13px;
+   i {
+     margin-right: 5px;
+     font-size: 13px;
+   }
+	&:hover {
+     background: darken(@blue, 8%);
+     border:1px solid darken(@blue,15%);
+   }   
+   &-grey {
+     border: 1px solid darken(@grey, 5%);
+     background: @grey;
+     color: #fff;
+     &:hover {
+       background: darken(@grey, 15%);
+     }
+     &-line {
+       border: 1px solid @grey;
+       background: transparent;
+       color: darken(@grey, 20%);
+       &:hover {
+         border: 1px solid darken(@grey, 5%);
+         background: @grey;
+         color: #fff;
+       }
+     }
+   }
+
+   &-radius {
+     border-radius: 90px;
+   }
+   
+   &-line {
+     border: 1px solid darken(@blue, 7%);
+     background: transparent;
+     color: @blue;
+     vertical-align: center;
+     &-red {
+       color: @red;
+       border: 1px solid @red;
+       background: transparent;
+       &:hover {
+         background: @red;
+         color: #fff;
+       }
+     }
+	&:hover {
+       background: @blue;
+       color: #fff;
+     }     
+     &-grey{
+     	border: 1px solid @grey;
+     	color:@grey;
+     	background:transparent;
+     	&:hover{
+			background:@grey;
+			border:1px solid darken(@grey,4%);
+	     	color:#fff;			
+     	}
+     }
+     
+   }
+   &Like {
+     color: @red;
+     border: 1px solid @red;
+     background: transparent;
+     &:hover {
+       background: @red;
+       border:1px solid darken(@red,4%);
+       color: #fff;
+     }
+   }
+   &Active {
+     background: @blue;
+     color: #fff;
+   }
+   &-min{
+    padding:4px 10px;
+    font-size:12px;
+    i{
+      font-size:12px;
+    }
+   }
+   &-max{
+    padding:10px 40px;
+    font-size:14px;
+      i{
+        font-size:14px;
+      }    
+   }
+ }
+ /*end commonStyle*/
