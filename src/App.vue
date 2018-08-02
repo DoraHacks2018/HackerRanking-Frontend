@@ -23,7 +23,7 @@
       </div>
     </div>
     <transition name="fade">
-      <router-view @update="update" @notify="notify" @atPage="atPage" @navigation="navigator"/>
+      <router-view @update="update" @atPage="atPage" @navigation="navigator"/>
     </transition>
     <footer>
       <div class="wrap">
@@ -34,7 +34,7 @@
         </ul>
       </div>
     </footer>
-    <news-modal ref="newsLayer" :news="news"></news-modal>
+    <!--<news-modal ref="newsLayer" :news="news"></news-modal>-->
     <login-modal ref="logLayer" @update="update"></login-modal>
 
 <!--<div class="talk-box" >-->
@@ -332,13 +332,13 @@ export default {
       console.log(this.$refs)
       this.$refs.logLayer.show = true
     },
-    showNews () {
-      if (this.$refs.newsLayer.show === true) {
-        this.$refs.newsLayer.show = false
-      } else {
-        this.$refs.newsLayer.show = true;
-      }
-    },
+    // showNews () {
+    //   if (this.$refs.newsLayer.show === true) {
+    //     this.$refs.newsLayer.show = false
+    //   } else {
+    //     this.$refs.newsLayer.show = true;
+    //   }
+    // },
     toHome () {
       this.isPage = [false, false, false]
     },
@@ -385,19 +385,19 @@ export default {
       }
       return text;
     },
-    notify (uid) {
-      api.notification(uid).then((res) => {
-        const d = res.data
-        if (d.errcode) {
-          return
-        }
-        this.notifications = d
-      })
-      this.news.n = this.notifications.length
-      for (let i = 0; i < this.notifications.length; i += 1) {
-        this.news.list.push({abstract: this.notifications[i].content, })
-      }
-    },
+    // notify (uid) {
+    //   api.notification(uid).then((res) => {
+    //     const d = res.data
+    //     if (d.errcode) {
+    //       return
+    //     }
+    //     this.notifications = d
+    //   })
+    //   this.news.n = this.notifications.length
+    //   for (let i = 0; i < this.notifications.length; i += 1) {
+    //     this.news.list.push({abstract: this.notifications[i].content, })
+    //   }
+    // },
     update (data) {
       const d = new Date()
       if (data) {

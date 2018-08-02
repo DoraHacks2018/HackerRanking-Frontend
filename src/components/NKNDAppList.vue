@@ -1,14 +1,17 @@
 <template>
   <div class="container">
-			<div class="p-header">
-				<h2 class="p-title">
-					NKN DApp Incentive Plan
-				</h2>
-				<div class="p-header-buttons">
-					<a class="button button-line button-radius"><i class="icon-github"></i>GitHub</a>
-					<a class="button button-radius"><i class="icon-lesson"></i>Online course</a>
+			<div class="p-header flex">
+        <div class="pull-left flex">
+				  <h2 class="p-title">NKN DApp Incentive Plan</h2>
+          <div class="p-header-buttons">
+            <a class="button button-line button-radius" href="https://github.com/nknorg"><i class="icon-github"></i>GitHub</a>
+            <a class="button button-radius"><i class="icon-lesson"></i>Online course</a>
+          </div>
+        </div>
+				<div class="p-header-buttons pull-right">
+
 					<a class="button button-radius button-line" @click="toCreate"><i class="icon-newdapp"></i>New DApp</a>
-          <a class="button button-radius" @click="toMine">My DApp</a>
+          <a class="button button-radius" @click="toMine" v-if="logined">My DApp</a>
         </div>
 			</div>
 			<div class="panel p-rules">
@@ -18,26 +21,26 @@
 				</div>
 			</div>
 
-			<div class="panel v-project">
+			<div class="panel v-project" v-for="dapp in dapps">
 				<div class="v-img">
-					<img :src="require('@/images/knk.png')" alt="">
-					<div class="button button-line button-radius">Vote</div>
+					<img :src=dapp.logo alt="">
+					<div class="button button-line button-radius" :disable="voted">Vote</div>
 				</div>
 				<div class="v-info">
-				<h2 class="v-title">Hackathon Dapp</h2>
+				<h2 class="v-title">{{dapp.name}}</h2>
 				<div class="v-bar">
 					<div>
-					<div class="button button-line button-min"><i class="icon-lab"></i>Demo</div>
-					<div class="button button-line button-min"><i class="icon-github"></i>GitHub</div>
+					<a :href=dapp.demo><div class="button button-line button-min"><i class="icon-lab"></i>Demo</div></a>
+					<a :href=dapp.git><div class="button button-line button-min"><i class="icon-github"></i>GitHub</div></a>
 					</div>
 				</div>
 				<div class="v-cont">
-				<p>{{rules}}</p>
+				<p>{{dapp.intro}}</p>
 				</div>
 				<div class="v-bar">
 					<div class="v-voted">
 						<i class="icon-voted"></i>
-						232 voted
+						{{dapp.vote}} voted
 					</div>
 					<!--<div class="v-edit">-->
 						<!--<div class="button button-line-grey button-min"><i class="icon-edit"></i>Edit</div>-->
@@ -54,11 +57,40 @@ export default {
   name: 'PlanVoted',
   data () {
     return {
+      dapps: [],
+      voted: false,
+      logined: false,
       rules: 'While the book is mostly a mathematician’s case for choosing a life of faith and belief, the more curious thing about it is its clear and lucid ruminations on what it means to be human. It’s a blueprint of our psychology long before psychology was deemed a formal discipline',
     }
   },
+  created () {
+    let uid = window.cookieStorage.getItem('id')
+    if (!uid || uid === 'anyValue') {
+      uid = 0
+    } else {
+      uid = parseInt(uid)
+      this.logined = true
+    }
+    api.nkn_dapps_list(uid).then((res) => {
+      const d = res.data
+      console.log(d)
+      if (d.errcode) {
+        alert(d.errmsg)
+      } else {
+        this.dapps = d.dapps
+        if (uid !== 0 && d.voted_dapp_id !== 0) {
+          this.voted = true
+        }
+      }
+    })
+  },
   methods: {
     toCreate () {
+      const uid = window.cookieStorage.getItem('id')
+      if (!uid || uid === 'anyValue') {
+        alert('请先登录/注册')
+        return
+      }
       this.$router.push('/partner/nkn/createdapp')
     },
     toMine () {
@@ -85,7 +117,9 @@ export default {
 	&-title{
 		font-size:24px;
 		margin-bottom:20px;
+    margin-right: 20px;
 		font-weight:800;
+    line-height: 0.5;
 		i{
 			margin-right:6px;
 		}

@@ -34,14 +34,8 @@
 					</div>
 					<div class="k-bar">
 						<div class="k-bar-left">
-							<div class="button button-line button-radius">
-								<i class="icon-github"></i>
-								GitHub
-							</div>
-							<div class="button button-line button-radius">
-								<i class="icon-lesson"></i>
-								Online course
-							</div>
+              <a href="https://github.com/nknorg"><div class="button button-line button-radius"><i class="icon-github"></i>GitHub</div></a>
+							<div class="button button-line button-radius" @click="toOnline"><i class="icon-lesson"></i>Online course</div>
 						</div>
 						<div class="k-bar-right">
 							<div class="button button-line-grey button-radius"
@@ -74,7 +68,7 @@ change or cancel its travel partner rewards. The accumulation of points or miles
 
 					<div class="k-submit">
 						<div class="button button-grey" @click="toGithub">
-							GitHub Contributors
+							GitHub Core Contributors
 						</div>
 						<div class="button button-grey-line"  @click="toDappList">
 							DApp Incentive Plan
@@ -109,115 +103,120 @@ export default {
     toDappList(){
     	this.$router.push('/partner/nkn/dapps')
     },
+    toOnline () {
+      this.$router.push('/partner/nkn/online-course')
+    }
   }
 }
 </script>
 
 <style lang="less" scoped>
-	.k{
-		padding:50px;
-		padding-left:220px;
-		z-index:2;
-		position: relative;
-		margin-top:-320px;
-		margin-bottom:40px;
-		box-shadow: 0 8px 20px 0 rgba(180,180,180,0.5);
-		&-banner{
-			height:500px;
-		   	z-index:1;
-		}
+a, router-link {
+  text-decoration: none;
+}
+.k{
+	padding:50px;
+	padding-left:220px;
+	z-index:2;
+	position: relative;
+	margin-top:-320px;
+	margin-bottom:40px;
+	box-shadow: 0 8px 20px 0 rgba(180,180,180,0.5);
+	&-banner{
+		height:500px;
+	   	z-index:1;
+	}
+	&-img{
+		width:130px;
+		position:absolute;
+		left:50px;
+		top:50px;
+		text-align:center;
 
-		&-img{
-			width:130px;
-			position:absolute;
-			left:50px;
-			top:50px;
-			text-align:center;
-
-			&-cont{
-				width:130px;
-				height:130px;
-				border: 1px solid #D9D9D9;
-				border-radius: 12px;
-				overlfow:hidden;
-				display:flex;
-				align-item:center;
-				justify-content:center;
-
-				img{
-					width:100%;
-					display:block;
-						border-radius: 12px;
-				}
-			}
-			.button{
-				padding:8px 0;
-				margin:20px 20px;
-				display:block;
-			}
-		}
-		&-title{
-			font-size:30px;
-			font-weight:700;
-			color:#444;
-			&-bar{
-				clear:both;
-				padding:16px 0;
-				border-bottom:1px solid #d0d5d5;
-				font-size:22px;
-				margin:100px 0 20px 0;
-			}
-		}
-		&-info{
-			margin:20px 0 30px;
-			&>a{
-				color:#444;
-				    transition: 0.4s;
-				    margin-right:20px;
-				    font-weight:normal;
-
-				    i{
-						margin-right:6px;
-						position:relative;
-						bottom:-1px;
-				    }
-				&:hover{
-					color:#4cc6c5;
-				}
-			}
-		}
 		&-cont{
-			color:#555;
-			p{
-				line-height:2;
-				font-size:15px;
-				text-align: justify;
-				margin-bottom:8px;
-				color:#555;
-			}
-		}
-		&-bar{
+			width:130px;
+			height:130px;
+			border: 1px solid #D9D9D9;
+			border-radius: 12px;
 			overlfow:hidden;
-			margin:20px 0;
-			&-left{
-				float:left;
-			}
-			&-right{
-				float:right;
-			}
-		}
-		&-submit{
-			margin-top:40px;
 			display:flex;
 			align-item:center;
-			justify-content: space-between;
-			.button{
-				width:48%;
-				padding:10px 0;
-				line-height:30px;
-				padding:8px 50px;
-				text-align:center;
+			justify-content:center;
+
+			img{
+				width:100%;
+				display:block;
+					border-radius: 12px;
+			}
+		}
+		.button{
+			padding:8px 0;
+			margin:20px 20px;
+			display:block;
+		}
+	}
+	&-title{
+		font-size:30px;
+		font-weight:700;
+		color:#444;
+		&-bar{
+			clear:both;
+			padding:16px 0;
+			border-bottom:1px solid #d0d5d5;
+			font-size:22px;
+			margin:100px 0 20px 0;
+		}
+	}
+	&-info{
+		margin:20px 0 30px;
+		&>a{
+			color:#444;
+			    transition: 0.4s;
+			    margin-right:20px;
+			    font-weight:normal;
+
+			    i{
+					margin-right:6px;
+					position:relative;
+					bottom:-1px;
+			    }
+			&:hover{
+				color:#4cc6c5;
 			}
 		}
 	}
+	&-cont{
+		color:#555;
+		p{
+			line-height:2;
+			font-size:15px;
+			text-align: justify;
+			margin-bottom:8px;
+			color:#555;
+		}
+	}
+	&-bar{
+		overlfow:hidden;
+		margin:20px 0;
+		&-left{
+			float:left;
+		}
+		&-right{
+			float:right;
+		}
+	}
+	&-submit{
+		margin-top:40px;
+		display:flex;
+		align-item:center;
+		justify-content: space-between;
+		.button{
+			width:48%;
+			padding:10px 0;
+			line-height:30px;
+			padding:8px 50px;
+			text-align:center;
+		}
+	}
+}
 </style>

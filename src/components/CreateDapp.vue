@@ -14,28 +14,27 @@
 						<i>Project logo</i>
 						<div class="f-upimg">
 							<div class="f-upload">
-								<div class="ico icon-image"></div>
-								<input type="file" />
-							</div>
+								<div class="add addone" :class="{bgnone:photo}">
+								<input type="file" @change="uploadLogo($event)"/>
+                <img :src="photo" alt="">
+                </div>
+              </div>
 						</div>
 					</div>
 
 					<div class="f-line">
-
 						<i>Project name</i>
-						<input type="text" />
+						<input type="text" v-model="name"/>
 					</div>
 					<div class="f-line">
-
 						<i>Github link</i>
-						<input type="text" />
+						<input type="text" v-model="git"/>
 					</div>
 
 					<div class="f-line">
-
-						<i>Dapp introduction</i>
-						<textarea></textarea>
-						<div class="f-length">9/92</div>
+						<i>DApp introduction</i>
+						<textarea v-model="intro"></textarea>
+						<div class="f-length"></div>
 					</div>
 
 					<div class="f-line">
@@ -49,16 +48,76 @@
 	</div>
 </template>
 <script>
+import api from '@/api'
+
 export default {
   name: 'CreateDapp',
   data () {
     return {
-
+      logo: '',
+      photo: '',
+      logo_uri: null,
+      name: '',
+      git: '',
+      intro: '',
+      demo: ''
+    }
+  },
+  created () {
+    const token = window.cookieStorage.getItem('token')
+    if (this.$route.query.did) {
+      const did = this.$route.query.did
+      api.get_dapp_info(did, token).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          console.log(d)
+          this.photo = d.logo
+          this.logo_uri = d.logo
+          this.name = d.name
+          this.git = d.git
+          this.intro = d.intro
+          this.demo = d.demo
+        }
+      })
     }
   },
   methods: {
+    uploadLogo(event){
+      var _name, _fileName;
+      _name = event.target.value;
+      _fileName = _name.substring(_name.lastIndexOf(".") + 1).toLowerCase();
+      if (_fileName !== 'png' && _fileName !== 'jpg') {
+        alert('我们只支持png和jpg的图片格式. 请重新上传.');
+      } else {
+        let url = `${window.URL.createObjectURL(event.target.files[0])}`
+        this.photo = url
+        this.logo = event.target.files[0]
+      }
+    },
     upload () {
-
+      const token = window.cookieStorage.getItem('token')
+      let formd = new FormData()
+      if (this.logo) {
+        formd.append('logo', this.logo)
+      } else {
+        alert('请上传logo')
+        return
+      }
+      formd.append('name', this.name)
+      formd.append('git', this.git)
+      formd.append('intro', this.intro)
+      formd.append('demo', this.demo)
+      formd.append('logo_uri', this.logo_uri)
+      api.upload_dapp(formd, token).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          alert('上传成功')
+        }
+      })
     },
     goBack () {
       this.$router.push('/partner/nkn/dapps')

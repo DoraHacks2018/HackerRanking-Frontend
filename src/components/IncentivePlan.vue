@@ -6,7 +6,7 @@
 					NKN DApp Incentive Plan
 				</h2>
 				<div class="p-header-buttons">
-					<a class="button button-line button-radius"><i class="icon-github"></i>GitHub</a>
+					<a class="button button-line button-radius" href="https://github.com/nknorg"><i class="icon-github"></i>GitHub</a>
 					<a class="button button-radius"><i class="icon-lesson"></i>Online course</a>
 				</div>
 			</div>
@@ -16,6 +16,7 @@
 					Marriott Rewards membership and its benefits are offered at the discretion of Marriott. Marriott and its travel partners have the right, without limitation, to change, limit, modify or cancel Program Rules, regulations, rewards, and reward levels at any time, with or without notice, even though such changes may affect the value of points or miles already accumulated, the ability to use accumulated points or miles, or the ability to obtain certain rewards. Marriott and its travel partners may, among other things…
 				</div>
 			</div>
+
 			<div class="p-rank">
 				<table class="p-table">
 					<tr>
@@ -23,16 +24,16 @@
 						<th>Commits</th>
 						<th align="left">GitHub address</th>
 					</tr>
-					<tr v-for="item in rank">
+					<tr v-for="item, index in rank">
 						<td>
 							<div class="p-rank-info">
-								<i class="icon-rank"><b>{{item.rank}}</b></i>
-								<img :src="item.userImg"></img>
-								<span>{{item.name}}</span>
+								<i class="icon-rank"><b>{{index+1}}</b></i>
+								<img :src="item.author_avatar"></img>
+								<span>{{item.author_login}}</span>
 							</div>
 						</td>
-						<td align="center">{{item.commits}}</td>
-						<td><a href="{item.address}">{{item.address}}</a></td>
+						<td align="center">{{item.commit}}</td>
+						<td><a href="{item.github}">{{item.github}}</a></td>
 					</tr>
 				</table>
 			</div>
@@ -41,106 +42,37 @@
 		  </div>
 </template>
 <script>
-	export default {
-  		name: 'IncentivePlan',
-  		data:function(){
-  			return {
-  				rank:[
-  					{
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:1,
-  						address:'https://github.com/jonasBrooke'
-  					},{
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:2,
-  						address:'https://github.com/jonasBrooke'
-  					}, {
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:3,
-  						address:'https://github.com/jonasBrooke'
-  					},  {
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:8,
-  						address:'https://github.com/jonasBrooke'
-  					},{
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:8,
-  						address:'https://github.com/jonasBrooke'
-  					}, 	{
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:8,
-  						address:'https://github.com/jonasBrooke'
-  					}, 	{
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:8,
-  						address:'https://github.com/jonasBrooke'
-  					}, 	{
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:8,
-  						address:'https://github.com/jonasBrooke'
-  					}, 	{
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:8,
-  						address:'https://github.com/jonasBrooke'
-  					}, 	{
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:8,
-  						address:'https://github.com/jonasBrooke'
-  					}, 	{
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:8,
-  						address:'https://github.com/jonasBrooke'
-  					}, 	{
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:8,
-  						address:'https://github.com/jonasBrooke'
-  					}, 	{
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:8,
-  						address:'https://github.com/jonasBrooke'
-  					}, 	{
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:8,
-  						address:'https://github.com/jonasBrooke'
-  					}, 	{
-  						userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
-  						name:"Jonas Brooke",
-  						commits:490,
-  						rank:8,
-  						address:'https://github.com/jonasBrooke'
-  					},
-  				]
-  			}
-  		}
-	}
+import api from '@/api'
+
+export default {
+  name: 'IncentivePlan',
+  data (){
+    return {
+      rank:[
+        // {
+        // 	userImg:'https://sfault-avatar.b0.upaiyun.com/283/845/2838459588-58328e275a4c3_big64',
+        // 	name:"Jonas Brooke",
+        // 	commits:490,
+        // 	rank:1,
+        // 	address:'https://github.com/jonasBrooke'
+        // },{
+      ]
+    }
+  },
+  created () {
+    api.nkn_contributors().then((res) => {
+      const d = res.data
+      console.log(d)
+      if (d.errcode) {
+        alert(d.errmsg)
+      } else {
+        this.rank = d
+      }
+    })
+  },
+  methods: {
+  }
+}
 </script>
 <style lang="less">
 .p{

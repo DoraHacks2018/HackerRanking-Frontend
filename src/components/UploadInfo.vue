@@ -129,7 +129,7 @@ export default {
       this.avatar = event.target.files[0]
       _fileName = _name.substring(_name.lastIndexOf(".") + 1).toLowerCase();
       if (_fileName !== 'png' && _fileName !== 'jpg') {
-        alert('We only support png/jpg. Please upload again.');
+        alert('我们只支持png和jpg的图片格式. 请重新上传.');
       } else {
         let url = `${window.URL.createObjectURL(event.target.files[0])}`
         this.ava = url

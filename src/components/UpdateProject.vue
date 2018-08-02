@@ -196,20 +196,20 @@ export default {
       if (this.lphoto) {
         formd.append('logo', this.lphoto)
       } else {
-        alert('Please upload the logo')
+        alert('请上传logo')
         return
       }
       formd.append('name', this.name)
       formd.append('git', this.git)
       formd.append('desc', this.intro)
-      console.log(this.demo)
+      // console.log(this.demo)
       formd.append('demo', this.demo)
       api.upload_project(formd, token).then((res) => {
         const d = res.data
         if (d.errcode) {
           alert(d.errmsg)
         } else {
-          alert('Upload Success')
+          alert('上传成功')
         }
       })
     }

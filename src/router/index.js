@@ -28,6 +28,7 @@ import IncentivePlan from '@/components/IncentivePlan'
 import CreateDapp from '@/components/CreateDapp'
 import NKNDAppList from '@/components/NKNDAppList'
 import NKNMyDApp from '@/components/NKNMyDApp'
+import NKNOnlineCourse from '@/components/NKNOnlineCourse'
 
 Vue.use(Router)
 
@@ -169,5 +170,10 @@ export default new Router({
       name: 'NKNMyDApp',
       component: NKNMyDApp
     },
+    {
+      path: '/partner/nkn/online-course',
+      name: 'NKNOnlineCourse',
+      component: NKNOnlineCourse
+    }
   ]
 })

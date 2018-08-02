@@ -274,4 +274,34 @@ export default {
       headers: { 'content-type': 'application/json' }
     })
   },
+  nkn_contributors () {
+    return axios.get(`${url}/rank/nkn/contributors`)
+  },
+  nkn_dapps_list (uid) {
+    return axios.get(`${url}/planets/dapp/list/${uid}`)
+  },
+  upload_dapp (formData, token) {
+    return axios.post(`${url}/user/dapp-upload`, formData, {
+      headers: {
+        'X-Auth-Token': token
+      }
+    })
+  },
+  get_dapp_info (did, token) {
+    return axios.get(`${url}/user/dapp-upload/${did}`, {
+      headers: {
+        'X-Auth-Token': token
+      }
+    })
+  },
+  my_dapps (uid) {
+    return axios.get(`${url}/planets/dapp/${uid}`)
+  },
+  delete_dapp (did, token) {
+    return axios.delete(`${url}/user/dapp-upload/${did}`, {
+      headers: {
+        'X-Auth-Token': token
+      }
+    })
+  }
 }

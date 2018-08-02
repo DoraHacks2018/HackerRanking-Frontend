@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuebar from 'vuebar'
 import axios from 'axios'
-import VueSocketio from 'vue-socket.io'
+// import VueSocketio from 'vue-socket.io'
 
 // import VueAuthenticate from 'vue-authenticate'
 import { CookieStorage } from 'cookie-storage'

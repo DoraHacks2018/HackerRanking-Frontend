@@ -8,30 +8,30 @@
         <a class="button button-radius button-line" @click="toCreate"><i class="icon-newdapp"></i>New DApp</a>
       </div>
     </div>
-    <div class="panel v-project">
+    <div class="panel v-project" v-for="d in dapps">
       <div class="v-img">
-        <img :src="require('@/images/knk.png')" alt="">
+        <img :src=d.logo alt="">
         <!--<div class="button button-line button-radius">Vote</div>-->
       </div>
       <div class="v-info">
-        <h2 class="v-title">Hackathon Dapp</h2>
+        <h2 class="v-title">{{d.name}}</h2>
         <div class="v-bar">
           <div>
-            <div class="button button-line button-min"><i class="icon-lab"></i>Demo</div>
-            <div class="button button-line button-min"><i class="icon-github"></i>GitHub</div>
+            <a :href=d.demo><div class="button button-line button-min"><i class="icon-lab"></i>Demo</div></a>
+            <a :href=d.git><div class="button button-line button-min"><i class="icon-github"></i>GitHub</div></a>
           </div>
         </div>
         <div class="v-cont">
-          <p>{{content}}</p>
+          <p>{{d.intro}}</p>
         </div>
         <div class="v-bar">
           <div class="v-voted">
             <i class="icon-voted"></i>
-            232 voted
+            {{d.vote}} voted
           </div>
           <div class="v-edit">
-          <div class="button button-line-grey button-min"><i class="icon-edit"></i>Edit</div>
-          <div class="button button-line-grey button-min">Delete</div>
+          <div class="button button-line-grey button-min" @click="toEdit(d.id)"><i class="icon-edit"></i>Edit</div>
+          <div class="button button-line-grey button-min" @click="deleteDapp(d.id)">Delete</div>
           </div>
         </div>
       </div>
@@ -40,11 +40,42 @@
 </template>
 
 <script>
+import api from '@/api'
+
 export default {
   name: 'NKNMyDApp',
   data () {
     return {
+      dapps: [],
       content: 'While the book is mostly a mathematician’s case for choosing a life of faith and belief, the more curious thing about it'
+    }
+  },
+  created () {
+    const uid = parseInt(window.cookieStorage.getItem('uid'))
+    api.my_dapps(uid).then((res) => {
+      const d = res.data
+      if (d.errcode) {
+        alert(d.errmsg)
+      } else {
+        console.log(d)
+        this.dapps = d
+      }
+    })
+  },
+  methods: {
+    toEdit (did) {
+      this.$router.push({'name': 'CreateDapp', query: { did: did }})
+    },
+    deleteDapp (did) {
+      const token = window.cookieStorage.getItem('token')
+      api.delete_dapp(did, token).then((res) => {
+        const d = res.data
+        if (d.errcode) {
+          alert(d.errmsg)
+        } else {
+          alert('删除成功')
+        }
+      })
     }
   }
 }
